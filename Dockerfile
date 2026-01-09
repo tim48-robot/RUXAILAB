@@ -9,6 +9,7 @@ RUN npm ci
 COPY babel.config.js ./
 COPY vue.config.js ./
 COPY jsconfig.json ./
+COPY .env* ./
 COPY public ./public
 COPY src ./src
 

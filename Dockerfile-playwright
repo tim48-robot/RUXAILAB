@@ -11,6 +11,7 @@ RUN npm ci
 COPY babel.config.js ./
 COPY vue.config.js ./
 COPY jsconfig.json ./
+COPY .env* ./
 COPY public ./public
 COPY src ./src
 RUN npm run build-dev
@@ -47,6 +48,7 @@ COPY public ./public
 COPY babel.config.js ./
 COPY vue.config.js ./
 COPY jsconfig.json ./
+COPY .env* ./
 RUN mkdir -p /app/playwright/output /app/playwright-report && chown -R app:app /app/playwright /app/playwright-report
 RUN chown -R app:app /app
 
