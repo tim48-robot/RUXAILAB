@@ -20,7 +20,7 @@
       <div class="content">
         <div class="title-row">
           <div class="title">
-            {{ notification.title || 'Notification' }}
+            {{ notification.titleKey ? $t(notification.titleKey, notification.titleParams || {}) : (notification.title || 'Notification') }}
             <span
               v-if="notification.type"
               class="type-badge"
@@ -36,7 +36,7 @@
 
         <div
           class="description"
-          v-html="formatMultiline(notification.description)"
+          v-html="formatMultiline(notification.descriptionKey ? $t(notification.descriptionKey, notification.descriptionParams || {}) : notification.description)"
         />
 
         <div class="meta">

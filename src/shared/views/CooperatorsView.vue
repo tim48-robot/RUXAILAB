@@ -146,14 +146,22 @@ const {
 const sendNotification = async ({
   userId,
   title,
+  titleKey,
+  titleParams,
   description,
+  descriptionKey,
+  descriptionParams,
   redirectsTo = '/',
   testId = null,
   author,
 } = {}) => {
   const notification = new Notification({
     title,
+    titleKey,
+    titleParams,
     description,
+    descriptionKey,
+    descriptionParams,
     redirectsTo,
     author,
     read: false,
@@ -375,12 +383,21 @@ const notifyCooperatorAccessibility = async (guest) => {
       testTitle: test.value.testTitle || t('common.test'),
     })
 
+    // Variables for i18n keys
+    let titleKey = 'HeuristicsCooperators.actions.send_invitation'
+    let titleParams = null
+    let descriptionKey = 'HeuristicsCooperators.messages.invite_message'
+    let descriptionParams = { testTitle: test.value.testTitle || 'Test' }
+
     if (test.value.testType === 'MANUAL') {
       path = `accessibility/manual/preview/${test.value.id}`
       title =
         t('studyCreation.methods.accessibility.manual_testing.name') +
         ' ' +
         t('HeuristicsCooperators.actions.send_invitation')
+      // Complex title concatenation, falling back to sender-side translation for title
+      titleKey = null 
+      
       description = t('HeuristicsCooperators.messages.invite_message', {
         testTitle: test.value.testTitle || t('common.test'),
       })
@@ -390,6 +407,9 @@ const notifyCooperatorAccessibility = async (guest) => {
         t('studyCreation.methods.accessibility.automatic_testing.name') +
         ' ' +
         t('HeuristicsCooperators.actions.send_invitation')
+      // Complex title concatenation, falling back to sender-side translation for title
+      titleKey = null
+
       description = t('HeuristicsCooperators.messages.invite_message', {
         testTitle: test.value.testTitle || t('common.test'),
       })
@@ -397,14 +417,18 @@ const notifyCooperatorAccessibility = async (guest) => {
 
     if (guest.userDocId && path) {
       const author = test.value.testAdmin.email
-      await sendNotification(
-        guest.userDocId,
+      await sendNotification({
+        userId: guest.userDocId,
         title,
+        titleKey,
+        titleParams,
         description,
-        path,
-        test.value.id,
+        descriptionKey,
+        descriptionParams,
+        redirectsTo: path,
+        testId: test.value.id,
         author,
-      )
+      })
     }
   }
 }
@@ -435,11 +459,14 @@ const notifyCooperator = (guest) => {
     sendNotification({
       userId: guest.userDocId,
       title: t('HeuristicsCooperators.actions.send_invitation'),
+      titleKey: 'HeuristicsCooperators.actions.send_invitation',
       description:
         inviteMessages.value ||
         t('HeuristicsCooperators.messages.invite_message', {
           testTitle: test.value.testTitle || t('common.test'),
         }),
+      descriptionKey: inviteMessages.value ? null : 'HeuristicsCooperators.messages.invite_message',
+      descriptionParams: inviteMessages.value ? null : { testTitle: test.value.testTitle || 'Test' },
       redirectsTo: path,
       author: test.value.testAdmin.email,
       testId: test.value.id,
