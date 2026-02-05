@@ -23,12 +23,12 @@
                   </div>
                   <div class="flex-grow-1">
                     <h1 class="dashboard-title text-white mb-0">
-                      {{
-                        test.testTitle || $t('manager.dashboard.defaultTitle')
-                      }}
+                      {{ test.testTitle || 'User Test Study' }}
                     </h1>
                     <p class="dashboard-subtitle text-white opacity-90 mb-0">
-                      {{ $t('manager.dashboard.moderatedDescription') }}
+                      Manage your moderated user testing study, track
+                      participant progress, and analyze results from your
+                      comprehensive dashboard.
                     </p>
                   </div>
                 </div>
@@ -42,9 +42,7 @@
                     <v-icon start size="16" color="white">
                       mdi-account-supervisor-circle
                     </v-icon>
-                    <span class="text-white">{{
-                      $t('manager.dashboard.moderatedStudy')
-                    }}</span>
+                    <span class="text-white">Moderated Study</span>
                   </v-chip>
                   <v-chip
                     class="status-chip"
@@ -56,9 +54,7 @@
                       {{ getStatusIcon(test.testStatus) }}
                     </v-icon>
                     <span class="text-white">{{
-                      test.testStatus
-                        ? $t(`manager.dashboard.${test.testStatus}`)
-                        : $t('manager.dashboard.active')
+                      test.testStatus || 'Active'
                     }}</span>
                   </v-chip>
                 </div>
@@ -79,10 +75,11 @@
         <div class="section-header">
           <h2 class="section-title">
             <v-icon class="section-icon">mdi-view-dashboard</v-icon>
-            {{ $t('manager.managementModules.title') }}
+            Management Modules
           </h2>
           <p class="section-description">
-            {{ $t('manager.managementModules.description') }}
+            Comprehensive tools to manage participants, tasks, settings, and
+            analyze your study data
           </p>
         </div>
 
@@ -111,9 +108,7 @@
                 <v-icon size="48" class="mb-2">
                   mdi-plus-circle-outline
                 </v-icon>
-                <p class="text-body-2">
-                  {{ $t('manager.managementModules.additionalModules') }}
-                </p>
+                <p class="text-body-2">Space for additional modules</p>
               </div>
             </v-card>
           </v-col>

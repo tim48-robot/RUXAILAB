@@ -2,6 +2,13 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getAuth } from 'firebase/auth'
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore'
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage'
 import { showError, showSuccess } from '../../../shared/utils/toast'
 
 export function useProfile() {
@@ -15,6 +22,9 @@ export function useProfile() {
   })
 
   const loading = ref(true)
+
+  // Track blob URLs for cleanup
+  const blobUrls = new Set()
 
   const fetchUserProfile = async () => {
     try {
@@ -62,7 +72,6 @@ export function useProfile() {
         finalProfileImage = await uploadProfileImage(
           profileData.pendingImageFile,
         )
-
         if (!finalProfileImage) {
           throw new Error(t('profile.profileImageUploadFailed'))
         }
@@ -100,110 +109,126 @@ export function useProfile() {
     }
   }
 
-  // Convert file to Base64 data URL (bypasses Firebase Storage - works on free plan)
-  const fileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onload = () => resolve(reader.result)
-      reader.onerror = (error) => reject(new Error('Failed to read file'))
-      reader.readAsDataURL(file)
-    })
-  }
-
   const uploadProfileImage = async (file) => {
+    let blobUrl = null
+
     try {
       const auth = getAuth()
       const user = auth.currentUser
       if (!user) throw new Error(t('profile.noUserSignedIn'))
 
-      // Compress the image first
+      // Create blob URL for preview and track it
+      blobUrl = URL.createObjectURL(file)
+      blobUrls.add(blobUrl)
 
+      // Compress and upload
       const compressedFile = await compressImage(file, 300, 0.6)
+      const storage = getStorage()
+      const storageReference = storageRef(storage, `profileImages/${user.uid}`)
 
-      // Convert to Base64 (stores directly in Firestore, no Storage needed!)
+      await uploadBytes(storageReference, compressedFile)
+      const downloadURL = await getDownloadURL(storageReference)
 
-      const base64DataUrl = await fileToBase64(compressedFile)
+      return downloadURL
+    } catch (error) {
+      throw error
+    } finally {
+      // Always cleanup blob URL
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl)
+        blobUrls.delete(blobUrl)
+      }
+    }
+  }
 
-      // Return the Base64 data URL (this will be stored in Firestore)
-      return base64DataUrl
+  const removeProfileImage = async () => {
+    try {
+      const auth = getAuth()
+      const user = auth.currentUser
+      if (!user) throw new Error(t('profile.noUserSignedIn'))
+
+      // Only try to delete if there's an existing image
+      if (userprofile.value.profileImage) {
+        const storage = getStorage()
+        const storageReference = storageRef(
+          storage,
+          `profileImages/${user.uid}`,
+        )
+
+        try {
+          await deleteObject(storageReference)
+        } catch (error) {
+          // Ignore error if file doesn't exist
+          if (error.code !== 'storage/object-not-found') {
+            throw error
+          }
+        }
+      }
+
+      return true
     } catch (error) {
       throw error
     }
   }
 
-  const removeProfileImage = async () => {
-    // With Base64 storage in Firestore, we just need to set profileImage to ''
-    // The actual removal happens in updateProfile when it saves the empty string
-
-    return true
-  }
-
-  // Helper function to load image from data URL
-  const loadImage = (dataUrl) => {
+  const compressImage = (file, maxWidth, quality) => {
     return new Promise((resolve, reject) => {
-      const img = new Image()
-      img.onload = () => resolve(img)
-      img.onerror = () => reject(new Error('Image load failed'))
-      img.src = dataUrl
-    })
-  }
-
-  // Helper function to convert canvas to File
-  const canvasToFile = (canvas, fileName, quality) => {
-    return new Promise((resolve, reject) => {
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            resolve(
-              new File([blob], fileName, {
-                type: 'image/jpeg',
-                lastModified: Date.now(),
-              }),
-            )
-          } else {
-            reject(new Error('Canvas to Blob conversion failed'))
-          }
-        },
-        'image/jpeg',
-        quality,
-      )
-    })
-  }
-
-  const compressImage = async (file, maxWidth, quality) => {
-    // Read file as data URL
-    const dataUrl = await new Promise((resolve, reject) => {
       const reader = new FileReader()
-      reader.onload = (e) => resolve(e.target.result)
-      reader.onerror = () => reject(new Error('FileReader error'))
       reader.readAsDataURL(file)
+
+      reader.onload = (event) => {
+        const img = new Image()
+        img.src = event.target.result
+
+        img.onload = () => {
+          const canvas = document.createElement('canvas')
+          let width = img.width
+          let height = img.height
+
+          // Resize if image is larger than maxWidth
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width
+            width = maxWidth
+          }
+
+          canvas.width = width
+          canvas.height = height
+
+          const ctx = canvas.getContext('2d')
+          // Use better image rendering for quality
+          ctx.imageSmoothingEnabled = true
+          ctx.imageSmoothingQuality = 'high'
+          ctx.drawImage(img, 0, 0, width, height)
+
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                resolve(
+                  new File([blob], file.name, {
+                    type: 'image/jpeg',
+                    lastModified: Date.now(),
+                  }),
+                )
+              } else {
+                reject(new Error('Canvas to Blob conversion failed'))
+              }
+            },
+            'image/jpeg',
+            quality,
+          )
+        }
+
+        img.onerror = () => reject(new Error('Image load failed'))
+      }
+
+      reader.onerror = () => reject(new Error('FileReader error'))
     })
+  }
 
-    // Load image
-    const img = await loadImage(dataUrl)
-
-    // Create canvas and resize
-    const canvas = document.createElement('canvas')
-    let width = img.width
-    let height = img.height
-
-    if (width > maxWidth) {
-      height = (height * maxWidth) / width
-      width = maxWidth
-    }
-
-    canvas.width = width
-    canvas.height = height
-
-    const ctx = canvas.getContext('2d')
-    ctx.imageSmoothingEnabled = true
-    ctx.imageSmoothingQuality = 'high'
-    ctx.drawImage(img, 0, 0, width, height)
-
-    // Convert to file
-    const compressedFile = await canvasToFile(canvas, file.name, quality)
-
-    return compressedFile
+  // Cleanup function to revoke all blob URLs
+  const cleanup = () => {
+    blobUrls.forEach((url) => URL.revokeObjectURL(url))
+    blobUrls.clear()
   }
 
   return {
@@ -211,5 +236,6 @@ export function useProfile() {
     loading,
     fetchUserProfile,
     updateProfile,
+    cleanup, // Export cleanup function
   }
 }

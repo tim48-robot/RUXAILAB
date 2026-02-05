@@ -113,16 +113,7 @@
 
     <!-- No Data Slot -->
     <template #no-data>
-      <div v-if="isFiltered" class="pa-8 text-center text-medium-emphasis">
-        <v-icon size="48" color="grey-lighten-1" class="mb-2">
-          mdi-magnify-remove-outline
-        </v-icon>
-        <div class="text-h6 mt-2">{{ t('common.table.noSearchResults') }}</div>
-        <div class="text-body-2">
-          {{ t('common.table.tryAdjustingSearch') }}
-        </div>
-      </div>
-      <div v-else class="text-center pa-4">
+      <div class="text-center pa-4">
         <span>
           {{ getEmptyStateMessage(t) }}
         </span>
@@ -155,10 +146,6 @@ const props = defineProps({
     type: Array,
     required: false,
     default: null,
-  },
-  isFiltered: {
-    type: Boolean,
-    default: false,
   },
 })
 

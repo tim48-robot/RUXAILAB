@@ -72,5 +72,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('resize', checkScreenSize);
+  profile.cleanup();
 });
 </script>

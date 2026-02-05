@@ -35,7 +35,6 @@
             :headers="headers"
             :items="allTasks"
             :items-per-page="5"
-            :items-per-page-text="$t('common.table.itemsPerPage')"
             class="elevation-0 rounded-lg"
             style="background: #ffffff; border: 1px solid #e5e7eb"
             :no-data-text="$t('UserTestTable.messages.noTasks')"
@@ -147,39 +146,11 @@
         />
       </v-card>
     </v-col>
-
-    <v-dialog v-model="taskDeleteDialog" width="600" persistent>
-      <v-card>
-        <v-card-title class="text-h5 bg-error text-white" primary-title>
-          {{ $t('UserTestTable.messages.confirm_delete_task') }}
-        </v-card-title>
-        <v-card-text>{{ taskDeleteDialogText }}</v-card-text>
-        <v-divider />
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            class="bg-grey-lighten-3"
-            variant="text"
-            @click="taskDeleteDialog = false"
-          >
-            {{ $t('buttons.cancel') }}
-          </v-btn>
-          <v-btn
-            class="bg-red text-white ml-1"
-            :loading="taskDeleteLoading"
-            variant="text"
-            @click="confirmTaskDeletion"
-          >
-            {{ $t('buttons.delete') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </v-row>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import FormDialog from './FormDialog.vue'
@@ -193,10 +164,6 @@ const dialog = ref(false)
 const allTasks = ref([])
 const editedIndex = ref(-1)
 const task = ref(new Task())
-
-const taskDeleteDialog = ref(false)
-const taskToDelete = ref(null)
-const taskDeleteLoading = ref(false)
 
 const headers = ref([
   {
@@ -257,12 +224,6 @@ const headers = ref([
   },
 ])
 
-const taskDeleteDialogText = computed(() =>
-  t('UserTestTable.messages.sure_to_delete_task', {
-    taskName: taskToDelete.value?.taskName,
-  }),
-)
-
 const editItem = (item) => {
   editedIndex.value = allTasks.value.indexOf(item)
   task.value = item
@@ -270,23 +231,12 @@ const editItem = (item) => {
 }
 
 const deleteItem = async (item) => {
-  taskToDelete.value = item
-  taskDeleteDialog.value = true
-}
-
-const confirmTaskDeletion = async () => {
-  taskDeleteLoading.value = true
-  try {
-    const index = allTasks.value.indexOf(taskToDelete.value)
-    if (index > -1) {
+  const index = allTasks.value.indexOf(item)
+  if (confirm('Are you sure you want to delete this task?')) {
+    try {
       allTasks.value.splice(index, 1)
       await store.dispatch('UserStudy/setTasks', allTasks.value)
-    }
-  } catch {
-  } finally {
-    taskDeleteDialog.value = false
-    taskDeleteLoading.value = false
-    taskToDelete.value = null
+    } catch {}
   }
 }
 

@@ -29,7 +29,8 @@
       height="200"
       :src="officeHoursImage"
       cover
-    />
+    >
+    </v-img>
 
     <v-card-text class="pa-6">
       <!-- Webinar Title -->
@@ -43,7 +44,7 @@
       </p>
 
       <!-- Date and Duration Info -->
-      <v-row class="info-row mb-2" no-gutters>
+      <v-row class="info-row mb-4" no-gutters>
         <v-col cols="6" class="pr-2">
           <div class="info-item">
             <div class="info-icon-wrapper">
@@ -57,8 +58,7 @@
             </div>
           </div>
         </v-col>
-
-        <v-col cols="6">
+        <v-col cols="6" class="">
           <div class="info-item">
             <div class="info-icon-wrapper">
               <v-icon icon="mdi-clock-outline" size="24" color="primary" />
@@ -72,10 +72,8 @@
           </div>
         </v-col>
       </v-row>
-    </v-card-text>
 
-    <!-- Join Button -->
-    <v-card-actions class="pa-6 pt-0">
+      <!-- Join Button -->
       <v-btn
         :color="buttonConfig.color"
         variant="flat"
@@ -89,7 +87,7 @@
       >
         {{ buttonConfig.text }}
       </v-btn>
-    </v-card-actions>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -131,10 +129,11 @@ const webinar = computed(() => {
 
   // Default webinar data
   return {
-    title: t('Dashboard.officeHours.title'),
-    description: t('Dashboard.officeHours.description'),
-    date: t('Dashboard.officeHours.nextSessionDate'),
-    duration: t('Dashboard.officeHours.frequency'),
+    title: 'Monthly Office Hours',
+    description:
+      'Starting in November, we will host monthly office hours to discuss project updates, answer questions, and connect with our community.',
+    date: 'Nov 2025',
+    duration: 'Monthly',
   }
 })
 

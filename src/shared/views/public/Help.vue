@@ -242,7 +242,8 @@ const generateFaqItems = () => {
         gif: `${gif}.mp4`,
         category,
       }
-    } catch {
+    } catch (error) {
+      console.warn(`Failed to create FAQ item for ${keyPrefix}:`, error)
       return {
         title: `FAQ ${keyPrefix}`,
         content: 'Content not available',
@@ -337,7 +338,8 @@ const getItemsByCategory = (categoryId) => {
 onMounted(() => {
   try {
     items.value = generateFaqItems()
-  } catch {
+  } catch (error) {
+    console.error('Failed to generate FAQ items:', error)
     items.value = []
   }
 

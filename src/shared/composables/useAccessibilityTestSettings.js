@@ -137,7 +137,8 @@ export function useAccessibilityTestSettings(config) {
         hour: '2-digit',
         minute: '2-digit',
       })
-    } catch {
+    } catch (e) {
+      console.error('Error formatting date:', e)
       return 'Invalid date'
     }
   }
@@ -256,6 +257,7 @@ export function useAccessibilityTestSettings(config) {
         showSuccess('Changes saved successfully')
       } catch (error) {
         showError('Failed to save changes.')
+        console.error('Error saving test:', error)
       } finally {
         loading.value = false
       }
@@ -288,8 +290,9 @@ export function useAccessibilityTestSettings(config) {
 
       showSuccess('Test deleted successfully!')
       router.push({ name: config.testListRoute })
-    } catch {
+    } catch (error) {
       showError('Failed to delete test.')
+      console.error('Error deleting test:', error)
     } finally {
       loading.value = false
       dialogDel.value = false
@@ -308,8 +311,9 @@ export function useAccessibilityTestSettings(config) {
       // Create template logic here (implement based on your template system)
       showSuccess('Template created successfully!')
       closeDialog()
-    } catch {
+    } catch (error) {
       showError('Failed to create template.')
+      console.error('Error creating template:', error)
     } finally {
       loading.value = false
     }
@@ -382,8 +386,9 @@ export function useAccessibilityTestSettings(config) {
 
       showSuccess('Test duplicated successfully!')
       router.push({ name: config.testListRoute })
-    } catch {
+    } catch (error) {
       showError('Failed to duplicate test.')
+      console.error('Error duplicating test:', error)
     } finally {
       loading.value = false
     }

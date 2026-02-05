@@ -198,16 +198,6 @@ function onTimeUpdate(event) {
   videoCurrentTime.value = video.currentTime
 }
 
-function onVideoPlay() {
-  isPlaying.value = true
-  updateLoop()
-}
-
-function onVideoPause() {
-  isPlaying.value = false
-  cancelAnimationFrame(rafId)
-}
-
 const togglePlay = () => {
   const video = mainVideo2.value
   if (!video) return
@@ -238,19 +228,21 @@ onMounted(() => {
   const video = mainVideo2.value
   if (!video) return
 
-  video.addEventListener('loadedmetadata', onMetadataLoaded)
-  video.addEventListener('play', onVideoPlay)
-  video.addEventListener('pause', onVideoPause)
+  video.addEventListener('loadedmetadata', () => {
+    videoDuration.value = video.duration
+  })
+
+  video.addEventListener('play', () => {
+    isPlaying.value = true
+    updateLoop()
+  })
+
+  video.addEventListener('pause', () => {
+    isPlaying.value = false
+    cancelAnimationFrame(rafId)
+  })
 })
-onBeforeUnmount(() => {
-  const video = mainVideo2.value
-  if (video) {
-    video.removeEventListener('loadedmetadata', onMetadataLoaded)
-    video.removeEventListener('play', onVideoPlay)
-    video.removeEventListener('pause', onVideoPause)
-  }
-  cancelAnimationFrame(rafId)
-})
+onBeforeUnmount(() => cancelAnimationFrame(rafId))
 </script>
 
 <style scoped>

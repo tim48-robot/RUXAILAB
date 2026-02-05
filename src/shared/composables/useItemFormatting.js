@@ -6,7 +6,7 @@ import {
 } from '../constants/methodDefinitions'
 
 export function useItemFormatting(type) {
-  const { t, ...i18n } = useI18n()
+  const { t } = useI18n()
 
   const getItemTitle = (item) => {
     if (type.value === 'myTemplates' || type.value === 'publicTemplates')
@@ -36,14 +36,10 @@ export function useItemFormatting(type) {
   }
 
   const formatItemDate = (item) => {
-    const date =
-      type.value === 'myTemplates' || type.value === 'publicTemplates'
-        ? item.header?.creationDate
-        : item.creationDate || item.updateDate
-
-    return formatDateLong(date, i18n.locale.value)
+    if (type.value === 'myTemplates' || type.value === 'publicTemplates')
+      return formatDateLong(item.header.creationDate, 'es')
+    return formatDateLong(item.creationDate || item.updateDate, 'es')
   }
-
   const getTags = (item) => {
     const tags = []
 
@@ -51,7 +47,7 @@ export function useItemFormatting(type) {
     const definition = getMethodDefinition(item.testType, item.subType)
     if (definition) {
       tags.push({
-        label: t(`methods.definitions.${definition.id}`),
+        label: definition.nameEn,
         color: definition.color,
         icon: definition.icon,
       })
@@ -61,7 +57,7 @@ export function useItemFormatting(type) {
     const category = getMethodCategory(item)
     if (category) {
       tags.push({
-        label: t(`methods.categories.${category.id}`),
+        label: category.nameEn,
         color: category.color,
         icon: category.icon,
       })
@@ -69,8 +65,9 @@ export function useItemFormatting(type) {
 
     // status
     if (item.status) {
+      const status = item.status.charAt(0).toUpperCase() + item.status.slice(1)
       tags.push({
-        label: t(`tags.${item.status}`),
+        label: status,
         color:
           item.status === 'active'
             ? 'green'
@@ -89,7 +86,7 @@ export function useItemFormatting(type) {
     // visibility
     if (item.isPublic !== undefined) {
       tags.push({
-        label: item.isPublic ? t('tags.public') : t('tags.private'),
+        label: item.isPublic ? 'Public' : 'Private',
         color: item.isPublic ? 'green' : 'grey',
         icon: item.isPublic ? 'mdi-earth' : 'mdi-lock',
       })
@@ -98,7 +95,7 @@ export function useItemFormatting(type) {
     // if created from a template
     if (item.templateDoc) {
       tags.push({
-        label: t('tags.fromTemplate'),
+        label: 'From Template',
         color: '#9C27B0',
         icon: 'mdi-file-document-edit',
       })
@@ -107,7 +104,7 @@ export function useItemFormatting(type) {
     // has cooperators
     if (item.cooperators?.length > 0) {
       tags.push({
-        label: t('tags.withCollaborators'),
+        label: 'With Collaborators',
         color: '#ff6161ff',
         icon: 'mdi-account-multiple',
       })
