@@ -25,7 +25,7 @@
             class="bg-red text-white ml-1"
             :loading="loadingBtn"
             variant="text"
-            @click="removeReport(report), (loadingBtn = true)"
+            @click="(removeReport(report), (loadingBtn = true))"
           >
             {{ $t('buttons.delete') }}
           </v-btn>
@@ -142,6 +142,17 @@
           </div>
         </template>
 
+        <template #[`item.totalTime`]="{ item }">
+          <div class="d-flex align-center">
+            <v-icon
+              icon="mdi-timer-outline"
+              size="small"
+              class="mr-2 text-medium-emphasis"
+            />
+            <span class="text-body-1">{{ item.totalTime }}</span>
+          </div>
+        </template>
+
         <template #[`item.status`]="{ item }">
           <v-chip
             :color="getStatusColor(item.status)"
@@ -180,7 +191,7 @@
                 prepend-icon="mdi-delete"
                 :title="$t('HeuristicsReport.messages.remove_report')"
                 class="text-error"
-                @click=";(dialog = true), (report = item)"
+                @click=";((dialog = true), (report = item))"
               />
               <v-list-item
                 v-if="item.hidden"
@@ -234,7 +245,7 @@
                   prepend-icon="mdi-delete"
                   :title="$t('HeuristicsReport.messages.remove_report')"
                   class="text-error"
-                  @click=";(dialog = true), (report = item)"
+                  @click=";((dialog = true), (report = item))"
                 />
                 <v-list-item
                   v-if="item.hidden"
@@ -300,6 +311,31 @@
               </v-sheet>
             </v-col>
 
+            <v-col cols="12">
+              <v-sheet
+                rounded
+                color="grey-lighten-4"
+                variant="flat"
+                class="pa-3 h-100"
+              >
+                <div
+                  class="text-caption font-weight-bold text-medium-emphasis mb-1"
+                >
+                  Total Time
+                </div>
+                <div class="d-flex align-center">
+                  <v-icon
+                    icon="mdi-timer-outline"
+                    size="small"
+                    class="mr-2 text-medium-emphasis"
+                  />
+                  <span class="text-body-2 font-weight-medium">
+                    {{ item.totalTime }}
+                  </span>
+                </div>
+              </v-sheet>
+            </v-col>
+
             <v-col cols="6">
               <v-sheet
                 rounded
@@ -321,7 +357,7 @@
                   <v-icon start size="small">
                     {{ item.hidden ? 'mdi-check' : 'mdi-close' }}
                   </v-icon>
-                  {{ item.hidden ? 'Hidden' : 'Visible' }}
+                  {{ item.hidden ? $t('common.hidden') : $t('common.visible') }}
                 </v-chip>
               </v-sheet>
             </v-col>
@@ -383,12 +419,16 @@ import Intro from '@/shared/components/introduction_cards/IntroReports.vue'
 import PageWrapper from '@/shared/views/template/PageWrapper.vue'
 import { STUDY_TYPES } from '@/shared/constants/methodDefinitions'
 import UserStudyEvaluatorAnswer from '@/ux/UserTest/models/UserStudyEvaluatorAnswer'
+import {
+  parseTimeSpentToMs,
+  formatTimeSpentFromMs,
+} from '@/ux/Heuristic/utils/statistics'
 import { showSuccess } from '../utils/toast'
 
 const store = useStore()
 const { t } = useI18n()
 
-const props = defineProps({ id: { type: String, default: '' } })
+defineProps({ id: { type: String, default: '' } })
 const emit = defineEmits(['goToCoops'])
 
 const dialog = ref(false)
@@ -410,6 +450,7 @@ const allHeaders = computed(() => [
   { title: t('HeuristicsReport.headers.evaluator'), key: 'evaluator' },
   { title: t('HeuristicsReport.headers.last_update'), key: 'lastUpdate' },
   { title: t('HeuristicsReport.headers.progress'), key: 'progress' },
+  { title: 'Total Time', key: 'totalTime' },
   { title: t('HeuristicsReport.headers.status'), key: 'status' },
   { title: t('common.hidden'), key: 'hidden' },
   {
@@ -459,6 +500,27 @@ const formatDate = (timestamp) => {
 
 const formatTimeAgo = (count, unit) => t(`common.timeAgo.${unit}`, { count })
 
+const getReportTotalTime = (reportData, type) => {
+  if (!reportData) return '00:00'
+
+  if (type === STUDY_TYPES.HEURISTIC) {
+    const heuristics = reportData.heuristicQuestions || []
+    const totalMs = heuristics.reduce(
+      (acc, heuristic) => acc + parseTimeSpentToMs(heuristic?.timeSpent),
+      0,
+    )
+    return formatTimeSpentFromMs(totalMs)
+  }
+
+  const tasks = reportData.tasks || {}
+  const list = Array.isArray(tasks) ? tasks : Object.values(tasks)
+  const totalMs = list.reduce(
+    (acc, task) => acc + Number(task?.taskTime || 0),
+    0,
+  )
+  return formatTimeSpentFromMs(totalMs)
+}
+
 const reports = computed(() => {
   const doc = answers.value
   if (!doc) return []
@@ -473,6 +535,7 @@ const reports = computed(() => {
     evaluator: getCooperatorEmail(r.userDocId),
     userDocId: r.userDocId,
     progress: parseFloat(r.progress).toFixed(2),
+    totalTime: getReportTotalTime(r, type),
     status: checkIfIsSubmitted(r.submitted),
     lastUpdate: formatDate(r.lastUpdate),
     hidden: r.hidden ?? false,
@@ -504,7 +567,7 @@ const unhideReport = async (item) => {
   )
 
   if (!payload) {
-    console.error('Session not found for userDocId:', item.id)
+    // console.error('Session not found for userDocId:', item.id)
     return
   }
   try {
@@ -515,8 +578,8 @@ const unhideReport = async (item) => {
       }),
       answersDocId: test.value.answersDocId,
     })
-  } catch (error) {
-    console.error('Error saving answer:', error.message)
+  } catch {
+    // console.error('Error saving answer:', error.message)
     store.commit('SET_TOAST', {
       type: 'error',
       message: t('errors.globalError'),
@@ -552,7 +615,7 @@ const removeReport = async (report) => {
 
 const goToCoops = () => emit('goToCoops')
 
-const getAvatarColor = (name) => '#3f51b5'
+const getAvatarColor = (_name) => '#3f51b5'
 const getInitials = (name) => name?.charAt(0)?.toUpperCase() || '?'
 const getProgressColor = (progress) => (progress >= 100 ? 'success' : 'primary')
 const getStatusColor = (status) =>
@@ -566,8 +629,8 @@ onMounted(async () => {
   store.commit('setLoading', true)
   try {
     await store.dispatch('getCurrentTestAnswerDoc')
-  } catch (error) {
-    console.error('Error:', error)
+  } catch {
+    // console.error('Error:', error)
   } finally {
     store.commit('setLoading', false)
   }

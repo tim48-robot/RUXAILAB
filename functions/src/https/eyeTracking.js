@@ -1,4 +1,10 @@
 import { admin, functions } from '../f.firebase.js'
+import logger from '../utils/logger.js'
+
+const calibrationCorsOrigins = (process.env.EYE_LAB_CORS_ORIGINS || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
 
 export const receiveCalibration = functions.onRequest({
   handler: async (req, res) => {
@@ -45,7 +51,7 @@ export const receiveCalibration = functions.onRequest({
         .status(200)
         .json({ message: 'Calibration saved and user updated successfully' })
     } catch (error) {
-      console.error('Error saving calibration:', error)
+      logger.error('Error saving calibration:', { error })
       return res.status(500).json({ error: error.message })
     }
   },
@@ -53,11 +59,7 @@ export const receiveCalibration = functions.onRequest({
 
 export const getCalibrationConfig = functions.onRequest({
   opts: {
-    cors: [
-      'http://localhost:8081',
-      'http://127.0.0.1:8081',
-      'https://eye-tracking-28179.web.app',
-    ],
+    cors: calibrationCorsOrigins,
   },
   handler: async (req, res) => {
     if (req.method !== 'GET') {
@@ -93,7 +95,7 @@ export const getCalibrationConfig = functions.onRequest({
         calibrationConfig,
       })
     } catch (error) {
-      console.error('Error getting calibration config:', error)
+      logger.error('Error getting calibration config:', { error })
       return res.status(500).json({ error: error.message })
     }
   },
