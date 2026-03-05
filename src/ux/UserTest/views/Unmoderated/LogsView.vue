@@ -1,6 +1,6 @@
 <template>
   <!-- Logs App -->
-  <div class="mockup-scope" style="min-height: 1200px; background-color: #e8eaf2">
+  <div class="mockup-scope" style="min-height: 1200px; background-color: #e8eaf2; padding-top: 1px">
     <v-container class="dashboard-container">
       <!-- Study Banner -->
       <!-- Study Banner --><div class="dashboard-header">
