@@ -1,6 +1,7 @@
 <template>
-  <v-container class="dashboard-container">
-    <!-- Logs App --><div class="mockup-scope">
+  <!-- Logs App -->
+  <div class="mockup-scope" style="min-height: 1200px; background-color: #e8eaf2">
+    <v-container class="dashboard-container">
       <!-- Study Banner -->
       <!-- Study Banner --><div class="dashboard-header">
         <!-- Banner Inner --><div class="header-content">
@@ -498,8 +499,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </v-container>
+    </v-container>
+  </div>
 </template>
 
 <script setup>
