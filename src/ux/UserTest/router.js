@@ -6,6 +6,7 @@ import SettingsView from '@/shared/views/SettingsView.vue'
 import CooperatorsView from '@/shared/views/CooperatorsView.vue'
 import CooperatorsModeratedView from './views/Moderators/CooperatorsModeratedView.vue'
 import UserAnswerView from './views/UserAnswerView.vue'
+import LogsView from './views/Unmoderated/LogsView.vue'
 
 export default [
   {
@@ -49,6 +50,13 @@ export default [
         props: true,
         meta: { authorize: [0, 1] },
         component: CooperatorsView,
+      },
+      {
+        path: '/userTest/unmoderated/logs/:id/:token?',
+        name: 'UserUnmoderatedLogsView',
+        props: true,
+        meta: { authorize: [0, 1] },
+        component: LogsView,
       },
     ],
   },

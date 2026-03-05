@@ -43,6 +43,11 @@ export const getNavigatorDefault = (test, accessLevel, route, type) => {
         icon: ICONS.COG,
         path: `/${type}/settings/${test.id}`,
       },
+      {
+        title: 'Logs',
+        icon: 'mdi-text-search',
+        path: `/${type}/logs/${test.id}`,
+      },
     )
   }
 
