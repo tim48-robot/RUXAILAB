@@ -1,5 +1,7 @@
 <template>
+  <!-- Sidebar Navigation -->
   <v-navigation-drawer
+    id="Sidebar Navigation"
     v-model="drawerOpen"
     :rail="miniMode && mdAndUp"
     :temporary="!mdAndUp"
@@ -7,21 +9,17 @@
     color="primary"
     class="pt-3"
   >
-    <!-- Navigation header 
-    <div v-if="!mini">
-      <v-list-item>
-        <h3>{{ test.testTitle }}</h3>
-      </v-list-item>
-    </div>
--->
-    <!-- Navigation options -->
-    <v-list v-if="items" density="compact">
-      <v-list-item v-for="(item, n) in items" :key="n" @click="go(item)">
+    <!-- Navigation Options -->
+    <v-list id="Navigation Options" v-if="items" density="compact">
+      <!-- Nav Item -->
+      <v-list-item :id="'Nav Item ' + item.title" v-for="(item, n) in items" :key="n" @click="go(item)">
         <template #prepend>
+          <!-- Nav Item Icon -->
           <v-icon :color="$route.path == item.path ? '#fca326' : '#bababa'">
             {{ item.icon }}
           </v-icon>
         </template>
+        <!-- Nav Item Label -->
         <v-list-item-title
           :style="$route.path == item.path ? 'color: #fca326' : 'color:#bababa'"
         >
@@ -30,13 +28,17 @@
       </v-list-item>
     </v-list>
 
-    <div v-if="mdAndUp" class="footer">
+    <!-- Sidebar Footer -->
+    <div id="Sidebar Footer" v-if="mdAndUp" class="footer">
+      <!-- Collapse Toggle -->
       <v-btn
+        id="Collapse Toggle"
         icon
         size="small"
         class="mr-2 bg-orange"
         @click.stop="toggleMiniMode"
       >
+        <!-- Collapse Icon -->
         <v-icon color="white">
           {{ miniMode ? 'mdi-chevron-right' : 'mdi-chevron-left' }}
         </v-icon>

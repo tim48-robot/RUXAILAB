@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logs — Trace View</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<div id="Top Bar" class="appbar">
+  <!-- Menu Icon -->
+  <div id="Menu Icon" class="appbar-menu">
+    <span class="mdi mdi-menu"></span>
+  </div>
+
+  <!-- Logo -->
+  <div id="Logo" class="appbar-logo">
+    <img id="Logo Text" src="../src/assets/logo_full_white.png" height="25" alt="RUXAILAB Logo">
+  </div>
+
+  <!-- Spacer -->
+  <div id="Spacer" style="flex: 1"></div>
+
+  <!-- Language Selector -->
+  <div id="Language Selector" class="appbar-locale">
+    <span id="Language Icon" class="mdi mdi-translate"></span>
+    <div id="Language Labels" class="text-wrap">
+      <span class="label">Language</span>
+      <span class="val">English</span>
+    </div>
+    <span id="Language Chevron" class="mdi mdi-menu-down"></span>
+  </div>
+
+  <!-- Return to Console -->
+  <div id="Return to Console Button" class="appbar-text-btn">Return to Console</div>
+
+  <!-- Help Button -->
+  <div id="Help Button" class="appbar-icon-btn">
+    <span id="Help Icon" class="mdi mdi-help-circle-outline"></span>
+  </div>
+
+  <!-- Notifications -->
+  <div id="Notifications" class="appbar-icon-btn">
+    <span id="Bell Icon" class="mdi mdi-bell-outline"></span>
+  </div>
+
+  <!-- User Avatar -->
+  <div id="User Avatar" class="appbar-avatar">
+    <span>JT</span>
+  </div>
+  
+  <!-- Dropdown Arrow -->
+  <div id="Dropdown Arrow" class="appbar-icon-btn" style="margin-left:-8px">
+    <span class="mdi mdi-chevron-down" style="font-size:20px; color:#90A4AE"></span>
+  </div>
+</div>
+
+<!-- App Layout -->
+<div id="App Layout" class="shell">
+  <!-- Sidebar Navigation -->
+  <aside id="Sidebar" class="drawer">
+    <!-- Nav Items -->
+    <div class="drawer-list">
+      <!-- Nav: Manager --><a class="ditem"><!-- Manager Icon --><span class="mdi mdi-home"></span><!-- Manager Label --><span>Manager</span></a>
+      <!-- Nav: Test --><a class="ditem"><!-- Test Icon --><span class="mdi mdi-file-document-edit"></span><!-- Test Label --><span>Test</span></a>
+      <!-- Nav: Preview --><a class="ditem"><!-- Preview Icon --><span class="mdi mdi-file-eye"></span><!-- Preview Label --><span>Preview</span></a>
+      <!-- Nav: Reports --><a class="ditem"><!-- Reports Icon --><span class="mdi mdi-book-multiple"></span><!-- Reports Label --><span>Reports</span></a>
+      <!-- Nav: Answers --><a class="ditem"><!-- Answers Icon --><span class="mdi mdi-order-bool-ascending-variant"></span><!-- Answers Label --><span>Answers</span></a>
+      <!-- Nav: Cooperators --><a class="ditem"><!-- Cooperators Icon --><span class="mdi mdi-account-group"></span><!-- Cooperators Label --><span>Cooperators</span></a>
+      <!-- Nav: Settings --><a class="ditem"><!-- Settings Icon --><span class="mdi mdi-cog"></span><!-- Settings Label --><span>Settings</span></a>
+      <!-- Divider --><div style="border-top:1px solid rgba(255,255,255,.08);margin:8px 0"></div>
+      <!-- Nav: Logs (Active) --><a class="ditem active"><!-- Logs Icon --><span class="mdi mdi-text-search"></span><!-- Logs Label --><span>Logs</span><!-- New Badge --><span style="margin-left:auto;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#fca326;color:#fff;padding:1px 5px;border-radius:3px">NEW</span></a>
+    </div>
+    <!-- Collapse Button --><div class="drawer-footer"><!-- Collapse Toggle --><div class="drawer-toggle"><!-- Chevron Left --><span class="mdi mdi-chevron-left"></span></div></div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Content Container -->
+    <div id="Content Container" class="dashboard-container">
+
+      <!-- Study Banner -->
+      <div class="dashboard-header">
+        <!-- Banner Inner -->
+        <div class="header-content">
+          <!-- Banner Icon Container --><div class="header-icon-container"><!-- Banner Icon --><span class="mdi mdi-chart-box-outline" style="color:#fff;font-size:28px"></span></div>
+          <!-- Banner Text -->
+          <div class="header-texts">
+            <!-- Study Title --><h1 class="dashboard-title">Mobile App Redesign Evaluation</h1>
+            <!-- Study Description --><p class="dashboard-subtitle">Usability test for the new checkout flow redesign</p>
+            <!-- Status Badges -->
+            <div class="header-chips">
+              <!-- Moderated Badge --><span class="study-chip"><!-- Moderated Icon --><span class="mdi mdi-account-check-outline"></span>Moderated Study</span>
+              <!-- Active Badge --><span class="study-chip"><!-- Active Dot --><span class="mdi mdi-circle-small"></span>Active</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div id="Tab Navigation" class="sub-tabs">
+        <!-- Tab: Overview --><button class="stab">Overview</button>
+        <!-- Tab: Log Explorer --><button class="stab">Log Explorer</button>
+        <!-- Tab: Trace View (Active) --><button class="stab active">Trace View</button>
+        <!-- Tab: Lifecycle --><button class="stab">Lifecycle</button>
+        <!-- Tab: Export --><button class="stab">Export</button>
+      </div>
+
+      <!-- Trace Content -->
+      <div>
+        <!-- Trace Summary Card -->
+        <div class="card" style="margin-bottom:14px">
+          <!-- Summary Row -->
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <!-- Trace ID Block -->
+            <div>
+              <!-- Trace ID Label --><div style="font-size:10px;color:#90A4AE;font-weight:600;text-transform:uppercase;letter-spacing:.5px">Trace ID</div>
+              <!-- Trace ID Value --><div style="font-size:18px;font-weight:700;color:#fca326">T-0042</div>
+            </div>
+            <!-- Divider --><div class="sep"></div>
+            <!-- Session Block --><div><!-- Session Label --><div style="font-size:10px;color:#90A4AE">Session</div><!-- Session Value --><div style="font-weight:600">S-008</div></div>
+            <!-- Divider --><div class="sep"></div>
+            <!-- Participant Block --><div><!-- Participant Label --><div style="font-size:10px;color:#90A4AE">Participant</div><!-- Participant Value --><div style="font-weight:600">P-004</div></div>
+            <!-- Divider --><div class="sep"></div>
+            <!-- Duration Block --><div><!-- Duration Label --><div style="font-size:10px;color:#90A4AE">Duration</div><!-- Duration Value --><div style="font-weight:600">12m 34s</div></div>
+            <!-- Spacer --><div style="flex:1"></div>
+            <!-- Deviation Badge --><span class="b b-warn"><!-- Alert Icon --><span class="mdi mdi-alert-outline"></span> 1 Deviation</span>
+            <!-- Export Button --><button class="btn btn-out" style="font-size:11px"><!-- Download Icon --><span class="mdi mdi-download-outline"></span> Export</button>
+          </div>
+        </div>
+
+        <!-- Swimlane Card -->
+        <div class="card" style="margin-bottom:14px">
+          <!-- Card Header -->
+          <div class="card-hdr">
+            <!-- Card Title --><div class="card-t">Event Swimlane</div>
+            <!-- Layer Legend -->
+            <div style="display:flex;gap:5px">
+              <!-- Tech Badge --><span class="b b-tech"><!-- Wrench --><span class="mdi mdi-wrench-outline"></span> Tech</span>
+              <!-- Method Badge --><span class="b b-meth"><!-- Clipboard --><span class="mdi mdi-clipboard-outline"></span> Method</span>
+              <!-- AI Badge --><span class="b b-ai"><!-- Robot --><span class="mdi mdi-robot-outline"></span> AI</span>
+            </div>
+          </div>
+          <!-- Timeline Axis -->
+          <div style="display:flex;justify-content:space-between;padding:0 112px 6px;font-size:10px;color:#90A4AE">
+            <!-- Time: 10:20 --><span>10:20</span>
+            <!-- Time: 10:21 --><span>10:21</span>
+            <!-- Time: 10:22 --><span>10:22</span>
+            <!-- Time: 10:23 --><span>10:23</span>
+            <!-- Time: 10:24 --><span>10:24</span>
+          </div>
+          <!-- Swimlane -->
+          <div class="sw-wrap">
+            <!-- Methodological Lane -->
+            <div class="sw-row">
+              <!-- Lane Label --><div class="sw-lbl" style="color:var(--meth)"><!-- Clipboard Icon --><span class="mdi mdi-clipboard-outline"></span> Method</div>
+              <!-- Lane Track -->
+              <div class="sw-trk">
+                <!-- Event: Task Start --><div class="sn sn-m">Task Start</div>
+                <!-- Event: Observer Note --><div class="sn sn-m">Observer Note</div>
+                <!-- Event: Task Done --><div class="sn sn-m">Task Done</div>
+                <!-- Event: Deviation --><div class="sn sn-w" style="margin-left:auto">⚠ Deviation</div>
+              </div>
+            </div>
+            <!-- Technical Lane -->
+            <div class="sw-row">
+              <!-- Lane Label --><div class="sw-lbl" style="color:var(--tech)"><!-- Wrench Icon --><span class="mdi mdi-wrench-outline"></span> Tech</div>
+              <!-- Lane Track -->
+              <div class="sw-trk">
+                <!-- Event: API Call --><div class="sn sn-t">API Call</div>
+                <!-- Event: DB Write --><div class="sn sn-t">DB Write</div>
+                <!-- Event: API Success --><div class="sn sn-t">API 200</div>
+                <!-- Event: Frame Drop --><div class="sn sn-e">Frame Drop</div>
+              </div>
+            </div>
+            <!-- AI Lane -->
+            <div class="sw-row" style="border-bottom:none">
+              <!-- Lane Label --><div class="sw-lbl" style="color:var(--ai)"><!-- Robot Icon --><span class="mdi mdi-robot-outline"></span> AI</div>
+              <!-- Lane Track -->
+              <div class="sw-trk">
+                <!-- Event: Eye Track --><div class="sn sn-a" style="margin-left:40px">Eye Track</div>
+                <!-- Event: Sentiment --><div class="sn sn-a">Sentiment</div>
+                <!-- Event: Transcript --><div class="sn sn-a" style="margin-left:auto">Transcript</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Detail Card -->
+        <div class="card">
+          <!-- Card Header -->
+          <div class="card-hdr">
+            <!-- Selected Event Title --><div class="card-t">Selected: Observer Note (10:21:33)</div>
+            <!-- Method Badge --><span class="b b-meth"><!-- Clipboard --><span class="mdi mdi-clipboard-outline"></span> Methodological</span>
+          </div>
+          <!-- Source Row --><div class="dr"><span class="dl">Source:</span><span>Dr. Ana Martinez</span></div>
+          <!-- Content Row --><div class="dr"><span class="dl">Content:</span><span>"Participant paused, re-read instructions twice before proceeding"</span></div>
+          <!-- Correlated Events -->
+          <div class="dr">
+            <!-- Correlated Label --><span class="dl">Correlated:</span>
+            <!-- Correlated Badges -->
+            <span style="display:flex;gap:4px">
+              <!-- Eye Fixation Badge --><span class="b b-ai" style="cursor:pointer"><!-- Robot --><span class="mdi mdi-robot-outline"></span> Eye fixation 1.2s</span>
+              <!-- Sentiment Badge --><span class="b b-ai" style="cursor:pointer"><!-- Robot --><span class="mdi mdi-robot-outline"></span> Frustrated 0.82</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

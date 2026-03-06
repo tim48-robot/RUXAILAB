@@ -1,5 +1,7 @@
 <template>
+  <!-- Help Button Container -->
   <div class="d-none d-md-flex">
+    <!-- Help Button -->
     <v-btn
       v-if="!isHelp"
       size="small"
@@ -7,6 +9,7 @@
       class="mr-1"
       @click="$router.push('/help')"
     >
+      <!-- Help Icon -->
       <v-icon size="20">
         mdi-help-circle-outline
       </v-icon>

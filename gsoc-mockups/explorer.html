@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logs — Explorer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<div id="Top Bar" class="appbar">
+  <!-- Menu Icon -->
+  <div id="Menu Icon" class="appbar-menu">
+    <span class="mdi mdi-menu"></span>
+  </div>
+
+  <!-- Logo -->
+  <div id="Logo" class="appbar-logo">
+    <img id="Logo Text" src="../src/assets/logo_full_white.png" height="25" alt="RUXAILAB Logo">
+  </div>
+
+  <!-- Spacer -->
+  <div id="Spacer" style="flex: 1"></div>
+
+  <!-- Language Selector -->
+  <div id="Language Selector" class="appbar-locale">
+    <span id="Language Icon" class="mdi mdi-translate"></span>
+    <div id="Language Labels" class="text-wrap">
+      <span class="label">Language</span>
+      <span class="val">English</span>
+    </div>
+    <span id="Language Chevron" class="mdi mdi-menu-down"></span>
+  </div>
+
+  <!-- Return to Console -->
+  <div id="Return to Console Button" class="appbar-text-btn">Return to Console</div>
+
+  <!-- Help Button -->
+  <div id="Help Button" class="appbar-icon-btn">
+    <span id="Help Icon" class="mdi mdi-help-circle-outline"></span>
+  </div>
+
+  <!-- Notifications -->
+  <div id="Notifications" class="appbar-icon-btn">
+    <span id="Bell Icon" class="mdi mdi-bell-outline"></span>
+  </div>
+
+  <!-- User Avatar -->
+  <div id="User Avatar" class="appbar-avatar">
+    <span>JT</span>
+  </div>
+  
+  <!-- Dropdown Arrow -->
+  <div id="Dropdown Arrow" class="appbar-icon-btn" style="margin-left:-8px">
+    <span class="mdi mdi-chevron-down" style="font-size:20px; color:#90A4AE"></span>
+  </div>
+</div>
+
+<!-- App Layout -->
+<div id="App Layout" class="shell">
+
+  <!-- Sidebar Navigation -->
+  <aside id="Sidebar" class="drawer">
+    <!-- Nav Items -->
+    <div class="drawer-list">
+      <!-- Nav: Manager -->
+      <a class="ditem">
+        <!-- Manager Icon --><span class="mdi mdi-home"></span>
+        <!-- Manager Label --><span>Manager</span>
+      </a>
+      <!-- Nav: Test -->
+      <a class="ditem">
+        <!-- Test Icon --><span class="mdi mdi-file-document-edit"></span>
+        <!-- Test Label --><span>Test</span>
+      </a>
+      <!-- Nav: Preview -->
+      <a class="ditem">
+        <!-- Preview Icon --><span class="mdi mdi-file-eye"></span>
+        <!-- Preview Label --><span>Preview</span>
+      </a>
+      <!-- Nav: Reports -->
+      <a class="ditem">
+        <!-- Reports Icon --><span class="mdi mdi-book-multiple"></span>
+        <!-- Reports Label --><span>Reports</span>
+      </a>
+      <!-- Nav: Answers -->
+      <a class="ditem">
+        <!-- Answers Icon --><span class="mdi mdi-order-bool-ascending-variant"></span>
+        <!-- Answers Label --><span>Answers</span>
+      </a>
+      <!-- Nav: Cooperators -->
+      <a class="ditem">
+        <!-- Cooperators Icon --><span class="mdi mdi-account-group"></span>
+        <!-- Cooperators Label --><span>Cooperators</span>
+      </a>
+      <!-- Nav: Settings -->
+      <a class="ditem">
+        <!-- Settings Icon --><span class="mdi mdi-cog"></span>
+        <!-- Settings Label --><span>Settings</span>
+      </a>
+      <!-- Divider -->
+      <div style="border-top:1px solid rgba(255,255,255,.08);margin:8px 0"></div>
+      <!-- Nav: Logs (Active) -->
+      <a class="ditem active">
+        <!-- Logs Icon --><span class="mdi mdi-text-search"></span>
+        <!-- Logs Label --><span>Logs</span>
+        <!-- New Badge --><span style="margin-left:auto;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#fca326;color:#fff;padding:1px 5px;border-radius:3px">NEW</span>
+      </a>
+    </div>
+    <!-- Collapse Button -->
+    <div class="drawer-footer">
+      <!-- Collapse Toggle -->
+      <div class="drawer-toggle">
+        <!-- Chevron Left --><span class="mdi mdi-chevron-left"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Content Container -->
+    <div id="Content Container" class="dashboard-container">
+
+      <!-- Study Banner -->
+      <div class="dashboard-header">
+        <!-- Banner Inner -->
+        <div class="header-content">
+          <!-- Banner Icon Container -->
+          <div class="header-icon-container">
+            <!-- Banner Icon --><span class="mdi mdi-chart-box-outline" style="color:#fff;font-size:28px"></span>
+          </div>
+          <!-- Banner Text -->
+          <div class="header-texts">
+            <!-- Study Title --><h1 class="dashboard-title">Mobile App Redesign Evaluation</h1>
+            <!-- Study Description --><p class="dashboard-subtitle">Usability test for the new checkout flow redesign</p>
+            <!-- Status Badges -->
+            <div class="header-chips">
+              <!-- Moderated Badge -->
+              <span class="study-chip">
+                <!-- Moderated Icon --><span class="mdi mdi-account-check-outline"></span>Moderated Study
+              </span>
+              <!-- Active Badge -->
+              <span class="study-chip">
+                <!-- Active Dot --><span class="mdi mdi-circle-small"></span>Active
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div id="Tab Navigation" class="sub-tabs">
+        <!-- Tab: Overview --><button class="stab">Overview</button>
+        <!-- Tab: Log Explorer (Active) --><button class="stab active">Log Explorer</button>
+        <!-- Tab: Trace View --><button class="stab">Trace View</button>
+        <!-- Tab: Lifecycle --><button class="stab">Lifecycle</button>
+        <!-- Tab: Export --><button class="stab">Export</button>
+      </div>
+
+      <!-- Explorer Content -->
+      <div>
+        <!-- Filter Bar -->
+        <div class="fbar">
+          <!-- Filter Label --><span style="font-size:11px;font-weight:600;color:#90A4AE">Layers:</span>
+          <!-- Filter: Technical --><button class="chip chip-tech"><span class="mdi mdi-wrench-outline"></span> Technical</button>
+          <!-- Filter: Methodological --><button class="chip chip-meth"><span class="mdi mdi-clipboard-outline"></span> Methodological</button>
+          <!-- Filter: AI --><button class="chip chip-ai"><span class="mdi mdi-robot-outline"></span> AI Decisions</button>
+          <!-- Divider --><div class="sep"></div>
+          <!-- Severity Filter --><select class="fsel"><option>Severity: All</option><option>Error</option><option>Warning</option><option>Info</option></select>
+          <!-- Session Filter --><select class="fsel"><option>Session: S-008</option><option>S-007</option><option>All</option></select>
+          <!-- Time Filter --><select class="fsel"><option>Last 1 hour</option><option>Last 15 min</option><option>Last 24h</option></select>
+          <!-- Search Input --><input class="fsearch" placeholder="Search logs...">
+        </div>
+
+        <!-- Log Table Card -->
+        <div class="card">
+          <!-- Card Header -->
+          <div class="card-hdr">
+            <!-- Card Title Block -->
+            <div>
+              <!-- Card Title --><div class="card-t">Log Entries</div>
+              <!-- Card Subtitle --><div class="card-s">847 entries · S-008 · last 1 hour</div>
+            </div>
+            <!-- Card Actions -->
+            <div style="display:flex;gap:6px">
+              <!-- Export Button --><button class="btn btn-out"><span class="mdi mdi-download-outline"></span> Export</button>
+              <!-- Refresh Button --><button class="btn btn-out"><span class="mdi mdi-refresh"></span></button>
+            </div>
+          </div>
+          <!-- Log Table -->
+          <table class="dtbl">
+            <!-- Table Header -->
+            <thead>
+              <!-- Header Row -->
+              <tr>
+                <!-- Col: Time --><th style="width:80px">Time</th>
+                <!-- Col: Layer --><th style="width:94px">Layer</th>
+                <!-- Col: Level --><th style="width:62px">Level</th>
+                <!-- Col: Source --><th style="width:100px">Source</th>
+                <!-- Col: Message --><th>Message</th>
+                <!-- Col: Trace --><th style="width:64px">Trace</th>
+              </tr>
+            </thead>
+            <!-- Table Body -->
+            <tbody>
+              <!-- Row: Firestore Write -->
+              <tr>
+                <td class="lt">10:23:01</td>
+                <td><span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECH</span></td>
+                <td><span class="b b-info">INFO</span></td>
+                <td class="ls">firestore</td>
+                <td>Write success: sessions/S-008/tasks/task_002</td>
+                <td><span class="ltr">T-0042</span></td>
+              </tr>
+              <!-- Row: Task Assigned -->
+              <tr>
+                <td class="lt">10:23:05</td>
+                <td><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METH</span></td>
+                <td><span class="b b-info">INFO</span></td>
+                <td class="ls">facilitator</td>
+                <td>Task 2 assigned to participant P-004</td>
+                <td><span class="ltr">T-0042</span></td>
+              </tr>
+              <!-- Row: Eye Fixation (Expanded) -->
+              <tr style="background:#F8F9FF">
+                <td class="lt">10:23:12</td>
+                <td><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span></td>
+                <td><span class="b b-info">INFO</span></td>
+                <td class="ls">eye-tracker</td>
+                <td style="font-weight:500">▾ Fixation at (342, 518) — 1.2s</td>
+                <td><span class="ltr">T-0042</span></td>
+              </tr>
+              <!-- Row: AI Detail Panel -->
+              <tr>
+                <td colspan="6" style="padding:0">
+                  <!-- AI Detail Card -->
+                  <div style="background:#F8F9FC;border:1px solid #E3E8F0;border-radius:8px;padding:12px 14px;margin:2px 4px;font-size:13px">
+                    <!-- Detail Header -->
+                    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+                      <!-- AI Badge --><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI Decision Detail</span>
+                    </div>
+                    <!-- Model Row -->
+                    <div class="dr"><span class="dl">Model:</span><span>gaze-detection-v2.1</span></div>
+                    <!-- Confidence Row -->
+                    <div class="dr"><span class="dl">Confidence:</span><span style="color:var(--ok);font-weight:600">0.91 ✓ High</span></div>
+                    <!-- AOI Row -->
+                    <div class="dr"><span class="dl">AOI Hit:</span><span>"Submit Button" — 3rd fixation in task</span></div>
+                  </div>
+                </td>
+              </tr>
+              <!-- Row: Sentiment Warning -->
+              <tr>
+                <td class="lt">10:23:22</td>
+                <td><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span></td>
+                <td><span class="b b-warn">WARN</span></td>
+                <td class="ls">sentiment</td>
+                <td>Expression: <b>frustrated</b> (confidence: 0.82)</td>
+                <td><span class="ltr">T-0042</span></td>
+              </tr>
+              <!-- Row: Protocol Deviation -->
+              <tr>
+                <td class="lt">10:23:30</td>
+                <td><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METH</span></td>
+                <td><span class="b b-warn">WARN</span></td>
+                <td class="ls">facilitator</td>
+                <td>⚠ Protocol deviation: extra hint given</td>
+                <td><span class="ltr">T-0042</span></td>
+              </tr>
+              <!-- Row: Frame Drop Error -->
+              <tr>
+                <td class="lt">10:23:35</td>
+                <td><span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECH</span></td>
+                <td><span class="b b-err">ERR</span></td>
+                <td class="ls">eye-tracker</td>
+                <td>Frame drop: 3 frames lost (network jitter)</td>
+                <td><span class="ltr">T-0042</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

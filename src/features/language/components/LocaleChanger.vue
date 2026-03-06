@@ -1,6 +1,7 @@
 <template>
+  <!-- Language Selector Column -->
   <v-col cols="1" md="2">
-    <!-- Desktop -->
+    <!-- Desktop Language Selector -->
     <v-select
       :model-value="lang"
       class="pt-7 hidden-sm-and-down"
@@ -14,24 +15,29 @@
       density="compact"
       @update:model-value="updateLang"
     />
-    <!-- Mobile -->
+    <!-- Mobile Language Selector -->
     <div
       class="hidden-md-and-up mr-1"
       style="display: flex; justify-content: center"
     >
+      <!-- Mobile Language Menu -->
       <v-menu>
         <template #activator="{ props }">
+          <!-- Translate Icon Button -->
           <v-btn size="small" color="primary" icon v-bind="props">
-            <v-icon size="20" color="white"> mdi-translate </v-icon>
+            <!-- Translate Icon --><v-icon size="20" color="white"> mdi-translate </v-icon>
           </v-btn>
         </template>
+        <!-- Language Options List -->
         <v-list>
+          <!-- Language Option -->
           <v-list-item
             v-for="(item, index) in languages"
             :key="index"
             link
             @click="updateLang(item.value)"
           >
+            <!-- Language Option Label -->
             <v-list-item-title class="hindi-fix">
               {{ item.label }}
             </v-list-item-title>
@@ -41,6 +47,7 @@
     </div>
   </v-col>
 </template>
+
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'

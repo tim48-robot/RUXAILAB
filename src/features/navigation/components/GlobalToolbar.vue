@@ -1,20 +1,25 @@
 <template>
-  <v-app-bar density="comfortable" color="#00213F" padding="10px !important">
+  <!-- Top Bar -->
+  <v-app-bar id="Top Bar" density="comfortable" color="#00213F" padding="10px !important">
+    <!-- Menu Icon -->
     <v-btn
+      id="Menu Icon"
       v-if="user"
       icon
       class="d-flex d-lg-none"
       @click="toggleDashboardDrawer"
     >
-      <v-icon>mdi-menu</v-icon>
+      <!-- Hamburger Icon --><v-icon>mdi-menu</v-icon>
     </v-btn>
 
-    <!-- Logo y título -->
+    <!-- Logo -->
     <v-toolbar-title
+      id="Logo Container"
       style="cursor: pointer"
       class="d-flex align-center"
       @click="goTo('/admin')"
     >
+      <!-- Logo Image -->
       <img
         :src="xs ? logoSmall : logoFull"
         alt="RUXAILAB Logo"
@@ -24,10 +29,13 @@
       />
     </v-toolbar-title>
 
-    <v-spacer />
+    <!-- Spacer -->
+    <v-spacer id="Spacer" />
 
-    <locale-changer />
+    <!-- Language Selector -->
+    <locale-changer id="Language Selector" />
 
+    <!-- Go to Console Button -->
     <v-btn
       v-if="$route.path === '/' && user"
       variant="text"
@@ -38,6 +46,7 @@
       {{ $t('buttons.goToConsole') }}
     </v-btn>
 
+    <!-- Go Home Button -->
     <v-btn
       v-if="['/admin', '/signin', '/signup'].includes($route.path)"
       variant="text"
@@ -48,7 +57,9 @@
       {{ $t('AccessNotAllowed.goHome') }}
     </v-btn>
 
+    <!-- Return to Console Button -->
     <v-btn
+      id="Return to Console Button"
       v-if="!['/', '/admin', '/signin', '/signup'].includes($route.path)"
       variant="text"
       color="#f9a826"
@@ -58,27 +69,13 @@
       {{ $t('buttons.returnToConsole') }}
     </v-btn>
 
-    <!-- Botones de herramientas -->
-    <HelpButton :class="smAndDown ? 'mx-1' : 'mx-2'" />
-    <NotificationButton v-if="user" :class="smAndDown ? 'mx-1' : 'mx-2'" />
+    <!-- Help Button -->
+    <HelpButton id="Help Button" :class="smAndDown ? 'mx-1' : 'mx-2'" />
+    <!-- Notifications Button -->
+    <NotificationButton id="Notifications Button" v-if="user" :class="smAndDown ? 'mx-1' : 'mx-2'" />
 
-    <!-- Autenticación -->
-    <v-btn
-      v-if="!user"
-      variant="text"
-      class="d-none d-lg-flex"
-      @click="goTo('/signin')"
-    >
-      <v-icon start> mdi-lock </v-icon>
-      {{ $t('auth.SIGNIN.sign-in') }}
-    </v-btn>
-
-    <v-btn v-if="!user" icon class="d-flex d-lg-none" @click="goTo('/signin')">
-      <v-icon :size="iconSize"> mdi-lock </v-icon>
-    </v-btn>
-
-    <!-- Menú de usuario -->
-    <UserMenu v-if="user" />
+    <!-- User Avatar Menu -->
+    <UserMenu id="User Avatar Menu" v-if="user" />
   </v-app-bar>
 </template>
 

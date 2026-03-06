@@ -1,0 +1,1229 @@
+[debug] [2026-03-04T04:17:49.446Z] ----------------------------------------------------------------------
+[debug] [2026-03-04T04:17:49.450Z] Command:       /home/justin/.nvm/versions/node/v22.21.1/bin/node /home/justin/.nvm/versions/node/v22.21.1/bin/firebase emulators:start
+[debug] [2026-03-04T04:17:49.450Z] CLI Version:   15.1.0
+[debug] [2026-03-04T04:17:49.451Z] Platform:      linux
+[debug] [2026-03-04T04:17:49.451Z] Node Version:  v22.21.1
+[debug] [2026-03-04T04:17:49.451Z] Time:          Wed Mar 04 2026 11:17:49 GMT+0700 (Western Indonesia Time)
+[debug] [2026-03-04T04:17:49.452Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-04T04:17:49.455Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-03-04T04:17:52.214Z] Object "/functions" in "firebase.json" has unknown property: {"additionalProperty":"runtimes"}
+[debug] [2026-03-04T04:17:52.215Z] Object "/functions" in "firebase.json" is missing required property: {"missingProperty":"remoteSource"}
+[debug] [2026-03-04T04:17:52.215Z] Field "/functions" in "firebase.json" is possibly invalid: must be array
+[debug] [2026-03-04T04:17:52.215Z] Field "/functions" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2026-03-04T04:17:52.226Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-04T04:17:52.226Z] > authorizing via signed-in user (justintimothy303@gmail.com)
+[debug] [2026-03-04T04:17:52.475Z] openjdk version "21.0.10" 2026-01-20
+
+[debug] [2026-03-04T04:17:52.475Z] OpenJDK Runtime Environment (build 21.0.10+7-Ubuntu-124.04)
+OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
+
+[debug] [2026-03-04T04:17:52.495Z] Parsed Java major version: 21
+[info] i  emulators: Starting emulators: auth, functions, firestore, hosting, storage, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting, storage, extensions"}}
+[debug] [2026-03-04T04:17:52.497Z] Checked if tokens are valid: false, expires at: 1772353173127
+[debug] [2026-03-04T04:17:52.498Z] Checked if tokens are valid: false, expires at: 1772353173127
+[debug] [2026-03-04T04:17:52.498Z] > refreshing access token with scopes: []
+[debug] [2026-03-04T04:17:52.500Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-04T04:17:52.500Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-04T04:17:53.511Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-03-04T04:17:53.511Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-03-04T04:17:55.755Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-04T04:17:55.755Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-04T04:17:55.767Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2026-03-04T04:17:55.768Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/retlab-dev
+[debug] [2026-03-04T04:17:57.876Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com 403
+[debug] [2026-03-04T04:17:57.876Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2026-03-04T04:17:57.877Z] Unable to check that https://cloudresourcemanager.googleapis.com is enabled on retlab-dev. Calls to it will fail if it is not enabled
+[debug] [2026-03-04T04:17:57.877Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:17:57.877Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:17:57.877Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev [none]
+[debug] [2026-03-04T04:18:01.177Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev 403
+[debug] [2026-03-04T04:18:01.177Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[error] ⬢  extensions: Unable to look up project number for retlab-dev.
+ If this is a real project, ensure that you are logged in and have access to it.
+ If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.
+ Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly. {"metadata":{"emulator":{"name":"extensions"},"message":"Unable to look up project number for retlab-dev.\n If this is a real project, ensure that you are logged in and have access to it.\n If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.\n Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly."}}
+[warn] ⚠  hosting: Hosting Emulator unable to start on port 5001, starting on 5002 instead. {"metadata":{"emulator":{"name":"hosting"},"message":"Hosting Emulator unable to start on port 5001, starting on 5002 instead."}}
+[debug] [2026-03-04T04:18:01.189Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2026-03-04T04:18:01.197Z] Emulator locator file path: /tmp/hub-retlab-dev.json
+[debug] [2026-03-04T04:18:01.197Z] [hub] writing locator at /tmp/hub-retlab-dev.json
+[debug] [2026-03-04T04:18:01.206Z] [Extensions] Started Extensions emulator, this is a noop.
+[warn] ⚠  functions: Functions Emulator unable to start on port 5002, starting on 5003 instead. {"metadata":{"emulator":{"name":"functions"},"message":"Functions Emulator unable to start on port 5002, starting on 5003 instead."}}
+[debug] [2026-03-04T04:18:01.208Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5003}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, database, pubsub, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, database, pubsub, dataconnect\u001b[22m"}}
+[debug] [2026-03-04T04:18:01.797Z] defaultcredentials: writing to file /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json
+[debug] [2026-03-04T04:18:01.799Z] Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json"}}
+[debug] [2026-03-04T04:18:01.800Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:18:01.800Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:18:01.800Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig [none]
+[debug] [2026-03-04T04:18:03.033Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig 403
+[debug] [2026-03-04T04:18:03.033Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-04T04:18:03.034Z] Failed to get Admin SDK config for retlab-dev, falling back to cache Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it. {"name":"FirebaseError","children":[],"exit":2,"message":"Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it.","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig had HTTP Error: 403, The caller does not have permission","status":403},"status":500}
+[warn] ⚠  functions: Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect. {"metadata":{"emulator":{"name":"functions"},"message":"Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect."}}
+[debug] [2026-03-04T04:18:03.055Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-04T04:18:03.056Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2026-03-04T04:18:03.056Z] Starting Firestore Emulator with command {"binary":"java","args":["-Djava.net.preferIPv4Stack=true","-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar","--host","127.0.0.1","--port",8081,"--websocket_port",9150,"--project_id","retlab-dev","--rules","/home/justin/opensource/RUXAILAB/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5003"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8081} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Djava.net.preferIPv4Stack=true\",\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",8081,\"--websocket_port\",9150,\"--project_id\",\"retlab-dev\",\"--rules\",\"/home/justin/opensource/RUXAILAB/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5003\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8081}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2026-03-04T04:18:05.876Z] Mar 04, 2026 11:18:05 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 04, 2026 11:18:05 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2026-03-04T04:18:05.932Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2026-03-04T04:18:05.932Z] 127.0.0.1:8081
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8081\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2026-03-04T04:18:16.261Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-04T04:18:17.998Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2026-03-04T04:18:18.004Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:18:18.004Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:18:18.005Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 
+[debug] [2026-03-04T04:18:20.759Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 403
+[debug] [2026-03-04T04:18:20.760Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites {"error":{"code":403,"message":"Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-04T04:18:20.760Z] Failed to list hosting sites
+[debug] Request to https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites had HTTP Error: 403, Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)
+[debug] [2026-03-04T04:18:20.760Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:18:20.761Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:18:20.761Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config [none]
+[debug] [2026-03-04T04:18:21.786Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config 403
+[debug] [2026-03-04T04:18:21.786Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-04T04:18:21.787Z] fetchWebSetup error: FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config had HTTP Error: 403, The caller does not have permission
+[warn] ⚠  hosting: Authentication error when trying to fetch your current web app configuration, have you run firebase login? 
+[warn] ⚠  hosting: Could not fetch web app configuration and there is no cached configuration on this machine. Check your internet connection and make sure you are authenticated. To continue, you must call firebase.initializeApp({...}) in your code before using Firebase. 
+[debug] [2026-03-04T04:18:21.791Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:18:21.791Z] Checked if tokens are valid: true, expires at: 1772601474756
+[debug] [2026-03-04T04:18:21.791Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev [none]
+[debug] [2026-03-04T04:18:22.556Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev 403
+[debug] [2026-03-04T04:18:22.556Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-04T04:18:22.556Z] Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev had HTTP Error: 403, The caller does not have permission
+[debug] [2026-03-04T04:18:22.558Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-stage" may fail or be empty.
+[debug] [2026-03-04T04:18:22.558Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-dev" may fail or be empty.
+[debug] [2026-03-04T04:18:22.558Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-develop" may fail or be empty.
+[debug] [2026-03-04T04:18:22.558Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-prod" may fail or be empty.
+[info] i  hosting[ruxailab-stage]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-stage]: Local server: http://127.0.0.1:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5002\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-dev]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-dev]: Local server: http://127.0.0.1:5007 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5007\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-develop]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-develop]: Local server: http://127.0.0.1:5008 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5008\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-prod]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-prod]: Local server: http://127.0.0.1:5009 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5009\u001b[22m\u001b[24m"}}
+[debug] [2026-03-04T04:18:22.597Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "/home/justin/opensource/RUXAILAB/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/home/justin/opensource/RUXAILAB/functions\" for Cloud Functions..."}}
+[debug] [2026-03-04T04:18:22.603Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-03-04T04:18:29.211Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2",
+    "nodemailer": "^6.9.5"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2026-03-04T04:18:29.211Z] Building nodejs source
+[debug] [2026-03-04T04:18:29.212Z] Failed to find version of module node: reached end of search path /home/justin/opensource/RUXAILAB/functions/node_modules
+[info] ✔  functions: Using node@22 from host. 
+[debug] [2026-03-04T04:18:29.216Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-03-04T04:18:29.227Z] Found firebase-functions binary at '/home/justin/opensource/RUXAILAB/node_modules/.bin/firebase-functions'
+[info] Serving at port 8483
+
+[error] Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    at packageResolve (node:internal/modules/esm/resolve:767:81)
+    at moduleResolve (node:internal/modules/esm/resolve:853:18)
+    at defaultResolve (node:internal/modules/esm/resolve:983:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:731:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:767:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:790:52)
+    at #cachedResolveSync (node:internal/modules/esm/loader:750:25)
+    at ModuleLoader.getModuleJobForRequire (node:internal/modules/esm/loader:459:50)
+    at new ModuleJobSync (node:internal/modules/esm/module_job:392:34) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+[debug] [2026-03-04T04:18:29.603Z] Got response code 400; body Failed to generate manifest from function source: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2026-03-04T04:18:33.629Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED 127.0.0.1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth       │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5003 │ http://127.0.0.1:4000/functions  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8081 │ http://127.0.0.1:4000/firestore  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5002 │ n/a                              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage    │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions     │ 127.0.0.1:5003 │ http://127.0.0.1:4000/extensions │
+└────────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150, 5007, 5008, 5009
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            [debug] [2026-03-05T05:29:37.973Z] ----------------------------------------------------------------------
+[debug] [2026-03-05T05:29:37.992Z] Command:       /home/justin/.nvm/versions/node/v22.21.1/bin/node /home/justin/.nvm/versions/node/v22.21.1/bin/firebase emulators:start
+[debug] [2026-03-05T05:29:37.993Z] CLI Version:   15.1.0
+[debug] [2026-03-05T05:29:37.993Z] Platform:      linux
+[debug] [2026-03-05T05:29:37.994Z] Node Version:  v22.21.1
+[debug] [2026-03-05T05:29:37.995Z] Time:          Thu Mar 05 2026 12:29:37 GMT+0700 (Western Indonesia Time)
+[debug] [2026-03-05T05:29:37.995Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-05T05:29:38.000Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-03-05T05:29:40.225Z] Object "/functions" in "firebase.json" has unknown property: {"additionalProperty":"runtimes"}
+[debug] [2026-03-05T05:29:40.225Z] Object "/functions" in "firebase.json" is missing required property: {"missingProperty":"remoteSource"}
+[debug] [2026-03-05T05:29:40.225Z] Field "/functions" in "firebase.json" is possibly invalid: must be array
+[debug] [2026-03-05T05:29:40.226Z] Field "/functions" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2026-03-05T05:29:40.247Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-05T05:29:40.248Z] > authorizing via signed-in user (justintimothy303@gmail.com)
+[debug] [2026-03-05T05:29:40.595Z] openjdk version "21.0.10" 2026-01-20
+
+[debug] [2026-03-05T05:29:40.596Z] OpenJDK Runtime Environment (build 21.0.10+7-Ubuntu-124.04)
+OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
+
+[debug] [2026-03-05T05:29:40.617Z] Parsed Java major version: 21
+[info] i  emulators: Starting emulators: auth, functions, firestore, hosting, storage, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting, storage, extensions"}}
+[debug] [2026-03-05T05:29:40.621Z] Checked if tokens are valid: false, expires at: 1772601474756
+[debug] [2026-03-05T05:29:40.621Z] Checked if tokens are valid: false, expires at: 1772601474756
+[debug] [2026-03-05T05:29:40.622Z] > refreshing access token with scopes: []
+[debug] [2026-03-05T05:29:40.625Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-05T05:29:40.625Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-05T05:29:40.810Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-05T05:29:40.811Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-05T05:29:40.878Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2026-03-05T05:29:40.878Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/retlab-dev
+[debug] [2026-03-05T05:29:40.883Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-03-05T05:29:40.883Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-03-05T05:29:43.149Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com 403
+[debug] [2026-03-05T05:29:43.149Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2026-03-05T05:29:43.150Z] Unable to check that https://cloudresourcemanager.googleapis.com is enabled on retlab-dev. Calls to it will fail if it is not enabled
+[debug] [2026-03-05T05:29:43.151Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:29:43.151Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:29:43.151Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev [none]
+[debug] [2026-03-05T05:29:44.726Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev 403
+[debug] [2026-03-05T05:29:44.727Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[error] ⬢  extensions: Unable to look up project number for retlab-dev.
+ If this is a real project, ensure that you are logged in and have access to it.
+ If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.
+ Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly. {"metadata":{"emulator":{"name":"extensions"},"message":"Unable to look up project number for retlab-dev.\n If this is a real project, ensure that you are logged in and have access to it.\n If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.\n Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly."}}
+[warn] ⚠  hosting: Hosting Emulator unable to start on port 5001, starting on 5002 instead. {"metadata":{"emulator":{"name":"hosting"},"message":"Hosting Emulator unable to start on port 5001, starting on 5002 instead."}}
+[debug] [2026-03-05T05:29:44.770Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2026-03-05T05:29:44.782Z] Emulator locator file path: /tmp/hub-retlab-dev.json
+[debug] [2026-03-05T05:29:44.782Z] [hub] writing locator at /tmp/hub-retlab-dev.json
+[debug] [2026-03-05T05:29:44.795Z] [Extensions] Started Extensions emulator, this is a noop.
+[warn] ⚠  functions: Functions Emulator unable to start on port 5002, starting on 5003 instead. {"metadata":{"emulator":{"name":"functions"},"message":"Functions Emulator unable to start on port 5002, starting on 5003 instead."}}
+[debug] [2026-03-05T05:29:44.798Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5003}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, database, pubsub, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, database, pubsub, dataconnect\u001b[22m"}}
+[debug] [2026-03-05T05:29:44.840Z] defaultcredentials: writing to file /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json
+[debug] [2026-03-05T05:29:44.843Z] Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json"}}
+[debug] [2026-03-05T05:29:44.844Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:29:44.845Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:29:44.845Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig [none]
+[debug] [2026-03-05T05:29:45.258Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig 403
+[debug] [2026-03-05T05:29:45.258Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-05T05:29:45.258Z] Failed to get Admin SDK config for retlab-dev, falling back to cache Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it. {"name":"FirebaseError","children":[],"exit":2,"message":"Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it.","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig had HTTP Error: 403, The caller does not have permission","status":403},"status":500}
+[warn] ⚠  functions: Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect. {"metadata":{"emulator":{"name":"functions"},"message":"Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect."}}
+[debug] [2026-03-05T05:29:45.287Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-05T05:29:45.288Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2026-03-05T05:29:45.288Z] Starting Firestore Emulator with command {"binary":"java","args":["-Djava.net.preferIPv4Stack=true","-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar","--host","127.0.0.1","--port",8081,"--websocket_port",9150,"--project_id","retlab-dev","--rules","/home/justin/opensource/RUXAILAB/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5003"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8081} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Djava.net.preferIPv4Stack=true\",\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",8081,\"--websocket_port\",9150,\"--project_id\",\"retlab-dev\",\"--rules\",\"/home/justin/opensource/RUXAILAB/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5003\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8081}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2026-03-05T05:29:48.899Z] Mar 05, 2026 12:29:48 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 05, 2026 12:29:48 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2026-03-05T05:29:48.985Z] API endpoint: http://127.0.0.1:8081 {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://127.0.0.1:8081"}}
+[debug] [2026-03-05T05:29:48.986Z] 
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2026-03-05T05:30:04.280Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-05T05:30:06.653Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2026-03-05T05:30:06.663Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:30:06.663Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:30:06.664Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 
+[debug] [2026-03-05T05:30:07.960Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 403
+[debug] [2026-03-05T05:30:07.961Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites {"error":{"code":403,"message":"Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-05T05:30:07.961Z] Failed to list hosting sites
+[debug] Request to https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites had HTTP Error: 403, Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)
+[debug] [2026-03-05T05:30:07.961Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:30:07.962Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:30:07.962Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config [none]
+[debug] [2026-03-05T05:30:08.368Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config 403
+[debug] [2026-03-05T05:30:08.368Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-05T05:30:08.368Z] fetchWebSetup error: FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config had HTTP Error: 403, The caller does not have permission
+[warn] ⚠  hosting: Authentication error when trying to fetch your current web app configuration, have you run firebase login? 
+[warn] ⚠  hosting: Could not fetch web app configuration and there is no cached configuration on this machine. Check your internet connection and make sure you are authenticated. To continue, you must call firebase.initializeApp({...}) in your code before using Firebase. 
+[debug] [2026-03-05T05:30:08.373Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:30:08.373Z] Checked if tokens are valid: true, expires at: 1772692179811
+[debug] [2026-03-05T05:30:08.374Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev [none]
+[debug] [2026-03-05T05:30:08.737Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev 403
+[debug] [2026-03-05T05:30:08.738Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-05T05:30:08.738Z] Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev had HTTP Error: 403, The caller does not have permission
+[debug] [2026-03-05T05:30:08.741Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-stage" may fail or be empty.
+[debug] [2026-03-05T05:30:08.741Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-dev" may fail or be empty.
+[debug] [2026-03-05T05:30:08.741Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-develop" may fail or be empty.
+[debug] [2026-03-05T05:30:08.741Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-prod" may fail or be empty.
+[info] i  hosting[ruxailab-stage]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-stage]: Local server: http://127.0.0.1:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5002\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-dev]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-dev]: Local server: http://127.0.0.1:5007 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5007\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-develop]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-develop]: Local server: http://127.0.0.1:5008 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5008\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-prod]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-prod]: Local server: http://127.0.0.1:5009 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5009\u001b[22m\u001b[24m"}}
+[debug] [2026-03-05T05:30:08.794Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "/home/justin/opensource/RUXAILAB/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/home/justin/opensource/RUXAILAB/functions\" for Cloud Functions..."}}
+[debug] [2026-03-05T05:30:08.802Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-03-05T05:30:10.552Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2",
+    "nodemailer": "^6.9.5"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2026-03-05T05:30:10.552Z] Building nodejs source
+[debug] [2026-03-05T05:30:10.553Z] Failed to find version of module node: reached end of search path /home/justin/opensource/RUXAILAB/functions/node_modules
+[info] ✔  functions: Using node@22 from host. 
+[debug] [2026-03-05T05:30:10.558Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-03-05T05:30:10.579Z] Found firebase-functions binary at '/home/justin/opensource/RUXAILAB/node_modules/.bin/firebase-functions'
+[info] Serving at port 8393
+
+[error] Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    at packageResolve (node:internal/modules/esm/resolve:767:81)
+    at moduleResolve (node:internal/modules/esm/resolve:853:18)
+    at defaultResolve (node:internal/modules/esm/resolve:983:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:731:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:767:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:790:52)
+    at #cachedResolveSync (node:internal/modules/esm/loader:750:25)
+    at ModuleLoader.getModuleJobForRequire (node:internal/modules/esm/loader:459:50)
+    at new ModuleJobSync (node:internal/modules/esm/module_job:392:34) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+[debug] [2026-03-05T05:30:10.953Z] Got response code 400; body Failed to generate manifest from function source: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2026-03-05T05:30:13.376Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED 127.0.0.1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth       │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5003 │ http://127.0.0.1:4000/functions  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8081 │ http://127.0.0.1:4000/firestore  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5002 │ n/a                              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage    │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions     │ 127.0.0.1:5003 │ http://127.0.0.1:4000/extensions │
+└────────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150, 5007, 5008, 5009
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2026-03-05T12:12:09.442Z] Received signal SIGTERM 1
+[debug] [2026-03-05T12:24:58.930Z] ----------------------------------------------------------------------
+[debug] [2026-03-05T12:24:58.936Z] Command:       /home/justin/.nvm/versions/node/v22.21.1/bin/node /home/justin/.nvm/versions/node/v22.21.1/bin/firebase emulators:start
+[debug] [2026-03-05T12:24:58.937Z] CLI Version:   15.1.0
+[debug] [2026-03-05T12:24:58.937Z] Platform:      linux
+[debug] [2026-03-05T12:24:58.937Z] Node Version:  v22.21.1
+[debug] [2026-03-05T12:24:58.938Z] Time:          Thu Mar 05 2026 19:24:58 GMT+0700 (Western Indonesia Time)
+[debug] [2026-03-05T12:24:58.938Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-05T12:25:02.594Z] Object "/functions" in "firebase.json" has unknown property: {"additionalProperty":"runtimes"}
+[debug] [2026-03-05T12:25:02.595Z] Object "/functions" in "firebase.json" is missing required property: {"missingProperty":"remoteSource"}
+[debug] [2026-03-05T12:25:02.595Z] Field "/functions" in "firebase.json" is possibly invalid: must be array
+[debug] [2026-03-05T12:25:02.595Z] Field "/functions" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2026-03-05T12:25:02.607Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-05T12:25:02.608Z] > authorizing via signed-in user (justintimothy303@gmail.com)
+[debug] [2026-03-05T12:25:02.915Z] openjdk version "21.0.10" 2026-01-20
+
+[debug] [2026-03-05T12:25:02.916Z] OpenJDK Runtime Environment (build 21.0.10+7-Ubuntu-124.04)
+OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
+
+[debug] [2026-03-05T12:25:02.937Z] Parsed Java major version: 21
+[info] i  emulators: Starting emulators: auth, functions, firestore, hosting, storage, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting, storage, extensions"}}
+[debug] [2026-03-05T12:25:02.941Z] Checked if tokens are valid: false, expires at: 1772692179811
+[debug] [2026-03-05T12:25:02.941Z] Checked if tokens are valid: false, expires at: 1772692179811
+[debug] [2026-03-05T12:25:02.942Z] > refreshing access token with scopes: []
+[debug] [2026-03-05T12:25:02.945Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-05T12:25:02.945Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-05T12:25:03.065Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-05T12:25:03.065Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-05T12:25:03.090Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2026-03-05T12:25:03.090Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/retlab-dev
+[debug] [2026-03-05T12:25:04.512Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com 403
+[debug] [2026-03-05T12:25:04.512Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2026-03-05T12:25:04.513Z] Unable to check that https://cloudresourcemanager.googleapis.com is enabled on retlab-dev. Calls to it will fail if it is not enabled
+[debug] [2026-03-05T12:25:04.513Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:04.513Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:04.514Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev [none]
+[debug] [2026-03-05T12:25:05.074Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev 403
+[debug] [2026-03-05T12:25:05.075Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[error] ⬢  extensions: Unable to look up project number for retlab-dev.
+ If this is a real project, ensure that you are logged in and have access to it.
+ If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.
+ Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly. {"metadata":{"emulator":{"name":"extensions"},"message":"Unable to look up project number for retlab-dev.\n If this is a real project, ensure that you are logged in and have access to it.\n If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.\n Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly."}}
+[warn] ⚠  hosting: Hosting Emulator unable to start on port 5001, starting on 5002 instead. {"metadata":{"emulator":{"name":"hosting"},"message":"Hosting Emulator unable to start on port 5001, starting on 5002 instead."}}
+[debug] [2026-03-05T12:25:05.091Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2026-03-05T12:25:05.105Z] Emulator locator file path: /tmp/hub-retlab-dev.json
+[debug] [2026-03-05T12:25:05.105Z] [hub] writing locator at /tmp/hub-retlab-dev.json
+[debug] [2026-03-05T12:25:05.122Z] [Extensions] Started Extensions emulator, this is a noop.
+[warn] ⚠  functions: Functions Emulator unable to start on port 5002, starting on 5003 instead. {"metadata":{"emulator":{"name":"functions"},"message":"Functions Emulator unable to start on port 5002, starting on 5003 instead."}}
+[debug] [2026-03-05T12:25:05.127Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5003}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, database, pubsub, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, database, pubsub, dataconnect\u001b[22m"}}
+[debug] [2026-03-05T12:25:05.165Z] defaultcredentials: writing to file /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json
+[debug] [2026-03-05T12:25:05.171Z] Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json"}}
+[debug] [2026-03-05T12:25:05.173Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:05.173Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:05.174Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig [none]
+[debug] [2026-03-05T12:25:05.815Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig 403
+[debug] [2026-03-05T12:25:05.816Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-05T12:25:05.816Z] Failed to get Admin SDK config for retlab-dev, falling back to cache Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it. {"name":"FirebaseError","children":[],"exit":2,"message":"Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it.","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig had HTTP Error: 403, The caller does not have permission","status":403},"status":500}
+[warn] ⚠  functions: Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect. {"metadata":{"emulator":{"name":"functions"},"message":"Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect."}}
+[debug] [2026-03-05T12:25:05.845Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-05T12:25:05.845Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2026-03-05T12:25:05.845Z] Starting Firestore Emulator with command {"binary":"java","args":["-Djava.net.preferIPv4Stack=true","-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar","--host","127.0.0.1","--port",8081,"--websocket_port",9150,"--project_id","retlab-dev","--rules","/home/justin/opensource/RUXAILAB/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5003"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8081} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Djava.net.preferIPv4Stack=true\",\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",8081,\"--websocket_port\",9150,\"--project_id\",\"retlab-dev\",\"--rules\",\"/home/justin/opensource/RUXAILAB/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5003\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8081}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2026-03-05T12:25:10.222Z] Mar 05, 2026 7:25:10 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 05, 2026 7:25:10 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2026-03-05T12:25:10.306Z] API endpoint: http://127.0.0.1:8081
+ {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://127.0.0.1:8081\n"}}
+[debug] [2026-03-05T12:25:10.308Z] If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2026-03-05T12:25:25.804Z] Mar 05, 2026 7:25:26 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Mar 05, 2026 7:25:26 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /userTest/moderated/manager/s4inPBU5KZfYvActBEIw/
+Mar 05, 2026 7:25:25 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /favicon.ico
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 05, 2026 7:25:26 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\nMar 05, 2026 7:25:26 PM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /userTest/moderated/manager/s4inPBU5KZfYvActBEIw/\nMar 05, 2026 7:25:25 PM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /favicon.ico\n"}}
+[debug] [2026-03-05T12:25:25.818Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-05T12:25:28.325Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2026-03-05T12:25:28.333Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:28.334Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:28.334Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 
+[debug] [2026-03-05T12:25:29.025Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 403
+[debug] [2026-03-05T12:25:29.025Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites {"error":{"code":403,"message":"Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-05T12:25:29.025Z] Failed to list hosting sites
+[debug] Request to https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites had HTTP Error: 403, Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)
+[debug] [2026-03-05T12:25:29.026Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:29.026Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:29.026Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config [none]
+[debug] [2026-03-05T12:25:29.556Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config 403
+[debug] [2026-03-05T12:25:29.556Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-05T12:25:29.557Z] fetchWebSetup error: FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config had HTTP Error: 403, The caller does not have permission
+[warn] ⚠  hosting: Authentication error when trying to fetch your current web app configuration, have you run firebase login? 
+[warn] ⚠  hosting: Could not fetch web app configuration and there is no cached configuration on this machine. Check your internet connection and make sure you are authenticated. To continue, you must call firebase.initializeApp({...}) in your code before using Firebase. 
+[debug] [2026-03-05T12:25:29.562Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:29.562Z] Checked if tokens are valid: true, expires at: 1772717102066
+[debug] [2026-03-05T12:25:29.563Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev [none]
+[debug] [2026-03-05T12:25:29.882Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev 403
+[debug] [2026-03-05T12:25:29.882Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-05T12:25:29.883Z] Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev had HTTP Error: 403, The caller does not have permission
+[debug] [2026-03-05T12:25:29.885Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-stage" may fail or be empty.
+[debug] [2026-03-05T12:25:29.885Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-dev" may fail or be empty.
+[debug] [2026-03-05T12:25:29.885Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-develop" may fail or be empty.
+[debug] [2026-03-05T12:25:29.885Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-prod" may fail or be empty.
+[info] i  hosting[ruxailab-stage]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-stage]: Local server: http://127.0.0.1:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5002\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-dev]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-dev]: Local server: http://127.0.0.1:5007 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5007\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-develop]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-develop]: Local server: http://127.0.0.1:5008 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5008\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-prod]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-prod]: Local server: http://127.0.0.1:5009 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5009\u001b[22m\u001b[24m"}}
+[debug] [2026-03-05T12:25:29.935Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "/home/justin/opensource/RUXAILAB/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/home/justin/opensource/RUXAILAB/functions\" for Cloud Functions..."}}
+[debug] [2026-03-05T12:25:29.944Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-03-05T12:25:30.979Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2",
+    "nodemailer": "^6.9.5"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2026-03-05T12:25:30.979Z] Building nodejs source
+[debug] [2026-03-05T12:25:30.980Z] Failed to find version of module node: reached end of search path /home/justin/opensource/RUXAILAB/functions/node_modules
+[info] ✔  functions: Using node@22 from host. 
+[debug] [2026-03-05T12:25:30.985Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-03-05T12:25:30.997Z] Found firebase-functions binary at '/home/justin/opensource/RUXAILAB/node_modules/.bin/firebase-functions'
+[info] Serving at port 8142
+
+[error] Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    at packageResolve (node:internal/modules/esm/resolve:767:81)
+    at moduleResolve (node:internal/modules/esm/resolve:853:18)
+    at defaultResolve (node:internal/modules/esm/resolve:983:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:731:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:767:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:790:52)
+    at #cachedResolveSync (node:internal/modules/esm/loader:750:25)
+    at ModuleLoader.getModuleJobForRequire (node:internal/modules/esm/loader:459:50)
+    at new ModuleJobSync (node:internal/modules/esm/module_job:392:34) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+[debug] [2026-03-05T12:25:31.533Z] Got response code 400; body Failed to generate manifest from function source: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2026-03-05T12:25:35.579Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED 127.0.0.1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth       │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5003 │ http://127.0.0.1:4000/functions  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8081 │ http://127.0.0.1:4000/firestore  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5002 │ n/a                              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage    │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions     │ 127.0.0.1:5003 │ http://127.0.0.1:4000/extensions │
+└────────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150, 5007, 5008, 5009
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2026-03-05T12:29:29.855Z] Mar 05, 2026 7:29:29 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /userTest/moderated/manager/s4inPBU5KZfYvActBEIw/
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 05, 2026 7:29:29 PM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /userTest/moderated/manager/s4inPBU5KZfYvActBEIw/\n"}}
+[debug] [2026-03-05T12:29:30.822Z] Mar 05, 2026 7:29:30 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /userTest/moderated/manager/s4inPBU5KZfYvActBEIw/
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 05, 2026 7:29:30 PM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /userTest/moderated/manager/s4inPBU5KZfYvActBEIw/\n"}}
+[debug] [2026-03-06T04:29:16.114Z] ----------------------------------------------------------------------
+[debug] [2026-03-06T04:29:16.117Z] Command:       /home/justin/.nvm/versions/node/v22.21.1/bin/node /home/justin/.nvm/versions/node/v22.21.1/bin/firebase emulators:start
+[debug] [2026-03-06T04:29:16.118Z] CLI Version:   15.1.0
+[debug] [2026-03-06T04:29:16.118Z] Platform:      linux
+[debug] [2026-03-06T04:29:16.118Z] Node Version:  v22.21.1
+[debug] [2026-03-06T04:29:16.119Z] Time:          Fri Mar 06 2026 11:29:16 GMT+0700 (Western Indonesia Time)
+[debug] [2026-03-06T04:29:16.119Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-06T04:29:19.499Z] Object "/functions" in "firebase.json" has unknown property: {"additionalProperty":"runtimes"}
+[debug] [2026-03-06T04:29:19.500Z] Object "/functions" in "firebase.json" is missing required property: {"missingProperty":"remoteSource"}
+[debug] [2026-03-06T04:29:19.500Z] Field "/functions" in "firebase.json" is possibly invalid: must be array
+[debug] [2026-03-06T04:29:19.500Z] Field "/functions" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2026-03-06T04:29:19.509Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-06T04:29:19.509Z] > authorizing via signed-in user (justintimothy303@gmail.com)
+[debug] [2026-03-06T04:29:19.771Z] openjdk version "21.0.10" 2026-01-20
+
+[debug] [2026-03-06T04:29:19.772Z] OpenJDK Runtime Environment (build 21.0.10+7-Ubuntu-124.04)
+OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
+
+[debug] [2026-03-06T04:29:19.794Z] Parsed Java major version: 21
+[info] i  emulators: Starting emulators: auth, functions, firestore, hosting, storage, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting, storage, extensions"}}
+[debug] [2026-03-06T04:29:19.798Z] Checked if tokens are valid: false, expires at: 1772717102066
+[debug] [2026-03-06T04:29:19.798Z] Checked if tokens are valid: false, expires at: 1772717102066
+[debug] [2026-03-06T04:29:19.799Z] > refreshing access token with scopes: []
+[debug] [2026-03-06T04:29:19.803Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-06T04:29:19.803Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-06T04:29:19.925Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-06T04:29:19.925Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-06T04:29:19.942Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2026-03-06T04:29:19.942Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/retlab-dev
+[debug] [2026-03-06T04:29:21.596Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com 403
+[debug] [2026-03-06T04:29:21.596Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2026-03-06T04:29:21.597Z] Unable to check that https://cloudresourcemanager.googleapis.com is enabled on retlab-dev. Calls to it will fail if it is not enabled
+[debug] [2026-03-06T04:29:21.597Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:21.597Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:21.598Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev [none]
+[debug] [2026-03-06T04:29:22.850Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev 403
+[debug] [2026-03-06T04:29:22.851Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[error] ⬢  extensions: Unable to look up project number for retlab-dev.
+ If this is a real project, ensure that you are logged in and have access to it.
+ If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.
+ Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly. {"metadata":{"emulator":{"name":"extensions"},"message":"Unable to look up project number for retlab-dev.\n If this is a real project, ensure that you are logged in and have access to it.\n If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.\n Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly."}}
+[warn] ⚠  hosting: Hosting Emulator unable to start on port 5001, starting on 5002 instead. {"metadata":{"emulator":{"name":"hosting"},"message":"Hosting Emulator unable to start on port 5001, starting on 5002 instead."}}
+[debug] [2026-03-06T04:29:22.863Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2026-03-06T04:29:22.875Z] Emulator locator file path: /tmp/hub-retlab-dev.json
+[debug] [2026-03-06T04:29:22.876Z] [hub] writing locator at /tmp/hub-retlab-dev.json
+[debug] [2026-03-06T04:29:22.890Z] [Extensions] Started Extensions emulator, this is a noop.
+[warn] ⚠  functions: Functions Emulator unable to start on port 5002, starting on 5003 instead. {"metadata":{"emulator":{"name":"functions"},"message":"Functions Emulator unable to start on port 5002, starting on 5003 instead."}}
+[debug] [2026-03-06T04:29:22.893Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5003}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, database, pubsub, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, database, pubsub, dataconnect\u001b[22m"}}
+[debug] [2026-03-06T04:29:22.923Z] defaultcredentials: writing to file /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json
+[debug] [2026-03-06T04:29:22.927Z] Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json"}}
+[debug] [2026-03-06T04:29:22.928Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:22.929Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:22.929Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig [none]
+[debug] [2026-03-06T04:29:23.390Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig 403
+[debug] [2026-03-06T04:29:23.390Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-06T04:29:23.390Z] Failed to get Admin SDK config for retlab-dev, falling back to cache Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it. {"name":"FirebaseError","children":[],"exit":2,"message":"Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it.","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig had HTTP Error: 403, The caller does not have permission","status":403},"status":500}
+[warn] ⚠  functions: Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect. {"metadata":{"emulator":{"name":"functions"},"message":"Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect."}}
+[debug] [2026-03-06T04:29:23.414Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-06T04:29:23.415Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2026-03-06T04:29:23.415Z] Starting Firestore Emulator with command {"binary":"java","args":["-Djava.net.preferIPv4Stack=true","-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar","--host","127.0.0.1","--port",8081,"--websocket_port",9150,"--project_id","retlab-dev","--rules","/home/justin/opensource/RUXAILAB/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5003"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8081} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Djava.net.preferIPv4Stack=true\",\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",8081,\"--websocket_port\",9150,\"--project_id\",\"retlab-dev\",\"--rules\",\"/home/justin/opensource/RUXAILAB/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5003\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8081}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2026-03-06T04:29:26.443Z] Mar 06, 2026 11:29:26 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 06, 2026 11:29:26 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2026-03-06T04:29:26.501Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2026-03-06T04:29:26.502Z] 127.0.0.1:8081
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8081\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2026-03-06T04:29:40.850Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-06T04:29:42.814Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2026-03-06T04:29:42.823Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:42.823Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:42.824Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 
+[debug] [2026-03-06T04:29:43.690Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 403
+[debug] [2026-03-06T04:29:43.690Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites {"error":{"code":403,"message":"Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-06T04:29:43.690Z] Failed to list hosting sites
+[debug] Request to https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites had HTTP Error: 403, Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)
+[debug] [2026-03-06T04:29:43.691Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:43.691Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:43.691Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config [none]
+[debug] [2026-03-06T04:29:44.076Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config 403
+[debug] [2026-03-06T04:29:44.077Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-06T04:29:44.077Z] fetchWebSetup error: FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config had HTTP Error: 403, The caller does not have permission
+[warn] ⚠  hosting: Authentication error when trying to fetch your current web app configuration, have you run firebase login? 
+[warn] ⚠  hosting: Could not fetch web app configuration and there is no cached configuration on this machine. Check your internet connection and make sure you are authenticated. To continue, you must call firebase.initializeApp({...}) in your code before using Firebase. 
+[debug] [2026-03-06T04:29:44.081Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:44.081Z] Checked if tokens are valid: true, expires at: 1772774958926
+[debug] [2026-03-06T04:29:44.082Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev [none]
+[debug] [2026-03-06T04:29:44.596Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev 403
+[debug] [2026-03-06T04:29:44.596Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-06T04:29:44.597Z] Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev had HTTP Error: 403, The caller does not have permission
+[debug] [2026-03-06T04:29:44.600Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-stage" may fail or be empty.
+[debug] [2026-03-06T04:29:44.600Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-dev" may fail or be empty.
+[debug] [2026-03-06T04:29:44.600Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-develop" may fail or be empty.
+[debug] [2026-03-06T04:29:44.600Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "ruxailab-prod" may fail or be empty.
+[info] i  hosting[ruxailab-stage]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-stage]: Local server: http://127.0.0.1:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5002\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-dev]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-dev]: Local server: http://127.0.0.1:5007 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5007\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-develop]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-develop]: Local server: http://127.0.0.1:5008 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5008\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-prod]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-prod]: Local server: http://127.0.0.1:5009 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5009\u001b[22m\u001b[24m"}}
+[debug] [2026-03-06T04:29:44.648Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "/home/justin/opensource/RUXAILAB/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/home/justin/opensource/RUXAILAB/functions\" for Cloud Functions..."}}
+[debug] [2026-03-06T04:29:44.655Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-03-06T04:29:44.436Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2",
+    "nodemailer": "^6.9.5"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2026-03-06T04:29:44.437Z] Building nodejs source
+[debug] [2026-03-06T04:29:44.437Z] Failed to find version of module node: reached end of search path /home/justin/opensource/RUXAILAB/functions/node_modules
+[info] ✔  functions: Using node@22 from host. 
+[debug] [2026-03-06T04:29:44.442Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-03-06T04:29:44.453Z] Found firebase-functions binary at '/home/justin/opensource/RUXAILAB/node_modules/.bin/firebase-functions'
+[info] Serving at port 8175
+
+[error] Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    at packageResolve (node:internal/modules/esm/resolve:767:81)
+    at moduleResolve (node:internal/modules/esm/resolve:853:18)
+    at defaultResolve (node:internal/modules/esm/resolve:983:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:731:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:767:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:790:52)
+    at #cachedResolveSync (node:internal/modules/esm/loader:750:25)
+    at ModuleLoader.getModuleJobForRequire (node:internal/modules/esm/loader:459:50)
+    at new ModuleJobSync (node:internal/modules/esm/module_job:392:34) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+[debug] [2026-03-06T04:29:44.768Z] Got response code 400; body Failed to generate manifest from function source: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2026-03-06T04:29:48.798Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED 127.0.0.1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth       │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5003 │ http://127.0.0.1:4000/functions  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8081 │ http://127.0.0.1:4000/firestore  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5002 │ n/a                              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage    │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions     │ 127.0.0.1:5003 │ http://127.0.0.1:4000/extensions │
+└────────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150, 5007, 5008, 5009
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2026-03-06T06:38:28.258Z] Mar 06, 2026 1:38:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 06, 2026 1:38:28 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2026-03-06T06:38:28.883Z] Mar 06, 2026 1:38:28 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /userTest/unmoderated/logs/MXJvvyAtA4kpiP9n10Rn
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 06, 2026 1:38:28 PM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /userTest/unmoderated/logs/MXJvvyAtA4kpiP9n10Rn\n"}}
+[debug] [2026-03-06T06:38:29.039Z] Mar 06, 2026 1:38:29 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /favicon.ico
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 06, 2026 1:38:29 PM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /favicon.ico\n"}}
+[debug] [2026-03-06T06:38:43.179Z] Mar 06, 2026 1:38:43 PM io.gapi.emulators.netty.NotFoundHandler handleRequest
+INFO: Unknown request URI: /userTest/unmoderated/logs/MXJvvyAtA4kpiP9n10Rn
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 06, 2026 1:38:43 PM io.gapi.emulators.netty.NotFoundHandler handleRequest\nINFO: Unknown request URI: /userTest/unmoderated/logs/MXJvvyAtA4kpiP9n10Rn\n"}}
+[debug] [2026-03-06T07:36:23.817Z] Received signal SIGHUP 1
+[info]  
+[info] i  emulators: Received SIGHUP for the first time. Starting a clean shutdown. 
+[info] i  emulators: Please wait for a clean shutdown or send the SIGHUP signal again to stop right now. 
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  ui: Stopping Emulator UI {"metadata":{"emulator":{"name":"ui"},"message":"Stopping Emulator UI"}}
+[info] i  extensions: Stopping Extensions Emulator {"metadata":{"emulator":{"name":"extensions"},"message":"Stopping Extensions Emulator"}}
+[debug] [2026-03-06T07:36:24.419Z] [Extensions] Stopping Extensions emulator, this is a noop.
+[info] i  functions: Stopping Functions Emulator {"metadata":{"emulator":{"name":"functions"},"message":"Stopping Functions Emulator"}}
+[info] i  hosting: Stopping Hosting Emulator {"metadata":{"emulator":{"name":"hosting"},"message":"Stopping Hosting Emulator"}}
+[info] i  firestore: Stopping Firestore Emulator {"metadata":{"emulator":{"name":"firestore"},"message":"Stopping Firestore Emulator"}}
+[debug] [2026-03-06T07:36:25.161Z] *** shutting down gRPC server since JVM is shutting down
+*** server shut down
+ {"metadata":{"emulator":{"name":"firestore"},"message":"*** shutting down gRPC server since JVM is shutting down\n*** server shut down\n"}}
+[info] i  auth: Stopping Authentication Emulator {"metadata":{"emulator":{"name":"auth"},"message":"Stopping Authentication Emulator"}}
+[debug] [2026-03-06T07:36:25.639Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.663Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.669Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.670Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.673Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.677Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.701Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.703Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.719Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.725Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.728Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.730Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.733Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T07:36:25.735Z] Error: write EIO
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:572:12)
+    at _write (node:internal/streams/writable:501:10)
+    at Writable.write (node:internal/streams/writable:510:10)
+    at Console.log (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/justin/.nvm/versions/node/v22.21.1/lib/node_modules/firebase-tools/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2026-03-06T08:01:04.312Z] ----------------------------------------------------------------------
+[debug] [2026-03-06T08:01:04.334Z] Command:       /home/justin/.nvm/versions/node/v22.21.1/bin/node /home/justin/.nvm/versions/node/v22.21.1/bin/firebase emulators:start
+[debug] [2026-03-06T08:01:04.335Z] CLI Version:   15.1.0
+[debug] [2026-03-06T08:01:04.335Z] Platform:      linux
+[debug] [2026-03-06T08:01:04.336Z] Node Version:  v22.21.1
+[debug] [2026-03-06T08:01:04.336Z] Time:          Fri Mar 06 2026 15:01:04 GMT+0700 (Western Indonesia Time)
+[debug] [2026-03-06T08:01:04.337Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-06T08:01:04.340Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2026-03-06T08:01:08.453Z] Object "/functions" in "firebase.json" has unknown property: {"additionalProperty":"runtimes"}
+[debug] [2026-03-06T08:01:08.453Z] Object "/functions" in "firebase.json" is missing required property: {"missingProperty":"remoteSource"}
+[debug] [2026-03-06T08:01:08.454Z] Field "/functions" in "firebase.json" is possibly invalid: must be array
+[debug] [2026-03-06T08:01:08.454Z] Field "/functions" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2026-03-06T08:01:08.464Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-06T08:01:08.464Z] > authorizing via signed-in user (justintimothy303@gmail.com)
+[debug] [2026-03-06T08:01:08.807Z] openjdk version "21.0.10" 2026-01-20
+OpenJDK Runtime Environment (build 21.0.10+7-Ubuntu-124.04)
+
+[debug] [2026-03-06T08:01:08.808Z] OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
+
+[debug] [2026-03-06T08:01:08.830Z] Parsed Java major version: 21
+[info] i  emulators: Starting emulators: auth, functions, firestore, hosting, storage, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, hosting, storage, extensions"}}
+[debug] [2026-03-06T08:01:08.834Z] Checked if tokens are valid: false, expires at: 1772774958926
+[debug] [2026-03-06T08:01:08.834Z] Checked if tokens are valid: false, expires at: 1772774958926
+[debug] [2026-03-06T08:01:08.834Z] > refreshing access token with scopes: []
+[debug] [2026-03-06T08:01:08.837Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-06T08:01:08.837Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-06T08:01:09.019Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-06T08:01:09.019Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-06T08:01:09.080Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2026-03-06T08:01:09.080Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/retlab-dev
+[debug] [2026-03-06T08:01:09.488Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-03-06T08:01:09.489Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2026-03-06T08:01:11.081Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com 403
+[debug] [2026-03-06T08:01:11.081Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/retlab-dev/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2026-03-06T08:01:11.082Z] Unable to check that https://cloudresourcemanager.googleapis.com is enabled on retlab-dev. Calls to it will fail if it is not enabled
+[debug] [2026-03-06T08:01:11.082Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:11.083Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:11.083Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev [none]
+[debug] [2026-03-06T08:01:13.253Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev 403
+[debug] [2026-03-06T08:01:13.254Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[error] ⬢  extensions: Unable to look up project number for retlab-dev.
+ If this is a real project, ensure that you are logged in and have access to it.
+ If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.
+ Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly. {"metadata":{"emulator":{"name":"extensions"},"message":"Unable to look up project number for retlab-dev.\n If this is a real project, ensure that you are logged in and have access to it.\n If this is a fake project, please use a project ID starting with 'demo-' to skip production calls.\n Continuing with a fake project number - secrets and other features that require production access may behave unexpectedly."}}
+[warn] ⚠  hosting: Hosting Emulator unable to start on port 5001, starting on 5002 instead. {"metadata":{"emulator":{"name":"hosting"},"message":"Hosting Emulator unable to start on port 5001, starting on 5002 instead."}}
+[debug] [2026-03-06T08:01:13.275Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2026-03-06T08:01:13.287Z] Emulator locator file path: /tmp/hub-retlab-dev.json
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project retlab-dev. This may result in unexpected behavior. 
+[debug] [2026-03-06T08:01:13.288Z] [hub] writing locator at /tmp/hub-retlab-dev.json
+[debug] [2026-03-06T08:01:13.311Z] [Extensions] Started Extensions emulator, this is a noop.
+[warn] ⚠  functions: Functions Emulator unable to start on port 5002, starting on 5003 instead. {"metadata":{"emulator":{"name":"functions"},"message":"Functions Emulator unable to start on port 5002, starting on 5003 instead."}}
+[debug] [2026-03-06T08:01:13.316Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8081}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5002}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5003}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, database, pubsub, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, database, pubsub, dataconnect\u001b[22m"}}
+[debug] [2026-03-06T08:01:13.356Z] defaultcredentials: writing to file /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json
+[debug] [2026-03-06T08:01:13.359Z] Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /home/justin/.config/firebase/justintimothy303_gmail_com_application_default_credentials.json"}}
+[debug] [2026-03-06T08:01:13.362Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:13.362Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:13.362Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig [none]
+[debug] [2026-03-06T08:01:14.791Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig 403
+[debug] [2026-03-06T08:01:14.791Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-06T08:01:14.791Z] Failed to get Admin SDK config for retlab-dev, falling back to cache Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it. {"name":"FirebaseError","children":[],"exit":2,"message":"Failed to get Admin SDK for Firebase project retlab-dev. Please make sure the project exists and your account has permission to access it.","original":{"name":"FirebaseError","children":[],"context":{"body":{"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}},"response":{"statusCode":403}},"exit":1,"message":"Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/adminSdkConfig had HTTP Error: 403, The caller does not have permission","status":403},"status":500}
+[warn] ⚠  functions: Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect. {"metadata":{"emulator":{"name":"functions"},"message":"Unable to fetch project Admin SDK configuration, Admin SDK behavior in Cloud Functions emulator may be incorrect."}}
+[debug] [2026-03-06T08:01:14.819Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-03-06T08:01:14.820Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2026-03-06T08:01:14.820Z] Starting Firestore Emulator with command {"binary":"java","args":["-Djava.net.preferIPv4Stack=true","-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar","--host","127.0.0.1","--port",8081,"--websocket_port",9150,"--project_id","retlab-dev","--rules","/home/justin/opensource/RUXAILAB/firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5003"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8081} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Djava.net.preferIPv4Stack=true\",\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/home/justin/.cache/firebase/emulators/cloud-firestore-emulator-v1.20.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",8081,\"--websocket_port\",9150,\"--project_id\",\"retlab-dev\",\"--rules\",\"/home/justin/opensource/RUXAILAB/firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5003\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8081}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2026-03-06T08:01:18.889Z] Mar 06, 2026 3:01:18 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Mar 06, 2026 3:01:18 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2026-03-06T08:01:18.971Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2026-03-06T08:01:18.972Z] 127.0.0.1:8081
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"127.0.0.1:8081\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8081\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8081\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2026-03-06T08:01:32.519Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-03-06T08:01:34.945Z] Temp file directory for storage emulator: /tmp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /tmp/firebase/storage/blobs"}}
+[debug] [2026-03-06T08:01:34.954Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:34.954Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:34.955Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 
+[debug] [2026-03-06T08:01:35.665Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites 403
+[debug] [2026-03-06T08:01:35.666Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites {"error":{"code":403,"message":"Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-06T08:01:35.666Z] Failed to list hosting sites
+[debug] Request to https://firebasehosting.googleapis.com/v1beta1/projects/retlab-dev/sites had HTTP Error: 403, Permission 'firebasehosting.sites.get' denied on resource 'projects/retlab-dev' (or it may not exist)
+[debug] [2026-03-06T08:01:35.666Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:35.667Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:35.667Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config [none]
+[debug] [2026-03-06T08:01:37.147Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config 403
+[debug] [2026-03-06T08:01:37.147Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-06T08:01:37.147Z] fetchWebSetup error: FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev/webApps/-/config had HTTP Error: 403, The caller does not have permission
+[warn] ⚠  hosting: Authentication error when trying to fetch your current web app configuration, have you run firebase login? 
+[warn] ⚠  hosting: Could not fetch web app configuration and there is no cached configuration on this machine. Check your internet connection and make sure you are authenticated. To continue, you must call firebase.initializeApp({...}) in your code before using Firebase. 
+[debug] [2026-03-06T08:01:37.152Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:37.153Z] Checked if tokens are valid: true, expires at: 1772787668019
+[debug] [2026-03-06T08:01:37.153Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev [none]
+[debug] [2026-03-06T08:01:37.669Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev 403
+[debug] [2026-03-06T08:01:37.669Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/retlab-dev {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-06T08:01:37.670Z] Request to https://firebase.googleapis.com/v1beta1/projects/retlab-dev had HTTP Error: 403, The caller does not have permission
+[info] i  hosting[ruxailab-stage]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-stage]: Local server: http://127.0.0.1:5002 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5002\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-dev]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-dev]: Local server: http://127.0.0.1:5007 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5007\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-develop]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-develop]: Local server: http://127.0.0.1:5008 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5008\u001b[22m\u001b[24m"}}
+[info] i  hosting[ruxailab-prod]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] ✔  hosting[ruxailab-prod]: Local server: http://127.0.0.1:5009 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5009\u001b[22m\u001b[24m"}}
+[debug] [2026-03-06T08:01:37.731Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "/home/justin/opensource/RUXAILAB/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/home/justin/opensource/RUXAILAB/functions\" for Cloud Functions..."}}
+[debug] [2026-03-06T08:01:37.739Z] Validating nodejs source
+[warn] ⚠  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] ⚠  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2026-03-06T08:01:40.678Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2",
+    "nodemailer": "^6.9.5"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2026-03-06T08:01:40.679Z] Building nodejs source
+[debug] [2026-03-06T08:01:40.680Z] Failed to find version of module node: reached end of search path /home/justin/opensource/RUXAILAB/functions/node_modules
+[info] ✔  functions: Using node@22 from host. 
+[debug] [2026-03-06T08:01:40.688Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-03-06T08:01:40.721Z] Found firebase-functions binary at '/home/justin/opensource/RUXAILAB/node_modules/.bin/firebase-functions'
+[info] Serving at port 8199
+
+[error] Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    at packageResolve (node:internal/modules/esm/resolve:767:81)
+    at moduleResolve (node:internal/modules/esm/resolve:853:18)
+    at defaultResolve (node:internal/modules/esm/resolve:983:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:731:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:767:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:790:52)
+    at #cachedResolveSync (node:internal/modules/esm/loader:750:25)
+    at ModuleLoader.getModuleJobForRequire (node:internal/modules/esm/loader:459:50)
+    at new ModuleJobSync (node:internal/modules/esm/module_job:392:34) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+[debug] [2026-03-06T08:01:41.612Z] Got response code 400; body Failed to generate manifest from function source: Cannot find package 'nodemailer' imported from /home/justin/opensource/RUXAILAB/functions/src/https/email.js
+[error] ⬢  functions: Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Functions codebase could not be analyzed successfully. It may have a syntax or runtime error"}}
+[debug] [2026-03-06T08:01:45.669Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED 127.0.0.1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth       │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Functions      │ 127.0.0.1:5003 │ http://127.0.0.1:4000/functions  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8081 │ http://127.0.0.1:4000/firestore  │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:5002 │ n/a                              │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage    │
+├────────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions     │ 127.0.0.1:5003 │ http://127.0.0.1:4000/extensions │
+└────────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150, 5007, 5008, 5009
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 

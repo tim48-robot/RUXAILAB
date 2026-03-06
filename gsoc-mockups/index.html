@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RUXAILAB — Logs & Traceability (GSoC 2026 PoC)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<div id="Top Bar" class="appbar">
+  <!-- Menu Icon -->
+  <div id="Menu Icon" class="appbar-menu">
+    <span class="mdi mdi-menu"></span>
+  </div>
+
+  <!-- Logo -->
+  <div id="Logo" class="appbar-logo">
+    <img id="Logo Text" src="../src/assets/logo_full_white.png" height="25" alt="RUXAILAB Logo">
+  </div>
+
+  <!-- Spacer -->
+  <div id="Spacer" style="flex: 1"></div>
+
+  <!-- Language Selector -->
+  <div id="Language Selector" class="appbar-locale">
+    <span id="Language Icon" class="mdi mdi-translate"></span>
+    <div id="Language Labels" class="text-wrap">
+      <span class="label">Language</span>
+      <span class="val">English</span>
+    </div>
+    <span id="Language Chevron" class="mdi mdi-menu-down"></span>
+  </div>
+
+  <!-- Return to Console -->
+  <div id="Return to Console Button" class="appbar-text-btn">Return to Console</div>
+
+  <!-- Help Button -->
+  <div id="Help Button" class="appbar-icon-btn">
+    <span id="Help Icon" class="mdi mdi-help-circle-outline"></span>
+  </div>
+
+  <!-- Notifications -->
+  <div id="Notifications" class="appbar-icon-btn">
+    <span id="Bell Icon" class="mdi mdi-bell-outline"></span>
+  </div>
+
+  <!-- User Avatar -->
+  <div id="User Avatar" class="appbar-avatar">
+    <span>JT</span>
+  </div>
+  
+  <!-- Dropdown Arrow -->
+  <div id="Dropdown Arrow" class="appbar-icon-btn" style="margin-left:-8px">
+    <span class="mdi mdi-chevron-down" style="font-size:20px; color:#90A4AE"></span>
+  </div>
+</div>
+
+<!-- App Layout -->
+<div id="App Layout" class="shell">
+
+  <!-- ════════════════════════════════════════════════
+       SIDEBAR / DRAWER
+       Source: Drawer.vue  color="primary" → #00213F
+       Items from managerDefault.js getNavigatorDefault()
+       Icons from theme.js ICONS constants:
+         MANAGER  → mdi-home
+         DOCUMENT_EDIT → mdi-file-document-edit
+         PREVIEW  → mdi-file-eye
+         BOOK     → mdi-book-multiple
+         ORDER    → mdi-order-bool-ascending-variant
+         ACCOUNT_GROUP → mdi-account-group
+         COG      → mdi-cog
+       Active: #fca326  |  Inactive: #bababa
+  ════════════════════════════════════════════════ -->
+  <aside id="Sidebar" class="drawer">
+    <div class="drawer-list">
+      <!-- All items from getNavigatorDefault() in managerDefault.js -->
+      <a class="ditem" onclick="sd('manager',this)">
+        <span class="mdi mdi-home"></span>
+        <span>Manager</span>
+      </a>
+      <a class="ditem" onclick="sd('test',this)">
+        <span class="mdi mdi-file-document-edit"></span>
+        <span>Test</span>
+      </a>
+      <a class="ditem" onclick="sd('preview',this)">
+        <span class="mdi mdi-file-eye"></span>
+        <span>Preview</span>
+      </a>
+      <a class="ditem" onclick="sd('reports',this)">
+        <span class="mdi mdi-book-multiple"></span>
+        <span>Reports</span>
+      </a>
+      <a class="ditem" onclick="sd('answers',this)">
+        <span class="mdi mdi-order-bool-ascending-variant"></span>
+        <span>Answers</span>
+      </a>
+      <a class="ditem" onclick="sd('cooperators',this)">
+        <span class="mdi mdi-account-group"></span>
+        <span>Cooperators</span>
+      </a>
+      <a class="ditem" onclick="sd('settings',this)">
+        <span class="mdi mdi-cog"></span>
+        <span>Settings</span>
+      </a>
+
+      <!-- NEW: Logs item (the GSoC contribution) -->
+      <div style="border-top:1px solid rgba(255,255,255,.08);margin:8px 0"></div>
+      <a class="ditem active" id="nav-logs" onclick="sd('logs',this)">
+        <span class="mdi mdi-text-search"></span>
+        <span>Logs</span>
+        <span style="margin-left:auto;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#fca326;color:#fff;padding:1px 5px;border-radius:3px">NEW</span>
+      </a>
+    </div>
+
+    <!-- Collapse button: Drawer.vue footer .bg-orange -->
+    <div class="drawer-footer">
+      <div class="drawer-toggle"><span class="mdi mdi-chevron-left"></span></div>
+    </div>
+  </aside>
+
+  <!-- ════════════════════════════════════════════════
+       MAIN CONTENT
+       Source: ManagerView.vue  .background { background-color: #e8eaf2 }
+  ════════════════════════════════════════════════ -->
+  <main class="main" id="main-area">
+
+    <!-- ── MANAGER view (shown when clicking Manager in sidebar) ── -->
+    <div id="page-manager" style="display:none">
+      <div id="Content Container" class="dashboard-container">
+        <p style="color:#546E7A;font-size:14px;padding:40px 0;text-align:center">
+          ← This is the real RUXAILAB Manager page (Total Participants, Completed, In Progress, Average Time).<br>
+          Click <strong style="color:#fca326">Logs</strong> in the sidebar to see the GSoC contribution.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── LOGS view (default, GSoC contribution) ── -->
+    <div id="page-logs">
+      <div id="Content Container" class="dashboard-container">
+
+        <!-- Study Banner Card -->
+        <!-- Source: .dashboard-header border-radius:20px; .gradient-header linear-gradient(135deg) -->
+        <div class="dashboard-header">
+          <div class="header-content">
+            <div class="header-icon-container">
+              <span class="mdi mdi-chart-box-outline" style="color:#fff;font-size:28px"></span>
+            </div>
+            <div class="header-texts">
+              <h1 class="dashboard-title">Mobile App Redesign Evaluation</h1>
+              <p class="dashboard-subtitle">Usability test for the new checkout flow redesign</p>
+              <div class="header-chips">
+                <span class="study-chip">
+                  <span class="mdi mdi-account-check-outline"></span>
+                  Moderated Study
+                </span>
+                <span class="study-chip">
+                  <span class="mdi mdi-circle-small"></span>
+                  Active
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-navigation tabs for Logs section -->
+        <div id="Tab Navigation" class="sub-tabs">
+          <button class="stab active" onclick="sw('dash')">Overview</button>
+          <button class="stab" onclick="sw('exp')">Log Explorer</button>
+          <button class="stab" onclick="sw('trace')">Trace View</button>
+          <button class="stab" onclick="sw('life')">Lifecycle</button>
+          <button class="stab" onclick="sw('export')">Export</button>
+        </div>
+
+        <!-- ══════ SCREEN: OVERVIEW ══════ -->
+        <div class="screen active" id="s-dash">
+          <!-- Stat Cards – 2×2 grid matching real app Manager cards -->
+          <div class="g g2" style="margin-bottom:20px">
+            <div class="stat-card">
+              <div class="sc-label">Total Logs Today</div>
+              <div class="sc-val">12,847</div>
+              <div class="sc-sub">+18% vs yesterday</div>
+              <div class="sc-icon"><span class="mdi mdi-text-box-outline"></span></div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-label">Active Sessions</div>
+              <div class="sc-val">3</div>
+              <div class="sc-sub">of 15 planned</div>
+              <div class="sc-icon"><span class="mdi mdi-monitor-dashboard"></span></div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-label">Errors (24h)</div>
+              <div class="sc-val">7</div>
+              <div class="sc-sub">-3 from yesterday</div>
+              <div class="sc-icon"><span class="mdi mdi-alert-circle-outline"></span></div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-label">AI Confidence Avg</div>
+              <div class="sc-val">0.87</div>
+              <div class="sc-sub">across all models</div>
+              <div class="sc-icon"><span class="mdi mdi-robot-outline"></span></div>
+            </div>
+          </div>
+
+          <div class="g g12">
+            <!-- Layer Health -->
+            <div class="card">
+              <div class="card-hdr"><div><div class="card-t">Layer Health</div><div class="card-s">3-layer logging status</div></div></div>
+              <div style="display:flex;flex-direction:column;gap:14px">
+                <div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                    <span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECHNICAL</span>
+                    <span style="color:var(--ok);font-size:12px;font-weight:600">● Healthy</span>
+                  </div>
+                  <div style="font-size:12px;color:#90A4AE">128 logs/min · 0 errors · 1.2 GB used</div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                    <span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METHODOLOGICAL</span>
+                    <span style="color:var(--warn);font-size:12px;font-weight:600">● 2 Deviations</span>
+                  </div>
+                  <div style="font-size:12px;color:#90A4AE">94.2% protocol adherence · 47 notes today</div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                    <span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI DECISIONS</span>
+                    <span style="color:var(--ok);font-size:12px;font-weight:600">● All Online</span>
+                  </div>
+                  <div style="font-size:12px;color:#90A4AE">Eye-tracker 0.91 · Sentiment 0.82 · Transcription 0.96</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Log Stream -->
+            <div class="card">
+              <div class="card-hdr">
+                <div><div class="card-t">Live Log Stream</div><div class="card-s">Real-time — last 8 entries</div></div>
+                <div style="display:flex;gap:4px">
+                  <span class="chip chip-tech" style="padding:3px 8px;font-size:10px"><span class="mdi mdi-wrench-outline"></span></span>
+                  <span class="chip chip-meth" style="padding:3px 8px;font-size:10px"><span class="mdi mdi-clipboard-outline"></span></span>
+                  <span class="chip chip-ai" style="padding:3px 8px;font-size:10px"><span class="mdi mdi-robot-outline"></span></span>
+                </div>
+              </div>
+              <div class="lrow"><span class="lt">10:23:01</span><span class="b b-tech" style="font-size:10px"><span class="mdi mdi-wrench-outline"></span></span><span class="ls">firestore</span><span>Write: sessions/S-008/tasks</span><span class="ltr">T-0042</span></div>
+              <div class="lrow"><span class="lt">10:23:05</span><span class="b b-meth" style="font-size:10px"><span class="mdi mdi-clipboard-outline"></span></span><span class="ls">facilitator</span><span>Task 2 assigned to P-004</span><span class="ltr">T-0042</span></div>
+              <div class="lrow"><span class="lt">10:23:12</span><span class="b b-ai" style="font-size:10px"><span class="mdi mdi-robot-outline"></span></span><span class="ls">eye-tracker</span><span>Fixation (342,518) — 1.2s, conf 0.91</span><span class="ltr">T-0042</span></div>
+              <div class="lrow"><span class="lt">10:23:15</span><span class="b b-meth" style="font-size:10px"><span class="mdi mdi-clipboard-outline"></span></span><span class="ls">observer</span><span>"Participant re-read instructions"</span><span class="ltr">T-0042</span></div>
+              <div class="lrow"><span class="lt">10:23:22</span><span class="b b-ai" style="font-size:10px"><span class="mdi mdi-robot-outline"></span></span><span class="ls">sentiment</span><span>Expression: <b>frustrated</b> (conf: 0.82)</span><span class="ltr">T-0042</span></div>
+              <div class="lrow"><span class="lt">10:23:30</span><span class="b b-warn" style="font-size:10px">⚠</span><span class="ls">facilitator</span><span>⚠ Protocol deviation: extra hint</span><span class="ltr">T-0042</span></div>
+              <div class="lrow"><span class="lt">10:23:35</span><span class="b b-err" style="font-size:10px">ERR</span><span class="ls">eye-tracker</span><span>Frame drop: 3 frames lost</span><span class="ltr">T-0042</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════ SCREEN: LOG EXPLORER ══════ -->
+        <div class="screen" id="s-exp">
+          <div class="fbar">
+            <span style="font-size:11px;font-weight:600;color:#90A4AE">Layers:</span>
+            <button class="chip chip-tech"><span class="mdi mdi-wrench-outline"></span> Technical</button>
+            <button class="chip chip-meth"><span class="mdi mdi-clipboard-outline"></span> Methodological</button>
+            <button class="chip chip-ai"><span class="mdi mdi-robot-outline"></span> AI Decisions</button>
+            <div class="sep"></div>
+            <select class="fsel"><option>Severity: All</option><option>Error</option><option>Warning</option><option>Info</option></select>
+            <select class="fsel"><option>Session: S-008</option><option>S-007</option><option>All</option></select>
+            <select class="fsel"><option>Last 1 hour</option><option>Last 15 min</option><option>Last 24h</option></select>
+            <input class="fsearch" placeholder="Search logs...">
+          </div>
+
+          <div class="card">
+            <div class="card-hdr">
+              <div><div class="card-t">Log Entries</div><div class="card-s">847 entries · S-008 · last 1 hour</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-out"><span class="mdi mdi-download-outline"></span> Export</button>
+                <button class="btn btn-out"><span class="mdi mdi-refresh"></span></button>
+              </div>
+            </div>
+            <table class="dtbl">
+              <thead><tr>
+                <th style="width:80px">Time</th><th style="width:94px">Layer</th><th style="width:62px">Level</th>
+                <th style="width:100px">Source</th><th>Message</th><th style="width:64px">Trace</th>
+              </tr></thead>
+              <tbody>
+                <tr><td class="lt">10:23:01</td><td><span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECH</span></td><td><span class="b b-info">INFO</span></td><td class="ls">firestore</td><td>Write success: sessions/S-008/tasks/task_002</td><td><span class="ltr">T-0042</span></td></tr>
+                <tr><td class="lt">10:23:05</td><td><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METH</span></td><td><span class="b b-info">INFO</span></td><td class="ls">facilitator</td><td>Task 2 assigned to participant P-004</td><td><span class="ltr">T-0042</span></td></tr>
+                <tr style="background:#F8F9FF"><td class="lt">10:23:12</td><td><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span></td><td><span class="b b-info">INFO</span></td><td class="ls">eye-tracker</td><td style="font-weight:500">▾ Fixation at (342, 518) — 1.2s</td><td><span class="ltr">T-0042</span></td></tr>
+                <tr><td colspan="6" style="padding:0"><div style="background:#F8F9FC;border:1px solid #E3E8F0;border-radius:8px;padding:12px 14px;margin:2px 4px;font-size:13px"><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI Decision Detail</span></div><div class="dr"><span class="dl">Model:</span><span>gaze-detection-v2.1</span></div><div class="dr"><span class="dl">Confidence:</span><span style="color:var(--ok);font-weight:600">0.91 ✓ High</span></div><div class="dr"><span class="dl">AOI Hit:</span><span>"Submit Button" — 3rd fixation in task</span></div></div></td></tr>
+                <tr><td class="lt">10:23:22</td><td><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span></td><td><span class="b b-warn">WARN</span></td><td class="ls">sentiment</td><td>Expression: <b>frustrated</b> (confidence: 0.82)</td><td><span class="ltr">T-0042</span></td></tr>
+                <tr><td class="lt">10:23:30</td><td><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METH</span></td><td><span class="b b-warn">WARN</span></td><td class="ls">facilitator</td><td>⚠ Protocol deviation: extra hint given</td><td><span class="ltr">T-0042</span></td></tr>
+                <tr><td class="lt">10:23:35</td><td><span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECH</span></td><td><span class="b b-err">ERR</span></td><td class="ls">eye-tracker</td><td>Frame drop: 3 frames lost (network jitter)</td><td><span class="ltr">T-0042</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ══════ SCREEN: TRACE VIEW ══════ -->
+        <div class="screen" id="s-trace">
+          <div class="card" style="margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+              <div><div style="font-size:10px;color:#90A4AE;font-weight:600;text-transform:uppercase;letter-spacing:.5px">Trace ID</div><div style="font-size:18px;font-weight:700;color:#fca326">T-0042</div></div>
+              <div class="sep"></div>
+              <div><div style="font-size:10px;color:#90A4AE">Session</div><div style="font-weight:600">S-008</div></div>
+              <div class="sep"></div>
+              <div><div style="font-size:10px;color:#90A4AE">Participant</div><div style="font-weight:600">P-004</div></div>
+              <div class="sep"></div>
+              <div><div style="font-size:10px;color:#90A4AE">Duration</div><div style="font-weight:600">12m 34s</div></div>
+              <div style="flex:1"></div>
+              <span class="b b-warn"><span class="mdi mdi-alert-outline"></span> 1 Deviation</span>
+              <button class="btn btn-out" style="font-size:11px"><span class="mdi mdi-download-outline"></span> Export</button>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom:14px">
+            <div class="card-hdr">
+              <div class="card-t">Event Swimlane</div>
+              <div style="display:flex;gap:5px">
+                <span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> Tech</span>
+                <span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> Method</span>
+                <span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:0 112px 6px;font-size:10px;color:#90A4AE">
+              <span>10:20</span><span>10:21</span><span>10:22</span><span>10:23</span><span>10:24</span>
+            </div>
+            <div class="sw-wrap">
+              <div class="sw-row"><div class="sw-lbl" style="color:var(--meth)"><span class="mdi mdi-clipboard-outline"></span> Method</div><div class="sw-trk"><div class="sn sn-m">Task Start</div><div class="sn sn-m">Observer Note</div><div class="sn sn-m">Task Done</div><div class="sn sn-w" style="margin-left:auto">⚠ Deviation</div></div></div>
+              <div class="sw-row"><div class="sw-lbl" style="color:var(--tech)"><span class="mdi mdi-wrench-outline"></span> Tech</div><div class="sw-trk"><div class="sn sn-t">API Call</div><div class="sn sn-t">DB Write</div><div class="sn sn-t">API 200</div><div class="sn sn-e">Frame Drop</div></div></div>
+              <div class="sw-row" style="border-bottom:none"><div class="sw-lbl" style="color:var(--ai)"><span class="mdi mdi-robot-outline"></span> AI</div><div class="sw-trk"><div class="sn sn-a" style="margin-left:40px">Eye Track</div><div class="sn sn-a">Sentiment</div><div class="sn sn-a" style="margin-left:auto">Transcript</div></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-hdr"><div class="card-t">Selected: Observer Note (10:21:33)</div><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> Methodological</span></div>
+            <div class="dr"><span class="dl">Source:</span><span>Dr. Ana Martinez</span></div>
+            <div class="dr"><span class="dl">Content:</span><span>"Participant paused, re-read instructions twice before proceeding"</span></div>
+            <div class="dr"><span class="dl">Correlated:</span><span style="display:flex;gap:4px"><span class="b b-ai" style="cursor:pointer"><span class="mdi mdi-robot-outline"></span> Eye fixation 1.2s</span><span class="b b-ai" style="cursor:pointer"><span class="mdi mdi-robot-outline"></span> Frustrated 0.82</span></span></div>
+          </div>
+        </div>
+
+        <!-- ══════ SCREEN: LIFECYCLE ══════ -->
+        <div class="screen" id="s-life">
+          <div class="card" style="margin-bottom:14px">
+            <div class="pbar">
+              <div class="pstep"><div class="pdot done"></div><div class="plbl done">Design</div></div>
+              <div class="pstep"><div class="pdot done"></div><div class="plbl done">Recruitment</div></div>
+              <div class="pstep"><div class="pdot now"></div><div class="plbl now">Execution</div></div>
+              <div class="pstep"><div class="pdot"></div><div class="plbl">Analysis</div></div>
+              <div class="pstep"><div class="pdot"></div><div class="plbl">Reporting</div></div>
+            </div>
+          </div>
+          <div class="g g3" style="margin-bottom:14px">
+            <div class="card"><div class="card-hdr"><div class="card-t">✅ Design</div><span class="b b-ok">Done</span></div><div style="font-size:12px;color:#90A4AE;margin-bottom:8px">Feb 15–20</div><div style="font-size:13px;display:flex;flex-direction:column;gap:5px"><div>📝 12 logs</div><div style="color:var(--ok)">✅ 5 tasks defined</div><div style="color:var(--ok)">✅ IRB approved</div></div></div>
+            <div class="card"><div class="card-hdr"><div class="card-t">✅ Recruitment</div><span class="b b-ok">Done</span></div><div style="font-size:12px;color:#90A4AE;margin-bottom:8px">Feb 20–28</div><div style="font-size:13px;display:flex;flex-direction:column;gap:5px"><div>📝 34 logs</div><div style="color:var(--ok)">✅ 12 consents</div><div style="color:var(--warn)">⚠ P-009 withdrawn</div></div></div>
+            <div class="card" style="border:2px solid #fca326"><div class="card-hdr"><div class="card-t">◉ Execution</div><span class="b" style="background:rgba(252,163,38,.1);color:#fca326">● Active</span></div><div style="font-size:12px;color:#90A4AE;margin-bottom:8px">Mar 1 – now</div><div style="font-size:13px;display:flex;flex-direction:column;gap:5px"><div>📝 2,847 logs</div><div>🎬 8/15 sessions</div><div style="color:var(--warn)">⚠ 2 deviations</div></div></div>
+          </div>
+          <div class="card">
+            <div class="card-t" style="margin-bottom:14px">Recent Activity</div>
+            <div class="tl">
+              <div class="tl-i"><div class="tl-d now"></div><div style="font-size:13px"><div style="font-weight:600">Session S-008 completed</div><div style="color:#90A4AE;font-size:12px">Today 10:24 · P-004 · 14 min · 3/5 tasks</div></div></div>
+              <div class="tl-i"><div class="tl-d warn"></div><div style="font-size:13px"><div style="font-weight:600;color:var(--warn)">⚠ Protocol deviation in S-007</div><div style="color:#90A4AE;font-size:12px">Today 09:45 · Extra hint at Task 3</div></div></div>
+              <div class="tl-i"><div class="tl-d done"></div><div style="font-size:13px"><div style="font-weight:600">Session S-007 completed</div><div style="color:#90A4AE;font-size:12px">Today 09:50 · P-011 · 18 min · 5/5 tasks</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════ SCREEN: EXPORT ══════ -->
+        <div class="screen" id="s-export">
+          <div class="g g2" style="gap:18px">
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="card">
+                <div class="card-t" style="margin-bottom:10px">Export Format</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap">
+                  <button class="chip" style="background:rgba(0,33,63,.08);border-color:#00213F;color:#00213F">● JSON</button>
+                  <button class="chip">CSV</button><button class="chip">PDF Report</button><button class="chip">APA Table</button>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-t" style="margin-bottom:12px">Anonymization</div>
+                <div class="trow"><div><div style="font-size:13px;font-weight:500">Replace participant names</div><div style="font-size:11px;color:#90A4AE">P-001, P-002…</div></div><div class="tsw on"></div></div>
+                <div class="trow"><div><div style="font-size:13px;font-weight:500">Hash session IDs</div><div style="font-size:11px;color:#90A4AE">sha256</div></div><div class="tsw on"></div></div>
+                <div class="trow"><div><div style="font-size:13px;font-weight:500">Strip IP addresses</div><div style="font-size:11px;color:#90A4AE">Remove from tech logs</div></div><div class="tsw on"></div></div>
+                <div class="trow"><div><div style="font-size:13px;font-weight:500">Redact free-text PII</div><div style="font-size:11px;color:#90A4AE">Auto-detect names, emails</div></div><div class="tsw on"></div></div>
+                <div class="trow"><div><div style="font-size:13px;font-weight:500">Remove demographics</div><div style="font-size:11px;color:#90A4AE">Age, gender, location</div></div><div class="tsw"></div></div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="card">
+                <div class="card-hdr"><div><div class="card-t">Preview</div><div class="card-s">First 3 entries (anonymized)</div></div></div>
+                <div class="prv">
+<span class="k">[</span>
+  { <span class="k">"layer"</span>: <span class="s">"technical"</span>, <span class="k">"message"</span>: <span class="s">"Write: sessions/[REDACTED]"</span> },
+  { <span class="k">"layer"</span>: <span class="s">"methodological"</span>, <span class="k">"message"</span>: <span class="s">"Task 2 assigned to P-004"</span> },
+  { <span class="k">"layer"</span>: <span class="s">"ai_decision"</span>, <span class="k">"model"</span>: <span class="s">"gaze-v2.1"</span>, <span class="k">"confidence"</span>: <span class="n">0.91</span> }
+<span class="k">]</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-t" style="margin-bottom:12px">Summary</div>
+                <div style="font-size:13px;display:flex;flex-direction:column;gap:6px">
+                  <div style="display:flex;justify-content:space-between"><span style="color:#90A4AE">Entries</span><span style="font-weight:600">2,847</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="color:#90A4AE">Size</span><span>2.3 MB</span></div>
+                  <div style="display:flex;justify-content:space-between"><span style="color:#90A4AE">Anonymization</span><span style="color:var(--ok)">4/5 active</span></div>
+                </div>
+                <button class="btn btn-orange" style="width:100%;margin-top:14px;justify-content:center;padding:10px;font-size:14px">
+                  <span class="mdi mdi-download-outline"></span> Export Data (2.3 MB)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /dashboard-container -->
+    </div><!-- /page-logs -->
+
+  </main>
+</div>
+
+<script>
+// Sidebar navigation
+function sd(page, el) {
+  document.querySelectorAll('.ditem').forEach(d => d.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.getElementById('page-manager').style.display = (page !== 'logs') ? 'block' : 'none';
+  document.getElementById('page-logs').style.display    = (page === 'logs')  ? 'block' : 'none';
+}
+
+// Sub-tab navigation (within Logs)
+function sw(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  const order = ['dash','exp','trace','life','export'];
+  document.querySelectorAll('.stab').forEach((t,i) => t.classList.toggle('active', order[i] === id));
+}
+
+// Set Logs active on load
+document.getElementById('nav-logs').classList.add('active');
+</script>
+</body>
+</html>

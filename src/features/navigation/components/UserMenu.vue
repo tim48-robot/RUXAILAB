@@ -1,5 +1,7 @@
 <template>
+  <!-- User Profile Menu -->
   <div v-if="user">
+    <!-- User Menu Dropdown -->
     <v-menu
       v-model="menu"
       :offset="[0, 8]"
@@ -9,15 +11,20 @@
       class="rounded-lg"
     >
       <template #activator="{ props }">
+        <!-- User Avatar Button -->
         <v-btn variant="text" class="pa-0 btn-fix" v-bind="props">
+          <!-- Avatar -->
           <v-avatar size="24" class="mr-1">
+            <!-- Profile Image -->
             <v-img v-if="profileImage" :src="profileImage" alt="User Profile" />
 
             <template v-else>
+              <!-- Default Avatar -->
               <v-avatar
                 size="24"
                 class="bg-primary d-flex align-center justify-center"
               >
+                <!-- User Initial -->
                 <span class="text-white text-body-2">
                   {{ userInitial }}
                 </span>
@@ -25,59 +32,73 @@
             </template>
           </v-avatar>
 
+          <!-- Dropdown Arrow Icon -->
           <v-icon size="small"> mdi-chevron-down </v-icon>
         </v-btn>
       </template>
 
       <template #default>
+        <!-- Menu Dropdown Card -->
         <div class="custom-dropdown bg-white rounded-lg">
-          <!-- User Info -->
+          <!-- User Info Section -->
           <div class="pa-6 d-flex align-center">
             <template v-if="profileImage">
+              <!-- Large Profile Avatar -->
               <v-avatar size="48" class="elevation-2">
-                <v-img :src="profileImage" alt="User Profile" />
+                <!-- Profile Image --><v-img :src="profileImage" alt="User Profile" />
               </v-avatar>
             </template>
 
             <template v-else>
+              <!-- Large Default Avatar -->
               <v-avatar
                 size="48"
                 class="elevation-2 bg-primary d-flex align-center justify-center"
               >
+                <!-- User Initial Large -->
                 <span class="text-h5 font-weight-medium text-white">
                   {{ userInitial }}
                 </span>
               </v-avatar>
             </template>
 
+            <!-- User Details -->
             <div class="ml-4 flex-grow-1">
+              <!-- Username Row -->
               <div class="d-flex align-center">
+                <!-- Username Text -->
                 <span class="text-h6 font-weight-bold text-grey-darken-4">
                   {{ username || $t('buttons.username') }}
                 </span>
 
+                <!-- Verified Badge -->
                 <v-icon color="primary" size="20" class="ml-2">
                   mdi-check-decagram
                 </v-icon>
               </div>
 
+              <!-- User Email -->
               <span class="text-subtitle-2 text-grey-darken-1">
                 {{ user?.email || '' }}
               </span>
             </div>
           </div>
 
+          <!-- Divider -->
           <v-divider />
 
-          <!-- Menu Items -->
+          <!-- Menu Items Section -->
           <div class="pa-2">
+            <!-- Profile Menu Item -->
             <v-hover v-slot="{ isHovering }">
+              <!-- Profile Row -->
               <div
                 class="d-flex align-center px-4 py-3 rounded-lg cursor-pointer"
                 :class="{ 'primary lighten-5': isHovering }"
                 @click="goToProfile(), (menu = false)"
               >
-                <v-icon color="primary" size="20"> mdi-account </v-icon>
+                <!-- Profile Icon --><v-icon color="primary" size="20"> mdi-account </v-icon>
+                <!-- Profile Label -->
                 <span
                   class="ml-3 text-subtitle-1 font-weight-medium"
                   :class="{ 'primary--text': isHovering }"
@@ -87,15 +108,19 @@
               </div>
             </v-hover>
 
+            <!-- Divider -->
             <v-divider class="my-2" />
 
+            <!-- Sign Out Menu Item -->
             <v-hover v-slot="{ isHovering }">
+              <!-- Sign Out Row -->
               <div
                 class="d-flex align-center px-4 py-3 rounded-lg cursor-pointer"
                 :class="{ 'error lighten-5': isHovering }"
                 @click="signOut(), (menu = false)"
               >
-                <v-icon color="error" size="20"> mdi-logout </v-icon>
+                <!-- Sign Out Icon --><v-icon color="error" size="20"> mdi-logout </v-icon>
+                <!-- Sign Out Label -->
                 <span
                   class="ml-3 text-subtitle-1 font-weight-medium"
                   :class="{ 'error--text': isHovering }"

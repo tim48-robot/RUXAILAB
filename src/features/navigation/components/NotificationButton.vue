@@ -1,5 +1,7 @@
 <template>
+  <!-- Notifications Container -->
   <div v-if="Array.isArray(user.notifications)">
+    <!-- Notifications Menu -->
     <v-menu
       v-model="menuOpen"
       location="bottom end"
@@ -7,8 +9,9 @@
       max-width="420"
       transition="scale-transition"
     >
-      <!-- Bell -->
+      <!-- Bell Icon Activator -->
       <template #activator="{ props }">
+        <!-- Bell Badge (Unread) -->
         <v-badge
           v-if="unreadCount > 0"
           :content="unreadCount"
@@ -17,6 +20,7 @@
           offset-x="6"
           offset-y="6"
         >
+          <!-- Bell Button (Active) -->
           <v-btn
             icon
             size="small"
@@ -24,22 +28,25 @@
             :class="{ pulse: unreadCount > 0 }"
             v-bind="props"
           >
-            <v-icon>mdi-bell-ring</v-icon>
+            <!-- Bell Ring Icon --><v-icon>mdi-bell-ring</v-icon>
           </v-btn>
         </v-badge>
 
+        <!-- Bell Button (No Unread) -->
         <v-btn v-else icon size="small" v-bind="props">
-          <v-icon>mdi-bell-outline</v-icon>
+          <!-- Bell Outline Icon --><v-icon>mdi-bell-outline</v-icon>
         </v-btn>
       </template>
 
-      <!-- 📬 Dropdown -->
+      <!-- Notifications Dropdown -->
       <v-card class="notification-dropdown" elevation="6">
-        <!-- Header -->
+        <!-- Dropdown Header -->
         <div class="dropdown-header">
-          <span class="text-h6">{{ $t('common.notifications') }}</span>
+          <!-- Header Title --><span class="text-h6">{{ $t('common.notifications') }}</span>
 
+          <!-- Header Actions -->
           <div class="actions">
+            <!-- Mark All Read Button -->
             <v-btn
               v-if="unreadCount > 0"
               size="x-small"
@@ -50,6 +57,7 @@
               {{ $t('common.markAllAsRead') }}
             </v-btn>
 
+            <!-- View All Button -->
             <v-btn
               size="x-small"
               variant="text"
@@ -61,11 +69,13 @@
           </div>
         </div>
 
+        <!-- Divider -->
         <v-divider />
 
-        <!-- Content -->
+        <!-- Dropdown Content -->
         <div class="dropdown-content">
           <template v-if="unreadNotifications.length">
+            <!-- Notification Item -->
             <NotificationItem
               v-for="(notification, index) in unreadNotifications"
               :key="notification.id"
@@ -76,11 +86,11 @@
             />
           </template>
 
-          <!-- Empty -->
+          <!-- Empty State -->
           <div v-else class="empty-state">
-            <v-icon size="40" color="grey">mdi-bell-check</v-icon>
-            <div class="empty-title">{{ $t('common.caughtUp') }}</div>
-            <div class="empty-subtitle">
+            <!-- Empty Icon --><v-icon size="40" color="grey">mdi-bell-check</v-icon>
+            <!-- Empty Title --><div class="empty-title">{{ $t('common.caughtUp') }}</div>
+            <!-- Empty Subtitle --><div class="empty-subtitle">
               {{ $t('common.noNewNotifications') }}
             </div>
           </div>
@@ -88,7 +98,7 @@
       </v-card>
     </v-menu>
 
-    <!-- Dialog -->
+    <!-- Invitation Dialog -->
     <AcceptInvitationDialog
       v-model="dialogVisible"
       @cancel="onReject"
