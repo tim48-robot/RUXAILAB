@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logs — Overview (Alert State)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<div id="Top Bar" class="appbar">
+  <!-- Menu Icon -->
+  <div id="Menu Icon" class="appbar-menu">
+    <span class="mdi mdi-menu" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+
+  <!-- Logo -->
+  <div id="Logo" class="appbar-logo">
+    <img id="Logo Text" src="../src/assets/logo_full_white.png" height="25" alt="RUXAILAB Logo">
+  </div>
+
+  <!-- Spacer -->
+  <div id="Spacer" style="flex: 1"></div>
+
+  <!-- Language Selector -->
+  <div id="Language Selector" class="appbar-locale">
+    <span id="Language Icon" class="mdi mdi-translate" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+    <div id="Language Labels" class="text-wrap">
+      <span class="label">Language</span>
+      <span class="val">English</span>
+    </div>
+    <span id="Language Chevron" class="mdi mdi-menu-down" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+
+  <!-- Return to Console -->
+  <div id="Return to Console Button" class="appbar-text-btn">Return to Console</div>
+
+  <!-- Help Button -->
+  <div id="Help Button" class="appbar-icon-btn">
+    <span id="Help Icon" class="mdi mdi-help-circle-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+
+  <!-- Notifications -->
+  <div id="Notifications" class="appbar-icon-btn" style="position:relative">
+    <span id="Bell Icon" class="mdi mdi-bell-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+    <!-- Notification Red Dot -->
+    <span style="position:absolute;top:8px;right:10px;width:12px;height:12px;background:#E8556D;border-radius:50%;border:2px solid #00213F;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700">4</span>
+  </div>
+
+  <!-- User Avatar -->
+  <div id="User Avatar" class="appbar-avatar">
+    <span>JT</span>
+  </div>
+  
+  <!-- Dropdown Arrow -->
+  <div id="Dropdown Arrow" class="appbar-icon-btn" style="margin-left:-8px">
+    <span class="mdi mdi-chevron-down" style="font-size:20px; color:#90A4AE" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+</div>
+
+<!-- App Layout -->
+<div id="App Layout" class="shell">
+
+  <!-- Sidebar Navigation -->
+  <aside id="Sidebar" class="drawer">
+    <!-- Nav Items -->
+    <div class="drawer-list">
+      <!-- Nav: Manager -->
+      <a class="ditem">
+        <!-- Manager Icon --><span class="mdi mdi-home" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+        <!-- Manager Label --><span>Manager</span>
+      </a>
+      <!-- Nav: Test -->
+      <a class="ditem">
+        <!-- Test Icon --><span class="mdi mdi-file-document-edit" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+        <!-- Test Label --><span>Test</span>
+      </a>
+      <!-- Nav: Preview -->
+      <a class="ditem">
+        <!-- Preview Icon --><span class="mdi mdi-file-eye" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+        <!-- Preview Label --><span>Preview</span>
+      </a>
+      <!-- Nav: Reports -->
+      <a class="ditem">
+        <!-- Reports Icon --><span class="mdi mdi-book-multiple" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+        <!-- Reports Label --><span>Reports</span>
+      </a>
+      <!-- Nav: Answers -->
+      <a class="ditem">
+        <!-- Answers Icon --><span class="mdi mdi-order-bool-ascending-variant" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+        <!-- Answers Label --><span>Answers</span>
+      </a>
+      <!-- Nav: Cooperators -->
+      <a class="ditem">
+        <!-- Cooperators Icon --><span class="mdi mdi-account-group" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+        <!-- Cooperators Label --><span>Cooperators</span>
+      </a>
+      <!-- Nav: Settings -->
+      <a class="ditem">
+        <!-- Settings Icon --><span class="mdi mdi-cog" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+        <!-- Settings Label --><span>Settings</span>
+      </a>
+      <!-- Divider -->
+      <div style="border-top:1px solid rgba(255,255,255,.08);margin:8px 0"></div>
+      <!-- Nav: Logs (Active) -->
+      <a class="ditem active">
+        <!-- Logs Icon --><span class="mdi mdi-text-search" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+        <!-- Logs Label --><span>Logs</span>
+        <!-- New Badge -->
+        <span style="margin-left:auto;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#fca326;color:#fff;padding:1px 5px;border-radius:3px">NEW</span>
+      </a>
+    </div>
+    <!-- Collapse Button -->
+    <div class="drawer-footer">
+      <!-- Collapse Toggle -->
+      <div class="drawer-toggle">
+        <!-- Chevron Left -->
+        <span class="mdi mdi-chevron-left" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Content Container -->
+    <div id="Content Container" class="dashboard-container">
+
+      <!-- Study Banner -->
+      <div class="dashboard-header">
+        <!-- Banner Inner -->
+        <div class="header-content">
+          <!-- Banner Icon Container -->
+          <div class="header-icon-container">
+            <!-- Banner Icon -->
+            <span class="mdi mdi-chart-box-outline" style="color:#fff;font-size:28px" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+          </div>
+          <!-- Banner Text -->
+          <div class="header-texts">
+            <!-- Study Title -->
+            <h1 class="dashboard-title">Mobile App Redesign Evaluation</h1>
+            <!-- Study Description -->
+            <p class="dashboard-subtitle">Usability test for the new checkout flow redesign</p>
+            <!-- Status Badges -->
+            <div class="header-chips">
+              <!-- Moderated Badge -->
+              <span class="study-chip">
+                <!-- Moderated Icon -->
+                <span class="mdi mdi-account-check-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+                Moderated Study
+              </span>
+              <!-- Active Badge -->
+              <span class="study-chip">
+                <!-- Active Dot -->
+                <span class="mdi mdi-circle-small" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+                Active
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div id="Tab Navigation" class="sub-tabs">
+        <!-- Tab: Overview (Active) -->
+        <button class="stab active">Overview</button>
+        <!-- Tab: Log Explorer -->
+        <button class="stab">Log Explorer</button>
+        <!-- Tab: Trace View -->
+        <button class="stab">Trace View</button>
+        <!-- Tab: Lifecycle -->
+        <button class="stab">Lifecycle</button>
+        <!-- Tab: Export -->
+        <button class="stab">Export</button>
+      </div>
+
+      <div id="Overview Content">
+      <div>
+        <!-- ── ALERTS BANNER ── -->
+        <div style="background:linear-gradient(135deg, rgba(232,85,109,.12), rgba(229,81,0,.08));border:1px solid rgba(232,85,109,.2);border-radius:14px;padding:14px 16px;margin-bottom:16px;display:flex;gap:14px;align-items:flex-start">
+          <!-- Alert Count -->
+          <div style="min-width:60px;text-align:center">
+            <div style="font-size:28px;font-weight:700;color:#E8556D">4</div>
+            <div style="font-size:10px;font-weight:600;color:#90A4AE;text-transform:uppercase;letter-spacing:.5px">Issues Now</div>
+          </div>
+          <!-- Alert Content -->
+          <div style="flex:1">
+            <!-- Title -->
+            <div style="font-size:14px;font-weight:600;color:#E8556D;margin-bottom:6px">Active issues requiring attention</div>
+            <!-- Description -->
+            <div style="font-size:12px;color:#90A4AE;line-height:1.5;margin-bottom:10px">
+              Researchers should review these anomalies to ensure study validity and trace reliability. All flagged items can be investigated from the Log Explorer or individual session traces.
+            </div>
+            <!-- Quick Actions -->
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-out" style="font-size:11px"><span class="mdi mdi-alert-outline"></span> View All Issues</button>
+              <button class="btn btn-out" style="font-size:11px"><span class="mdi mdi-email-outline"></span> Email Alert</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stat Cards Row -->
+        <div class="g g2" style="margin-bottom:20px">
+          <div class="stat-card">
+            <div class="sc-label">Total Logs Today</div>
+            <div class="sc-val">12,847</div>
+            <div class="sc-sub">+18% vs yesterday</div>
+            <div class="sc-icon"><span class="mdi mdi-text-box-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span></div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-label">Active Sessions</div>
+            <div class="sc-val">3</div>
+            <div class="sc-sub">of 15 planned</div>
+            <div class="sc-icon"><span class="mdi mdi-monitor-dashboard" data-html2design-name="Icon" data-name="Icon" title="Icon"></span></div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-label">Protocol Deviations</div>
+            <div class="sc-val" style="color:var(--warn)">2</div>
+            <div class="sc-sub">requires review</div>
+            <div class="sc-icon"><span class="mdi mdi-alert-circle-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span></div>
+          </div>
+          <div class="stat-card">
+            <div class="sc-label">AI Confidence Avg</div>
+            <div class="sc-val">0.87</div>
+            <div class="sc-sub">across all models</div>
+            <div class="sc-icon"><span class="mdi mdi-robot-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span></div>
+          </div>
+        </div>
+
+        <!-- Critical Issues Card (Full Width) -->
+        <div class="g g12">
+          <!-- Critical Issues -->
+          <div class="card" style="margin-bottom:14px;border-color:#E8556D;background:rgba(232,85,109,.04)">
+            <div class="card-hdr"><div><div class="card-t" style="color:#E8556D">🚨 Critical Issues</div><div class="card-s">High-priority anomalies</div></div></div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <!-- Issue 1: Frustration Spike -->
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;background:rgba(232,85,109,.08);border-radius:8px">
+                <span class="mdi mdi-alert-octagon" style="color:#E8556D;font-size:18px;flex-shrink:0;margin-top:2px"></span>
+                <div style="flex:1">
+                  <div style="font-weight:600;font-size:13px;color:#E8556D">S-008 P-004 — Frustration spike during Task 2</div>
+                  <div style="font-size:12px;color:#90A4AE;margin-top:2px">AI sentiment: <strong>0.82 confidence</strong> · Possible UX friction point · Recommend video review</div>
+                  <div style="margin-top:6px;display:flex;gap:8px">
+                    <button class="btn btn-out" style="font-size:10px;padding:4px 10px">Review Session</button>
+                    <button class="btn btn-out" style="font-size:10px;padding:4px 10px">Jump to Trace</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Issue 2: Protocol Deviation -->
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;background:rgba(255,152,0,.08);border-radius:8px">
+                <span class="mdi mdi-alert-circle" style="color:#F57C00;font-size:18px;flex-shrink:0;margin-top:2px"></span>
+                <div style="flex:1">
+                  <div style="font-weight:600;font-size:13px">S-011 P-007 — Protocol deviation at Task 3</div>
+                  <div style="font-size:12px;color:#90A4AE;margin-top:2px">Facilitator provided extra hint · Missing observer note · Impacts protocol adherence score</div>
+                  <div style="margin-top:6px;display:flex;gap:8px">
+                    <button class="btn btn-out" style="font-size:10px;padding:4px 10px">Add Note</button>
+                    <button class="btn btn-out" style="font-size:10px;padding:4px 10px">Flag for Analysis</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Warnings Card -->
+          <div class="card" style="margin-bottom:14px;border-color:#F57C00;background:rgba(255,152,0,.04)">
+            <div class="card-hdr"><div><div class="card-t" style="color:#F57C00">⚠ Warnings</div><div class="card-s">Items needing attention</div></div></div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <!-- Warning 1: Unlinked Events -->
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;background:rgba(255,152,0,.08);border-radius:8px">
+                <span class="mdi mdi-link-variant-off" style="color:#F57C00;font-size:18px;flex-shrink:0;margin-top:2px"></span>
+                <div style="flex:1">
+                  <div style="font-weight:600;font-size:13px">T-0042 — 2 AI events unlinked from parent span</div>
+                  <div style="font-size:12px;color:#90A4AE;margin-top:2px">Eye-tracker output missing metadata · Trace completeness reduced to 87%</div>
+                  <div style="margin-top:6px">
+                    <button class="btn btn-out" style="font-size:10px;padding:4px 10px">View Trace »</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Warning 2: Delayed Ingestion -->
+              <div style="display:flex;gap:12px;align-items:flex-start;padding:10px;background:rgba(255,152,0,.08);border-radius:8px">
+                <span class="mdi mdi-clock-alert-outline" style="color:#F57C00;font-size:18px;flex-shrink:0;margin-top:2px"></span>
+                <div style="flex:1">
+                  <div style="font-weight:600;font-size:13px">Delayed ingestion: AI sentiment processing</div>
+                  <div style="font-size:12px;color:#90A4AE;margin-top:2px">Transcription arrived <strong>+4.2 seconds late</strong> · May affect causality analysis</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Items -->
+          <div class="card">
+            <div class="card-hdr"><div><div class="card-t">ℹ Information</div><div class="card-s">System updates and notices</div></div></div>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:12px">
+              <!-- Info 1: Export Ready -->
+              <div style="display:flex;gap:8px;align-items:flex-start;padding:8px;color:#90A4AE">
+                <span class="mdi mdi-check-circle-outline" style="color:var(--ok);flex-shrink:0;margin-top:2px"></span>
+                <div>✓ S-007 ready for export (protocol adherence: 100%)</div>
+              </div>
+              <!-- Info 2: System Update -->
+              <div style="display:flex;gap:8px;align-items:flex-start;padding:8px;color:#90A4AE">
+                <span class="mdi mdi-information-outline" style="color:var(--info);flex-shrink:0;margin-top:2px"></span>
+                <div>Last system sync: 2 minutes ago · All traces captured</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

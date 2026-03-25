@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide 1 – Cover</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: #0b1725;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 100px;
+      padding-top: 150px;
+    }
+
+    .dec-circle { position: absolute; border-radius: 50%; border: 2px solid rgba(252,163,38,0.1); z-index: 0; pointer-events: none; }
+    .dec-1 { width: 800px; height: 800px; bottom: -200px; right: -200px; }
+    .dec-2 { width: 1200px; height: 1200px; bottom: -400px; right: -400px; }
+
+    .cover-content { z-index: 10; }
+
+    .cover-logo-img { height: 56px; margin-bottom: 20px; }
+
+    .cover-title {
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-top: 28px;
+      margin-bottom: 16px;
+      max-width: 1000px;
+      letter-spacing: -1px;
+    }
+
+    .cover-subtitle {
+      font-size: 26px;
+      font-weight: 300;
+      color: #90A4AE;
+    }
+
+    .cover-subtitle strong {
+      color: #fca326;
+      font-weight: 500;
+    }
+
+    .cover-author {
+      position: absolute;
+      bottom: 60px;
+      right: 100px;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      font-weight: 400;
+      z-index: 10;
+    }
+
+    .cover-author strong { font-weight: 600; color: rgba(255,255,255,0.6); }
+
+    .separator {
+      position: absolute;
+      bottom: 90px;
+      left: 100px;
+      right: 100px;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      z-index: 10;
+    }
+
+    .click-prompt {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="dec-circle dec-1"></div>
+    <div class="dec-circle dec-2"></div>
+
+    <div class="cover-content">
+      <!-- Cover Logo -->
+      <img id="Cover Logo" class="cover-logo-img" src="https://public-ruxailab.web.app/images/ruxailab-long-crop-white.png" alt="RUXAILAB">
+
+      <!-- Cover Title -->
+      <div id="Cover Title" class="cover-title">Unified Logging and Traceability System<br>for Usability Studies</div>
+      <!-- Cover Subtitle -->
+      <div id="Cover Subtitle" class="cover-subtitle">A <strong>GSoC 2026</strong> Proposal</div>
+    </div>
+
+    <!-- Separator Line -->
+    <div id="Separator Line" class="separator"></div>
+    <!-- Cover Author -->
+    <div id="Cover Author" class="cover-author">Designed by <strong>Justin Timothy</strong></div>
+    <!-- Click Prompt -->
+    <div id="Click Prompt" class="click-prompt">Click anywhere to start</div>
+  </div>
+</body>
+</html>

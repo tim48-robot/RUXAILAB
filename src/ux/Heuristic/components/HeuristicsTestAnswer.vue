@@ -33,6 +33,9 @@
             <v-tab @click="setTab(3)">
               {{ $t('HeuristicsTestAnswer.titles.analytics') }}
             </v-tab>
+            <v-tab @click="setTab(4)">
+              Proof of Concept: Logs
+            </v-tab>
           </v-tabs>
         </template>
 
@@ -66,6 +69,102 @@
             />
             <!-- Tab 4 - Analytics -->
             <HeuristicsAnalytics v-if="tab == 3" />
+
+            <!-- Tab 5 - PoC Log Explorer -->
+            <div v-if="tab == 4" style="width: 100%; max-width: 1000px; margin: 12px auto;">
+              <!-- Header -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <v-icon color="#FCA326" size="24">mdi-text-search</v-icon>
+                  <span style="font-size: 18px; font-weight: 600; color: #00213F;">Log Explorer</span>
+                  <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: #FCA326; color: #fff; padding: 2px 6px; border-radius: 3px;">PoC</span>
+                </div>
+                <v-btn color="#FCA326" variant="flat" size="small" @click="fetchLogs" :loading="logsLoading" style="color: white;">
+                  <v-icon size="18" class="mr-1">mdi-refresh</v-icon> Refresh
+                </v-btn>
+              </div>
+
+              <!-- Layer Filter Chips -->
+              <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; align-items: center;">
+                <span style="font-size: 11px; font-weight: 600; color: #90A4AE;">Layers:</span>
+                <v-chip size="small" :variant="logFilter === 'all' ? 'flat' : 'outlined'" color="#455A64" @click="logFilter = 'all'" style="cursor: pointer;">
+                  All
+                </v-chip>
+                <v-chip size="small" :variant="logFilter === 'technical' ? 'flat' : 'outlined'" color="#1565C0" @click="logFilter = 'technical'" style="cursor: pointer;">
+                  <v-icon size="14" class="mr-1">mdi-wrench-outline</v-icon> Technical
+                </v-chip>
+                <v-chip size="small" :variant="logFilter === 'methodological' ? 'flat' : 'outlined'" color="#2E7D32" @click="logFilter = 'methodological'" style="cursor: pointer;">
+                  <v-icon size="14" class="mr-1">mdi-clipboard-outline</v-icon> Methodological
+                </v-chip>
+              </div>
+
+              <!-- Log Table -->
+              <div style="background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; overflow: hidden;">
+                <!-- Table Header -->
+                <div style="display: grid; grid-template-columns: 130px 90px 60px 80px 1fr; gap: 8px; padding: 10px 14px; background: #F8F9FA; border-bottom: 1px solid rgba(0,0,0,0.08); font-size: 11px; font-weight: 700; color: #90A4AE; text-transform: uppercase; letter-spacing: 0.5px;">
+                  <div>Time</div>
+                  <div>Layer</div>
+                  <div>Level</div>
+                  <div>Source</div>
+                  <div>Message</div>
+                </div>
+
+                <!-- Loading State -->
+                <div v-if="logsLoading" style="padding: 40px; text-align: center; color: #90A4AE;">
+                  <v-progress-circular indeterminate color="#FCA326" size="32" />
+                  <div style="margin-top: 8px; font-size: 13px;">Loading logs...</div>
+                </div>
+
+                <!-- Empty State -->
+                <div v-else-if="filteredLogs.length === 0" style="padding: 40px; text-align: center; color: #90A4AE; font-size: 13px;">
+                  No log entries found. Try changing an answer and refreshing.
+                </div>
+
+                <!-- Log Rows -->
+                <div v-else>
+                  <div
+                    v-for="(log, idx) in filteredLogs"
+                    :key="idx"
+                    style="display: grid; grid-template-columns: 130px 90px 60px 80px 1fr; gap: 8px; padding: 10px 14px; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 13px; align-items: center;"
+                    :style="{ background: log.layer === 'methodological' ? '#F8FFF8' : '#fff' }"
+                  >
+                    <!-- Time -->
+                    <div style="color: #90A4AE; font-size: 12px; font-family: monospace;">
+                      {{ formatLogTime(log) }}
+                    </div>
+                    <!-- Layer Badge -->
+                    <div>
+                      <span v-if="log.layer === 'technical'" style="display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; color: #1565C0; background: rgba(21,101,192,0.08); padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+                        <v-icon size="12" color="#1565C0">mdi-wrench-outline</v-icon> TECH
+                      </span>
+                      <span v-else-if="log.layer === 'methodological'" style="display: inline-flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; color: #2E7D32; background: rgba(46,125,50,0.08); padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+                        <v-icon size="12" color="#2E7D32">mdi-clipboard-outline</v-icon> METH
+                      </span>
+                    </div>
+                    <!-- Level Badge -->
+                    <div>
+                      <span v-if="log.level === 'warn'" style="font-size: 10px; font-weight: 700; color: #E65100; background: rgba(230,81,0,0.08); padding: 3px 8px; border-radius: 4px;">WARN</span>
+                      <span v-else style="font-size: 10px; font-weight: 700; color: #0277BD; background: rgba(2,119,189,0.08); padding: 3px 8px; border-radius: 4px;">INFO</span>
+                    </div>
+                    <!-- Source -->
+                    <div style="color: #607D8B; font-size: 12px;">
+                      {{ log.source || 'system' }}
+                    </div>
+                    <!-- Message -->
+                    <div style="color: #212121; line-height: 1.4;">
+                      {{ log.message || log.action }}
+                      <span v-if="log.traceId" style="margin-left: 6px; font-size: 10px; color: #FCA326; font-weight: 600; background: rgba(252,163,38,0.08); padding: 2px 6px; border-radius: 3px;">{{ log.traceId }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Footer -->
+                <div style="padding: 8px 14px; background: #F8F9FA; border-top: 1px solid rgba(0,0,0,0.08); font-size: 11px; color: #90A4AE; display: flex; justify-content: space-between;">
+                  <span>{{ filteredLogs.length }} entries</span>
+                  <span>Study type: HEURISTIC</span>
+                </div>
+              </div>
+            </div>
           </div>
         </template>
       </ShowInfo>
@@ -87,6 +186,7 @@ import HeuristicsAnalytics from '@/ux/Heuristic/components/HeuristicsAnalytics.v
 import StatisticsSummaryCard from '@/ux/Heuristic/components/statistics/StatisticsSummaryCard.vue'
 import EvaluatorsAndGraphicsCard from '@/ux/Heuristic/components/statistics/EvaluatorsAndGraphicsCard.vue'
 import HeuristicsDataCard from '@/ux/Heuristic/components/statistics/HeuristicsDataCard.vue'
+import LogController from '@/shared/controllers/LogController'
 
 import axios from 'axios'
 import {
@@ -124,6 +224,24 @@ const relative = ref(null)
 const usability_total = ref(0)
 const loading = ref(false) // Note: Check if Vuex getter 'loading' is needed
 const array_scores = ref([])
+
+// PoC Logs state
+const logController = new LogController()
+const logsLoading = ref(false)
+const fetchedLogs = ref([])
+const logFilter = ref('all')
+
+const filteredLogs = computed(() => {
+  if (logFilter.value === 'all') return fetchedLogs.value
+  return fetchedLogs.value.filter(log => log.layer === logFilter.value)
+})
+
+const formatLogTime = (log) => {
+  if (log.timestamp?.toDate) {
+    return log.timestamp.toDate().toLocaleString()
+  }
+  return log.timestamp || '-'
+}
 
 const showFinalResult = computed(() => finalResult())
 
@@ -476,6 +594,31 @@ watch(answers, () => {
   ) {
     resultEvaluator.value = statistics()
     intro.value = answers.value.length === 0
+  }
+})
+
+// PoC Logs Logic
+const fetchLogs = async () => {
+  logsLoading.value = true
+  try {
+    // Props.id is the test/answer id, wait, props.id is the answer string. The actual test ID is test.value.id
+    const currentTestId = test.value?.id || props.id // Fallback just in case
+    const rawLogs = await logController.getAllLogs(currentTestId)
+    fetchedLogs.value = rawLogs.sort((a,b) => {
+      const timeA = a.timestamp?.toMillis ? a.timestamp.toMillis() : 0
+      const timeB = b.timestamp?.toMillis ? b.timestamp.toMillis() : 0
+      return timeB - timeA
+    })
+  } catch (e) {
+    console.error('PoC Logs Error:', e)
+  }
+  logsLoading.value = false
+}
+
+// Watch tab to load logs dynamically
+watch(tab, (newVal) => {
+  if (newVal === 4 && fetchedLogs.value.length === 0) {
+    fetchLogs()
   }
 })
 

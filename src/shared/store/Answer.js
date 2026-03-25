@@ -5,8 +5,11 @@ import { formatTimeSpentFromMs } from '@/ux/Heuristic/utils/statistics'
 import { STUDY_TYPES } from '@/shared/constants/methodDefinitions'
 import UserStudyEvaluatorAnswer from '@/ux/UserTest/models/UserStudyEvaluatorAnswer'
 import TaskAnswer from '@/ux/UserTest/models/TaskAnswer'
+import LogController from '@/shared/controllers/LogController'
+import { detectChanges } from '@/shared/utils/logDiff'
 
 const answerController = new AnswerController()
+const logController = new LogController()
 
 export default {
   state: {
@@ -272,6 +275,25 @@ export default {
     },
     async saveTestAnswer({ commit, state, rootState }, payload) {
       commit('setLoading', true)
+
+      // ── Logging: capture BEFORE state ──────────────────────────
+      const userId = rootState.Auth?.user?.id || rootState.user?.id || payload.data?.userDocId
+      const testId = rootState.Tests?.Test?.id || rootState.test?.id || payload.answersDocId // Fallbacks if path differs
+      let previousData = null
+
+      if (state.testAnswerDocument && userId) {
+        if (payload.testType === STUDY_TYPES.HEURISTIC) {
+          // Deep clone the previous data to prevent reference identicality checks failing!
+          const rawPrev = state.testAnswerDocument.heuristicAnswers?.[userId]
+          previousData = rawPrev ? JSON.parse(JSON.stringify(rawPrev)) : null
+        } else if (payload.testType === STUDY_TYPES.USER) {
+          const rawPrev = state.testAnswerDocument.taskAnswers?.[userId]
+          previousData = rawPrev ? JSON.parse(JSON.stringify(rawPrev)) : null
+        }
+      }
+      console.log('[LogController Diagnostics] PRE-SAVE -> userId:', userId, 'testId:', testId, 'hasPrev:', !!previousData)
+      // ────────────────────────────────────────────────────────────
+
       try {
         await answerController.saveTestAnswer(
           payload.data,
@@ -279,9 +301,40 @@ export default {
           payload.testType,
         )
 
+        // ── Logging: write ENRICHED log entries AFTER successful write ──
+        console.log('[LogController Diagnostics] POST-SAVE. Checking conditions:', { testId, userId })
+        if (testId && userId) {
+          try {
+            const changes = detectChanges(previousData, payload.data, payload.testType)
+            console.log('[LogController Diagnostics] Changes detected:', changes.length, changes)
+            if (changes.length > 0) {
+              // Write one log document per change for granular filtering
+              const logPromises = changes.map(change =>
+                logController.createLog(testId, {
+                  action: change.type,
+                  layer: change.layer || 'technical',
+                  level: change.level || 'info',
+                  source: change.source || 'firestore',
+                  message: change.message || change.type,
+                  traceId: change.traceId || null,
+                  studyType: payload.testType,
+                  userId: userId,
+                  progress: payload.data.progress ?? 0,
+                  details: change.details || null,
+                })
+              )
+              await Promise.all(logPromises)
+              console.log('[LogController] Logged', changes.length, 'enriched events for study', testId)
+            }
+          } catch (logError) {
+            // Logging failure MUST NOT break the main save flow
+            console.warn('[LogController] Failed to write log entry:', logError)
+          }
+        }
+        // ────────────────────────────────────────────────────────────
+
         // Update the local state to reflect saved changes
-        if (state.testAnswerDocument && rootState.user) {
-          const userId = rootState.user.id
+        if (state.testAnswerDocument && userId) {
           if (payload.testType === STUDY_TYPES.HEURISTIC) {
             if (!state.testAnswerDocument.heuristicAnswers) {
               state.testAnswerDocument.heuristicAnswers = {}

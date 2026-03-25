@@ -188,174 +188,209 @@
         <button class="stab">Export</button>
       </div>
 
+      <!-- Overview Content Section -->
       <div id="Overview Content">
+      <!-- Main Overview Area -->
       <div>
         <!-- Stat Cards Row -->
-        <div class="g g2" style="margin-bottom:20px">
-          <!-- Total Logs Card -->
-          <div class="stat-card">
-            <!-- Total Logs Label -->
-            <div class="sc-label">Total Logs Today</div>
-            <!-- Total Logs Value -->
-            <div class="sc-val">12,847</div>
-            <!-- Total Logs Trend -->
-            <div class="sc-sub">+18% vs yesterday</div>
-            <!-- Total Logs Icon -->
-            <div class="sc-icon">
-              <!-- Log Icon -->
-              <span class="mdi mdi-text-box-outline"></span>
-            </div>
+        <div class="g g2" style="margin-bottom:20px;gap:20px">
+          <!-- Total Study Logs Card -->
+          <div class="stat-card" style="background:#00213F;color:#fff;border:none">
+            <!-- Label -->
+            <div class="sc-label" style="color:#CFD8DC">Total Study Logs</div>
+            <!-- Value -->
+            <div class="sc-val" style="color:#fff">12,847</div>
+            <!-- Subtitle -->
+            <div class="sc-sub" style="color:#90A4AE">Across 8 sessions (1 active)</div>
+            <!-- Icon Container -->
+            <div class="sc-icon" style="background:rgba(255,255,255,.1);right:20px;bottom:20px;position:absolute;padding:8px;border-radius:8px"><span class="mdi mdi-text-box-outline" style="color:#fff" data-html2design-name="Icon" data-name="Icon" title="Icon"></span></div>
           </div>
-          <!-- Active Sessions Card -->
-          <div class="stat-card">
-            <!-- Sessions Label -->
-            <div class="sc-label">Active Sessions</div>
-            <!-- Sessions Value -->
-            <div class="sc-val">3</div>
-            <!-- Sessions Subtitle -->
-            <div class="sc-sub">of 15 planned</div>
-            <!-- Sessions Icon -->
-            <div class="sc-icon">
-              <!-- Monitor Icon -->
-              <span class="mdi mdi-monitor-dashboard"></span>
-            </div>
-          </div>
-          <!-- Errors Card -->
-          <div class="stat-card">
-            <!-- Errors Label -->
-            <div class="sc-label">Errors (24h)</div>
-            <!-- Errors Value -->
-            <div class="sc-val">7</div>
-            <!-- Errors Trend -->
-            <div class="sc-sub">-3 from yesterday</div>
-            <!-- Errors Icon -->
-            <div class="sc-icon">
-              <!-- Alert Icon -->
-              <span class="mdi mdi-alert-circle-outline"></span>
-            </div>
-          </div>
-          <!-- AI Confidence Card -->
-          <div class="stat-card">
-            <!-- AI Label -->
-            <div class="sc-label">AI Confidence Avg</div>
-            <!-- AI Value -->
-            <div class="sc-val">0.87</div>
-            <!-- AI Subtitle -->
-            <div class="sc-sub">across all models</div>
-            <!-- AI Icon -->
-            <div class="sc-icon">
-              <!-- Robot Icon -->
-              <span class="mdi mdi-robot-outline"></span>
-            </div>
+          <!-- Detected Anomalies Card -->
+          <div class="stat-card" style="background:#00213F;color:#fff;border:none">
+            <!-- Label -->
+            <div class="sc-label" style="color:#CFD8DC">Detected Anomalies</div>
+            <!-- Value with Badge -->
+            <div class="sc-val" style="color:#fff">14 <span style="font-size:14px;font-weight:600;color:#90A4AE">warnings</span></div>
+            <!-- Subtitle -->
+            <div class="sc-sub" style="color:#fca326">All-time in this study</div>
+            <!-- Icon Container -->
+            <div class="sc-icon" style="background:rgba(255,255,255,.1);right:20px;bottom:20px;position:absolute;padding:8px;border-radius:8px"><span class="mdi mdi-alert-circle-outline" style="color:#fff" data-html2design-name="Icon" data-name="Icon" title="Icon"></span></div>
           </div>
         </div>
 
         <!-- Bottom Cards Row -->
-        <div class="g g12">
-          <!-- Layer Health Card -->
+        <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:20px">
+          <!-- Layer Distribution Card -->
           <div class="card">
             <!-- Card Header -->
-            <div class="card-hdr">
-              <!-- Card Title Block -->
-              <div>
-                <!-- Card Title -->
-                <div class="card-t">Layer Health</div>
-                <!-- Card Subtitle -->
-                <div class="card-s">3-layer logging status</div>
-              </div>
+            <div class="card-hdr" style="margin-bottom:20px">
+              <!-- Card Title -->
+              <div class="card-t" style="font-size:14px">Layer Distribution</div>
+              <!-- More Options Icon -->
+              <span class="mdi mdi-dots-horizontal" style="color:#90A4AE"></span>
             </div>
-            <!-- Layer List -->
-            <div style="display:flex;flex-direction:column;gap:14px">
-              <!-- Technical Layer Row -->
+            <!-- Layer Rows Container -->
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <!-- Technical Row -->
               <div>
-                <!-- Technical Row Header -->
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-                  <!-- Technical Badge -->
-                  <span class="b b-tech">
-                    <!-- Wrench Icon -->
-                    <span class="mdi mdi-wrench-outline"></span>
-                    TECHNICAL
-                  </span>
-                  <!-- Technical Status -->
-                  <span style="color:var(--ok);font-size:12px;font-weight:600">● Healthy</span>
+                <!-- Technical Header -->
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px;font-weight:600;color:var(--tech)">
+                  <span><span class="mdi mdi-wrench-outline"></span> Technical</span>
+                  <span style="color:#455A64">62%</span>
                 </div>
-                <!-- Technical Detail -->
-                <div style="font-size:12px;color:#90A4AE">128 logs/min · 0 errors · 1.2 GB used</div>
+                <!-- Technical Progress Bar -->
+                <div style="height:6px;background:rgba(21,101,192,.1);border-radius:4px;overflow:hidden">
+                  <!-- Progress Fill -->
+                  <div style="height:100%;width:62%;background:var(--tech)"></div>
+                </div>
               </div>
-              <!-- Methodological Layer Row -->
+              <!-- Methodological Row -->
               <div>
-                <!-- Methodological Row Header -->
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-                  <!-- Methodological Badge -->
-                  <span class="b b-meth">
-                    <!-- Clipboard Icon -->
-                    <span class="mdi mdi-clipboard-outline"></span>
-                    METHODOLOGICAL
-                  </span>
-                  <!-- Methodological Status -->
-                  <span style="color:var(--warn);font-size:12px;font-weight:600">● 2 Deviations</span>
+                <!-- Methodological Header -->
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px;font-weight:600;color:var(--meth)">
+                  <span><span class="mdi mdi-clipboard-outline"></span> Methodological</span>
+                  <span style="color:#455A64">28%</span>
                 </div>
-                <!-- Methodological Detail -->
-                <div style="font-size:12px;color:#90A4AE">94.2% protocol adherence · 47 notes today</div>
+                <!-- Methodological Progress Bar -->
+                <div style="height:6px;background:rgba(46,125,50,.1);border-radius:4px;overflow:hidden">
+                  <!-- Progress Fill -->
+                  <div style="height:100%;width:28%;background:var(--meth)"></div>
+                </div>
               </div>
-              <!-- AI Layer Row -->
+              <!-- AI Decisions Row -->
               <div>
-                <!-- AI Row Header -->
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-                  <!-- AI Badge -->
-                  <span class="b b-ai">
-                    <!-- Robot Icon -->
-                    <span class="mdi mdi-robot-outline"></span>
-                    AI DECISIONS
-                  </span>
-                  <!-- AI Status -->
-                  <span style="color:var(--ok);font-size:12px;font-weight:600">● All Online</span>
+                <!-- AI Header -->
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px;font-weight:600;color:var(--ai)">
+                  <span><span class="mdi mdi-robot-outline"></span> AI Decisions</span>
+                  <span style="color:#455A64">10%</span>
                 </div>
-                <!-- AI Detail -->
-                <div style="font-size:12px;color:#90A4AE">Eye-tracker 0.91 · Sentiment 0.82 · Transcription 0.96</div>
+                <!-- AI Progress Bar -->
+                <div style="height:6px;background:rgba(156,39,176,.1);border-radius:4px;overflow:hidden">
+                  <!-- Progress Fill -->
+                  <div style="height:100%;width:10%;background:var(--ai)"></div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Live Log Stream Card -->
+          <!-- Active Sessions Card -->
           <div class="card">
             <!-- Card Header -->
-            <div class="card-hdr">
-              <!-- Card Title Block -->
+            <div class="card-hdr" style="margin-bottom:16px;align-items:flex-start">
+              <!-- Header Text -->
               <div>
                 <!-- Card Title -->
-                <div class="card-t">Live Log Stream</div>
+                <div class="card-t" style="font-size:14px">Active Session</div>
                 <!-- Card Subtitle -->
-                <div class="card-s">Real-time — last 7 entries</div>
+                <div class="card-s" style="margin-top:2px">1 session currently running</div>
               </div>
-              <!-- Layer Filter Icons -->
-              <div style="display:flex;gap:4px">
-                <!-- Filter: Technical -->
-                <span class="chip chip-tech" style="padding:3px 8px;font-size:10px"><span class="mdi mdi-wrench-outline"></span></span>
-                <!-- Filter: Methodological -->
-                <span class="chip chip-meth" style="padding:3px 8px;font-size:10px"><span class="mdi mdi-clipboard-outline"></span></span>
-                <!-- Filter: AI -->
-                <span class="chip chip-ai" style="padding:3px 8px;font-size:10px"><span class="mdi mdi-robot-outline"></span></span>
+              <!-- View Schedule Button -->
+              <button class="btn btn-out" style="font-size:11px;padding:4px 12px;border-radius:12px">View Schedule</button>
+            </div>
+            
+            <!-- Sessions List -->
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <!-- Live Session Item -->
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid rgba(0,0,0,.05);border-radius:8px">
+                <!-- Session Info -->
+                <div>
+                  <!-- Session ID -->
+                  <div style="font-weight:600;color:#00213F;margin-bottom:2px;font-size:13px">Session S-008</div>
+                  <!-- Session Details -->
+                  <div style="font-size:12px;color:#90A4AE">Participant: P-004 · Running for 14m</div>
+                </div>
+                <!-- Actions -->
+                <div style="display:flex;align-items:center;gap:12px">
+                  <!-- Live Badge -->
+                  <span style="display:flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:#fca326;background:rgba(252,163,38,.1);padding:4px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px"><span class="mdi mdi-circle-small"></span> LIVE</span>
+                  <!-- Join Button -->
+                  <button class="btn" style="background:#00213F;color:#fff;font-size:12px;padding:6px 14px;border-radius:6px;border:none;cursor:pointer">Join</button>
+                </div>
+              </div>
+              <!-- Upcoming Session Item -->
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px dashed rgba(0,0,0,.15);border-radius:8px;background:#f8f9fa">
+                <!-- Session Info -->
+                <div>
+                  <!-- Session ID -->
+                  <div style="font-weight:600;color:#607D8B;margin-bottom:2px;font-size:13px">Session S-009</div>
+                  <!-- Session Details -->
+                  <div style="font-size:12px;color:#90A4AE">Participant: P-011 · Scheduled in 30m</div>
+                </div>
+                <!-- Prepare Button -->
+                <button class="btn btn-out" style="font-size:12px;padding:6px 14px;border-radius:6px;color:#455A64">Prepare</button>
               </div>
             </div>
-            <!-- Log Entry: Firestore Write -->
-            <div class="lrow"><span class="lt">10:23:01</span><span class="b b-tech" style="font-size:10px"><span class="mdi mdi-wrench-outline"></span></span><span class="ls">firestore</span><span>Write: sessions/S-008/tasks</span><span class="ltr">T-0042</span></div>
-            <!-- Log Entry: Task Assigned -->
-            <div class="lrow"><span class="lt">10:23:05</span><span class="b b-meth" style="font-size:10px"><span class="mdi mdi-clipboard-outline"></span></span><span class="ls">facilitator</span><span>Task 2 assigned to P-004</span><span class="ltr">T-0042</span></div>
-            <!-- Log Entry: Eye Fixation -->
-            <div class="lrow"><span class="lt">10:23:12</span><span class="b b-ai" style="font-size:10px"><span class="mdi mdi-robot-outline"></span></span><span class="ls">eye-tracker</span><span>Fixation (342,518) — 1.2s, conf 0.91</span><span class="ltr">T-0042</span></div>
-            <!-- Log Entry: Observer Note -->
-            <div class="lrow"><span class="lt">10:23:15</span><span class="b b-meth" style="font-size:10px"><span class="mdi mdi-clipboard-outline"></span></span><span class="ls">observer</span><span>"Participant re-read instructions"</span><span class="ltr">T-0042</span></div>
-            <!-- Log Entry: Sentiment Warning -->
-            <div class="lrow"><span class="lt">10:23:22</span><span class="b b-ai" style="font-size:10px"><span class="mdi mdi-robot-outline"></span></span><span class="ls">sentiment</span><span>Expression: <b>frustrated</b> (conf: 0.82)</span><span class="ltr">T-0042</span></div>
-            <!-- Log Entry: Protocol Deviation -->
-            <div class="lrow"><span class="lt">10:23:30</span><span class="b b-warn" style="font-size:10px">⚠</span><span class="ls">facilitator</span><span>⚠ Protocol deviation: extra hint</span><span class="ltr">T-0042</span></div>
-            <!-- Log Entry: Frame Drop Error -->
-            <div class="lrow"><span class="lt">10:23:35</span><span class="b b-err" style="font-size:10px">ERR</span><span class="ls">eye-tracker</span><span>Frame drop: 3 frames lost</span><span class="ltr">T-0042</span></div>
+          </div>
+        </div>
+
+        <!-- Moderated Study Tools Row -->
+        <div style="margin-top:20px">
+          <!-- Live Observer Stream Card -->
+          <div class="card" style="border:1px solid #E3E8F0">
+            <!-- Card Header -->
+            <div class="card-hdr" style="margin-bottom:14px">
+              <!-- Title -->
+              <div class="card-t" style="font-size:14px;display:flex;align-items:center;gap:6px">
+                Live Observer Notes
+              </div>
+              <!-- Session Badge -->
+              <div style="font-size:11px;color:#90A4AE;display:flex;align-items:center;gap:4px">
+                <span class="mdi mdi-circle" style="color:#fca326;font-size:8px"></span> Session S-008
+              </div>
+            </div>
+            <!-- Messages Container -->
+            <div style="display:flex;flex-direction:column;gap:12px;max-height:220px;overflow-y:auto">
+              <!-- Message Item 1 -->
+              <div style="display:flex;gap:12px">
+                <!-- Timestamp -->
+                <div style="font-size:11px;color:#90A4AE;min-width:32px;text-align:right;margin-top:3px">10:15</div>
+                <!-- Message Bubble -->
+                <div style="font-size:13px;color:#455A64;background:#F8F9FA;padding:10px 14px;border-radius:0 8px 8px 8px;border:1px solid rgba(0,0,0,.05);flex:1;position:relative">
+                  <div style="position:absolute;top:0;left:-6px;width:0;height:0;border-top:6px solid #F8F9FA;border-left:6px solid transparent"></div>
+                  Participant P-004 joined the room 2 minutes late, but connection is stable. Starting consent form.
+                </div>
+              </div>
+              <!-- Message Item 2 -->
+              <div style="display:flex;gap:12px">
+                <!-- Timestamp -->
+                <div style="font-size:11px;color:#90A4AE;min-width:32px;text-align:right;margin-top:3px">10:18</div>
+                <!-- Message Bubble -->
+                <div style="font-size:13px;color:#455A64;background:#F8F9FA;padding:10px 14px;border-radius:0 8px 8px 8px;border:1px solid rgba(0,0,0,.05);flex:1;position:relative">
+                  <div style="position:absolute;top:0;left:-6px;width:0;height:0;border-top:6px solid #F8F9FA;border-left:6px solid transparent"></div>
+                  Task 1 completed quickly without issues. Participant understands the navigation well.
+                </div>
+              </div>
+              <!-- Message Item 3 -->
+              <div style="display:flex;gap:12px">
+                <!-- Timestamp -->
+                <div style="font-size:11px;color:#90A4AE;min-width:32px;text-align:right;margin-top:3px">10:21</div>
+                <!-- Message Bubble -->
+                <div style="font-size:13px;color:#455A64;background:#F8F9FA;padding:10px 14px;border-radius:0 8px 8px 8px;border:1px solid rgba(0,0,0,.05);flex:1;position:relative">
+                  <div style="position:absolute;top:0;left:-6px;width:0;height:0;border-top:6px solid #F8F9FA;border-left:6px solid transparent"></div>
+                  Re-reading instructions. Long pause (~15s) at Task 2.
+                </div>
+              </div>
+              <!-- Message Item 4 -->
+              <div style="display:flex;gap:12px">
+                <!-- Timestamp -->
+                <div style="font-size:11px;color:#90A4AE;min-width:32px;text-align:right;margin-top:3px">10:23</div>
+                <!-- Message Bubble Warning -->
+                <div style="font-size:13px;color:#455A64;background:#FFF3E0;padding:10px 14px;border-radius:0 8px 8px 8px;border:1px solid rgba(252,163,38,.2);flex:1;position:relative">
+                  <div style="position:absolute;top:0;left:-6px;width:0;height:0;border-top:6px solid #FFF3E0;border-left:6px solid transparent"></div>
+                  Participant is clicking the wrong submit button multiple times. Seems confused by the secondary outlined button.
+                </div>
+              </div>
+            </div>
+            <!-- Input Row -->
+            <div style="margin-top:14px;position:relative">
+              <!-- Text Input -->
+              <input type="text" placeholder="Add quick note..." style="width:100%;padding:10px 32px 10px 12px;border-radius:8px;border:1px solid rgba(0,0,0,.15);font-size:13px;background:#fff;outline:none">
+              <!-- Send Icon -->
+              <span class="mdi mdi-send" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#00213F;cursor:pointer"></span>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
   </main>
 </div>

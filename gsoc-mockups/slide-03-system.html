@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide 3 – Unified Logging &amp; Traceability System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+    .slide {
+      width: 1280px; height: 720px; position: relative; overflow: hidden;
+      background: #0b1725; color: white;
+      display: flex; flex-direction: column;
+      padding: 56px 80px 48px;
+    }
+
+    .dec-circle { position: absolute; border-radius: 50%; border: 2px solid rgba(252,163,38,0.08); z-index: 0; pointer-events: none; }
+    .dec-1 { width: 600px; height: 600px; top: -160px; right: -160px; }
+    .dec-2 { width: 950px; height: 950px; top: -340px; right: -300px; }
+
+    .header { position: relative; z-index: 2; margin-bottom: 28px; }
+    .eyebrow { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #E8556D; margin-bottom: 10px; }
+    .title { font-size: 40px; font-weight: 600; color: white; letter-spacing: -1px; margin-bottom: 10px; }
+    .one-liner { font-size: 18px; font-weight: 300; color: #90A4AE; line-height: 1.5; max-width: 900px; }
+
+    /* KEY CONCEPT DIAGRAM */
+    .diagram-section { position: relative; z-index: 2; margin-bottom: 28px; }
+    .diagram-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
+
+    .diagram {
+      display: flex; align-items: center; justify-content: center; gap: 0;
+      padding: 18px 0;
+    }
+
+    .layer-box {
+      width: 190px; padding: 16px 18px;
+      border-radius: 12px; text-align: center;
+      border: 1px solid; flex-shrink: 0;
+    }
+    .layer-box .layer-icon { font-size: 22px; margin-bottom: 6px; }
+    .layer-box .layer-name { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .layer-box .layer-desc { font-size: 11px; font-weight: 300; line-height: 1.4; }
+
+    .layer-tech { border-color: rgba(33,150,243,0.35); background: rgba(33,150,243,0.06); }
+    .layer-tech .layer-icon, .layer-tech .layer-name { color: #42A5F5; }
+    .layer-tech .layer-desc { color: rgba(66,165,245,0.7); }
+
+    .layer-meth { border-color: rgba(76,175,80,0.35); background: rgba(76,175,80,0.06); }
+    .layer-meth .layer-icon, .layer-meth .layer-name { color: #66BB6A; }
+    .layer-meth .layer-desc { color: rgba(102,187,106,0.7); }
+
+    .layer-ai { border-color: rgba(171,71,188,0.35); background: rgba(171,71,188,0.06); }
+    .layer-ai .layer-icon, .layer-ai .layer-name { color: #AB47BC; }
+    .layer-ai .layer-desc { color: rgba(171,71,188,0.7); }
+
+    .merge-arrow { flex-shrink: 0; padding: 0 16px; display: flex; align-items: center; }
+
+    .central-box {
+      width: 220px; padding: 18px 20px;
+      border-radius: 14px; text-align: center;
+      border: 2px solid rgba(252,163,38,0.4);
+      background: rgba(252,163,38,0.06);
+      flex-shrink: 0;
+      box-shadow: 0 0 40px rgba(252,163,38,0.06);
+    }
+    .central-box .layer-icon { color: #fca326; font-size: 24px; margin-bottom: 6px; }
+    .central-box .layer-name { color: #fca326; font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+    .central-box .layer-desc { color: rgba(252,163,38,0.7); font-size: 11px; font-weight: 300; line-height: 1.4; }
+
+    /* DESIGN PRINCIPLES */
+    .principles { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; flex: 1; }
+
+    .principle {
+      padding: 20px 20px 16px; border-radius: 12px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      display: flex; flex-direction: column;
+    }
+    .principle-num {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: #fca326; margin-bottom: 8px;
+    }
+    .principle-title { font-size: 18px; font-weight: 600; color: white; margin-bottom: 8px; letter-spacing: -0.3px; }
+    .principle-desc { font-size: 13px; color: #90A4AE; line-height: 1.5; flex: 1; }
+
+    .footer {
+      position: absolute; bottom: 24px; right: 32px;
+      font-size: 12px; color: rgba(255,255,255,0.35); z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }ini
+    .anim-1 { animation: fadeIn 0.5s 0.1s ease both; }
+    .anim-2 { animation: fadeIn 0.5s 0.25s ease both; }
+    .anim-3 { animation: fadeIn 0.5s 0.4s ease both; }
+  </style>
+</head>
+<body>
+  <!-- Slide Container -->
+  <div id="Slide Container" class="slide">
+    <!-- Decorative Circle 1 -->
+    <div id="Decorative Circle 1" class="dec-circle dec-1"></div>
+    <!-- Decorative Circle 2 -->
+    <div id="Decorative Circle 2" class="dec-circle dec-2"></div>
+
+    <!-- Header Section -->
+    <div id="Header Section" class="header anim-1">
+      <!-- Header Eyebrow -->
+      <div id="Header Eyebrow" class="eyebrow">The Proposal</div>
+      <!-- Header Title -->
+      <div id="Header Title" class="title">Unified Logging &amp; Traceability System</div>
+      <!-- Header One-liner -->
+      <div id="Header One-liner" class="one-liner">A structured event log that captures every technical, methodological, and AI decision during a usability study — linked by a single trace ID.</div>
+    </div>
+
+    <!-- Key Concept Diagram Section -->
+    <div id="Key Concept Diagram Section" class="diagram-section anim-2">
+      <!-- Diagram Label -->
+      <div id="Diagram Label" class="diagram-label">Key concept · Three layers, one trace</div>
+      <!-- Diagram Row -->
+      <div id="Diagram Row" class="diagram">
+
+        <!-- Technical Layer Box -->
+        <div id="Technical Layer Box" class="layer-box layer-tech">
+          <!-- Technical Icon -->
+          <div id="Technical Icon" class="layer-icon"><span class="mdi mdi-wrench-outline"></span></div>
+          <!-- Technical Name -->
+          <div id="Technical Name" class="layer-name">Technical</div>
+          <!-- Technical Desc -->
+          <div id="Technical Desc" class="layer-desc">API calls, DB writes, frame drops, network jitter</div>
+        </div>
+
+        <!-- Arrow: Tech to Unified -->
+        <div id="Arrow: Tech to Unified" class="merge-arrow">
+          <svg width="36" height="14" viewBox="0 0 36 14" fill="none">
+            <line x1="0" y1="7" x2="28" y2="7" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <polyline points="22,1 29,7 22,13" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Central: Unified Log Box -->
+        <div id="Unified Log Box" class="central-box">
+          <!-- Unified Log Icon -->
+          <div id="Unified Log Icon" class="layer-icon"><span class="mdi mdi-link-variant"></span></div>
+          <!-- Unified Log Name -->
+          <div id="Unified Log Name" class="layer-name">Unified Log</div>
+          <!-- Unified Log Desc -->
+          <div id="Unified Log Desc" class="layer-desc">Every event linked by traceId, sessionId, participantId</div>
+        </div>
+
+        <!-- Arrow: Unified to Meth -->
+        <div id="Arrow: Unified to Meth" class="merge-arrow" style="transform:scaleX(-1)">
+          <svg width="36" height="14" viewBox="0 0 36 14" fill="none">
+            <line x1="0" y1="7" x2="28" y2="7" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <polyline points="22,1 29,7 22,13" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Methodological Layer Box -->
+        <div id="Methodological Layer Box" class="layer-box layer-meth">
+          <!-- Methodological Icon -->
+          <div id="Methodological Icon" class="layer-icon"><span class="mdi mdi-clipboard-text-outline"></span></div>
+          <!-- Methodological Name -->
+          <div id="Methodological Name" class="layer-name">Methodological</div>
+          <!-- Methodological Desc -->
+          <div id="Methodological Desc" class="layer-desc">Task assignments, observer notes, protocol deviations</div>
+        </div>
+
+        <!-- Arrow: Unified to AI -->
+        <div id="Arrow: Unified to AI" class="merge-arrow" style="transform:scaleX(-1)">
+          <svg width="36" height="14" viewBox="0 0 36 14" fill="none">
+            <line x1="0" y1="7" x2="28" y2="7" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <polyline points="22,1 29,7 22,13" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- AI Layer Box -->
+        <div id="AI Layer Box" class="layer-box layer-ai">
+          <!-- AI Icon -->
+          <div id="AI Icon" class="layer-icon"><span class="mdi mdi-robot-outline"></span></div>
+          <!-- AI Name -->
+          <div id="AI Name" class="layer-name">AI Decisions</div>
+          <!-- AI Desc -->
+          <div id="AI Desc" class="layer-desc">Gaze detection, sentiment analysis, model confidence</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Design Principles Grid -->
+    <div id="Design Principles Grid" class="principles anim-3">
+
+      <!-- Principle 01 Card -->
+      <div id="Principle 01 Card" class="principle">
+        <!-- Principle 01 Number --><div id="Principle 01 Number" class="principle-num">Principle 01</div>
+        <!-- Principle 01 Title --><div id="Principle 01 Title" class="principle-title">Multi-Layer Correlation</div>
+        <!-- Principle 01 Desc --><div id="Principle 01 Desc" class="principle-desc">Every event — regardless of its source layer — receives a shared trace ID, enabling researchers to ask "when the AI flagged frustration, what was happening technically and methodologically?"</div>
+      </div>
+
+      <!-- Principle 02 Card -->
+      <div id="Principle 02 Card" class="principle">
+        <!-- Principle 02 Number --><div id="Principle 02 Number" class="principle-num">Principle 02</div>
+        <!-- Principle 02 Title --><div id="Principle 02 Title" class="principle-title">Research-First Design</div>
+        <!-- Principle 02 Desc --><div id="Principle 02 Desc" class="principle-desc">The system is built for usability researchers, not DevOps engineers. Filters, exports, and views are organized around study concepts: sessions, tasks, participants, and phases.</div>
+      </div>
+
+      <!-- Principle 03 Card -->
+      <div id="Principle 03 Card" class="principle">
+        <!-- Principle 03 Number --><div id="Principle 03 Number" class="principle-num">Principle 03</div>
+        <!-- Principle 03 Title --><div id="Principle 03 Title" class="principle-title">Privacy by Default</div>
+        <!-- Principle 03 Desc --><div id="Principle 03 Desc" class="principle-desc">Logs are stored anonymized (P-004, not "John Doe"). An identity resolution layer enables authorized tracing without exposing PII in the log store itself.</div>
+      </div>
+
+    </div>
+
+    <!-- Slide Footer -->
+    <div id="Slide Footer" class="footer">Slide 3 · System overview</div>
+  </div>
+</body>
+</html>

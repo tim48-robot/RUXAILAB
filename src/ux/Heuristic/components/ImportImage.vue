@@ -145,6 +145,22 @@ const uploadFile = async () => {
     if (!file) {
       return
     }
+
+    // ── Localhost CORS Bypass ────────────────────────────────
+    // if running on localhost, bypass the real Firebase Storage
+    // and just return a mock URL so the logging PoC can be tested
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    if (isLocalhost) {
+      console.warn('[Mock Storage] Bypassing actual image upload for localhost to avoid CORS errors')
+      url.value = URL.createObjectURL(file) // Creates a local blob URL
+      
+      store.dispatch('setCurrentImageUrl', url.value)
+      imageUploaded.value = true
+      emit('imageUploaded', url.value)
+      return
+    }
+    // ─────────────────────────────────────────────────────────
+
     const storage = getStorage()
     const storageReference = storageRef(
       storage,

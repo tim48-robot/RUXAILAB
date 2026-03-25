@@ -64,13 +64,17 @@ body {
 .appbar {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 64px;            /* Increased for production scale */
+  height: 64px;
   background: #00213F;
   display: flex;
   align-items: center;
-  padding: 0 32px 0 24px;  /* Increased padding */
+  padding: 0 32px 0 24px;
   z-index: 200;
-  gap: 16px; /* Increased gap */
+  gap: 16px;
+  /* Vuetify v-app-bar default elevation-4 shadow */
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.3),
+              0px 4px 5px 0px rgba(0,0,0,0.20),
+              0px 1px 10px 0px rgba(0,0,0,0.16);
 }
 
 .appbar-menu {
@@ -159,7 +163,7 @@ body {
 /* ═══════════════════════════════════════════
    LAYOUT SHELL
 ═══════════════════════════════════════════ */
-.shell { display: flex; min-height: 100vh; padding-top: 64px; }  /* Increased mapping */
+.shell { display: flex; min-height: 100vh; padding-top: 64px; overflow: visible; }  /* overflow:visible lets sidebar shadow bleed into main */
 
 /* ═══════════════════════════════════════════
    SIDEBAR / DRAWER
@@ -169,14 +173,28 @@ body {
            rail (mini) support
 ═══════════════════════════════════════════ */
 .drawer {
-  width: 250px;          /* Increased width to match production */
+  width: 250px;
   background: #00213F;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  padding-top: 20px;     /* pt-3 from Drawer.vue */
+  padding-top: 20px;
   position: relative;
   min-height: calc(100vh - 64px);
+  z-index: 100;
+}
+
+/* Right-edge shadow — same approach Vuetify uses for v-navigation-drawer elevation */
+.drawer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -8px;          /* Bleeds 8px into the main content area */
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.18), rgba(0,0,0,0));
+  pointer-events: none;
+  z-index: 101;
 }
 
 .drawer-list { padding: 0 8px; flex: 1; }
@@ -218,7 +236,7 @@ body {
   cursor: pointer;
   color: #fff;
   font-size: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  box-shadow: 4px 0 16px rgba(0,0,0,0.2); z-index: 100;
 }
 
 /* ═══════════════════════════════════════════

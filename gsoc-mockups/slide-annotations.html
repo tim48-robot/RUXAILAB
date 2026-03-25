@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide 3 – Design Decisions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: white;
+      padding: 72px 80px 60px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fca326;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 40px;
+      font-weight: 700;
+      color: #00213F;
+      margin-bottom: 40px;
+    }
+
+    .anno-layout {
+      display: flex;
+      gap: 60px;
+      flex: 1;
+    }
+
+    .anno-placeholder {
+      flex: 1;
+      background: #F0F4F8;
+      border: 2px dashed #CFD8DC;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #B0BEC5;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .anno-sidebar {
+      width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      justify-content: center;
+    }
+
+    .anno-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .anno-number {
+      width: 32px;
+      height: 32px;
+      background: #00213F;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .anno-content h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #00213F;
+      margin-bottom: 6px;
+    }
+
+    .anno-content p {
+      font-size: 13px;
+      color: #546E7A;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="section-eyebrow">Why it's designed this way</div>
+    <div class="section-title">Key Design Decisions</div>
+
+    <div class="anno-layout">
+      <!-- Drop your Overview screenshot here in Figma -->
+      <div class="anno-placeholder">[ Paste your Overview mockup here ]</div>
+
+      <div class="anno-sidebar">
+
+        <div class="anno-item">
+          <div class="anno-number">1</div>
+          <div class="anno-content">
+            <h3>Show less at first glance</h3>
+            <p>Filters, AI traces, and advanced options are tucked away by default. Researchers see what they need — not a wall of controls — the moment they land on the page.</p>
+          </div>
+        </div>
+
+        <div class="anno-item">
+          <div class="anno-number">2</div>
+          <div class="anno-content">
+            <h3>Problems float to the top</h3>
+            <p>KPI cards are color-coded so protocol deviations and anomalies catch your eye immediately, without hunting through logs.</p>
+          </div>
+        </div>
+
+        <div class="anno-item">
+          <div class="anno-number">3</div>
+          <div class="anno-content">
+            <h3>Built to slot into existing code</h3>
+            <p>The table layout reuses Vuetify's v-data-table, meaning the dev implementing this won't need to write custom grid logic from scratch.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

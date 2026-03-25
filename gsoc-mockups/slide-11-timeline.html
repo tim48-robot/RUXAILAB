@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide 11 – Implementation Timeline</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+    .slide {
+      width: 1280px; height: 720px; position: relative; overflow: hidden;
+      background: #0b1725; color: white;
+      display: flex; flex-direction: column;
+      padding: 40px 80px 32px;
+    }
+
+    .dec-circle { position: absolute; border-radius: 50%; border: 2px solid rgba(252,163,38,0.08); z-index: 0; pointer-events: none; }
+    .dec-1 { width: 500px; height: 500px; top: -120px; right: -100px; }
+    .dec-2 { width: 900px; height: 900px; bottom: -300px; left: -200px; }
+
+    .header { position: relative; z-index: 2; margin-bottom: 24px; }
+    .eyebrow { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #E8556D; margin-bottom: 8px; }
+    .title { font-size: 36px; font-weight: 600; color: white; letter-spacing: -1px; margin-bottom: 10px; }
+    .subtitle { font-size: 16px; font-weight: 300; color: #90A4AE; max-width: 800px; line-height: 1.4; }
+
+    /* TIMELINE */
+    .timeline {
+      position: relative; z-index: 2; flex: 1;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .phase {
+      display: flex; align-items: stretch; gap: 24px;
+      padding: 18px 30px; border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+
+    /* Connecting lines between phases */
+    .phase:not(:last-child)::after {
+      content: ''; position: absolute;
+      left: 104px; bottom: -16px; width: 2px; height: 16px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .phase-badge-col {
+      width: 150px; flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+    }
+    .phase-num {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: #90A4AE;
+    }
+    .phase-weeks {
+      font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.5px;
+    }
+    .phase-tag {
+      font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+    }
+    .tag-blue { background: rgba(33,150,243,0.1); color: #42A5F5; border: 1px solid rgba(33,150,243,0.25); }
+    .tag-orange { background: rgba(252,163,38,0.1); color: #fca326; border: 1px solid rgba(252,163,38,0.25); }
+    .tag-purple { background: rgba(171,71,188,0.1); color: #AB47BC; border: 1px solid rgba(171,71,188,0.25); }
+
+    .phase-content {
+      flex: 1; border-left: 1px solid rgba(255,255,255,0.1);
+      padding-left: 24px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .phase-title { font-size: 20px; font-weight: 600; color: white; margin-bottom: 4px; letter-spacing: -0.3px; }
+    .phase-desc { font-size: 14px; color: #90A4AE; line-height: 1.4; margin-bottom: 10px; }
+
+    .phase-tasks {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .task-chip {
+      font-size: 12px; font-weight: 500; color: #CFD8DC;
+      background: rgba(255,255,255,0.05); padding: 5px 12px;
+      border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .footer {
+      position: absolute; bottom: 24px; right: 32px;
+      font-size: 12px; color: rgba(255,255,255,0.35); z-index: 2;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-15px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .anim-1 { animation: slideIn 0.5s 0.1s ease both; }
+    .anim-2 { animation: slideIn 0.5s 0.25s ease both; }
+    .anim-3 { animation: slideIn 0.5s 0.4s ease both; }
+    .anim-4 { animation: slideIn 0.5s 0.55s ease both; }
+
+  </style>
+</head>
+<body>
+  <!-- Timeline Slide Container -->
+  <div class="slide" id="timeline-slide">
+    <!-- Decorative Circle 1 -->
+    <div class="dec-circle dec-1" id="dec-circle-tr"></div>
+    <!-- Decorative Circle 2 -->
+    <div class="dec-circle dec-2" id="dec-circle-bl"></div>
+
+    <!-- Header Container -->
+    <div class="header anim-1" id="timeline-header">
+      <!-- Eyebrow -->
+      <div class="eyebrow" id="timeline-eyebrow">Project Roadmap</div>
+      <!-- Title -->
+      <div class="title" id="timeline-title">Implementation Timeline</div>
+      <!-- Subtitle -->
+      <div class="subtitle" id="timeline-subtitle">A structured 175-hour execution plan spanning 12 weeks. Core data infrastructure first, followed by researcher-facing UI, and finally hardening and ethics compliance.</div>
+    </div>
+
+    <!-- Timeline List -->
+    <div class="timeline" id="timeline-container">
+
+      <!-- Phase 1 -->
+      <div class="phase anim-2" id="phase-1-card">
+        <!-- Phase 1 Left Col -->
+        <div class="phase-badge-col" id="phase-1-badge-col">
+          <!-- Phase 1 Label -->
+          <div class="phase-num">Phase 1</div>
+          <!-- Phase 1 Weeks -->
+          <div class="phase-weeks">Weeks 1-4</div>
+          <!-- Phase 1 Tag -->
+          <div class="phase-tag tag-blue">Backend & Data</div>
+        </div>
+        <!-- Phase 1 Right Col -->
+        <div class="phase-content" id="phase-1-content">
+          <!-- Phase 1 Title -->
+          <div class="phase-title">Core Logging Infrastructure</div>
+          <!-- Phase 1 Description -->
+          <div class="phase-desc">Designing the Firestore data model, creating the ingestion pipeline, and defining the event payload taxonomy across the 3 layers.</div>
+          <!-- Phase 1 Tasks List -->
+          <div class="phase-tasks">
+            <!-- Task 1 Chip -->
+            <span class="task-chip">
+              <!-- Task 1 Icon -->
+              <span class="mdi mdi-database"></span>
+              <!-- Task 1 Label -->
+              Schema definitions
+            </span>
+            <!-- Task 2 Chip -->
+            <span class="task-chip">
+              <!-- Task 2 Icon -->
+              <span class="mdi mdi-pipe"></span>
+              <!-- Task 2 Label -->
+              Buffer & flush ingestion mechanism
+            </span>
+            <!-- Task 3 Chip -->
+            <span class="task-chip">
+              <!-- Task 3 Icon -->
+              <span class="mdi mdi-shield-account"></span>
+              <!-- Task 3 Label -->
+              Identity Map (Anonymization Layer)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase anim-3" id="phase-2-card">
+        <!-- Phase 2 Left Col -->
+        <div class="phase-badge-col" id="phase-2-badge-col">
+          <!-- Phase 2 Label -->
+          <div class="phase-num">Phase 2</div>
+          <!-- Phase 2 Weeks -->
+          <div class="phase-weeks">Weeks 5-8</div>
+          <!-- Phase 2 Tag -->
+          <div class="phase-tag tag-orange">Frontend UI</div>
+        </div>
+        <!-- Phase 2 Right Col -->
+        <div class="phase-content" id="phase-2-content">
+          <!-- Phase 2 Title -->
+          <div class="phase-title">Logs Module Interface</div>
+          <!-- Phase 2 Description -->
+          <div class="phase-desc">Building the researcher-facing Vue.js components. Integrating the new views directly into the existing Study Detail pages.</div>
+          <!-- Phase 2 Tasks List -->
+          <div class="phase-tasks">
+            <!-- Task 1 Chip -->
+            <span class="task-chip">
+              <!-- Task 1 Icon -->
+              <span class="mdi mdi-view-dashboard"></span>
+              <!-- Task 1 Label -->
+              Overview Dashboard
+            </span>
+            <!-- Task 2 Chip -->
+            <span class="task-chip">
+              <!-- Task 2 Icon -->
+              <span class="mdi mdi-table-search"></span>
+              <!-- Task 2 Label -->
+              Log Explorer & Filters
+            </span>
+            <!-- Task 3 Chip -->
+            <span class="task-chip">
+              <!-- Task 3 Icon -->
+              <span class="mdi mdi-chart-timeline-variant"></span>
+              <!-- Task 3 Label -->
+              Trace View & Lifecycle
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase anim-4" id="phase-3-card">
+        <!-- Phase 3 Left Col -->
+        <div class="phase-badge-col" id="phase-3-badge-col">
+          <!-- Phase 3 Label -->
+          <div class="phase-num">Phase 3</div>
+          <!-- Phase 3 Weeks -->
+          <div class="phase-weeks">Weeks 9-12</div>
+          <!-- Phase 3 Tag -->
+          <div class="phase-tag tag-purple">Polish & Delivery</div>
+        </div>
+        <!-- Phase 3 Right Col -->
+        <div class="phase-content" id="phase-3-content">
+          <!-- Phase 3 Title -->
+          <div class="phase-title">Testing, Export & Stretch Goals</div>
+          <!-- Phase 3 Description -->
+          <div class="phase-desc">Hardening the anonymization boundaries, writing unit tests, finalizing the CSV/JSON export module, and implementing selected stretch features.</div>
+          <!-- Phase 3 Tasks List -->
+          <div class="phase-tasks">
+            <!-- Task 1 Chip -->
+            <span class="task-chip">
+              <!-- Task 1 Icon -->
+              <span class="mdi mdi-download"></span>
+              <!-- Task 1 Label -->
+              Reproducible Export Module
+            </span>
+            <!-- Task 2 Chip -->
+            <span class="task-chip">
+              <!-- Task 2 Icon -->
+              <span class="mdi mdi-test-tube"></span>
+              <!-- Task 2 Label -->
+              Unit & integration testing
+            </span>
+            <!-- Task 3 Chip -->
+            <span class="task-chip">
+              <!-- Task 3 Icon -->
+              <span class="mdi mdi-rocket-launch"></span>
+              <!-- Task 3 Label -->
+              Stretch goals delivery
+            </span>
+            <!-- Task 4 Chip -->
+            <span class="task-chip">
+              <!-- Task 4 Icon -->
+              <span class="mdi mdi-book-open"></span>
+              <!-- Task 4 Label -->
+              Final documentation
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Text -->
+    <div class="footer" id="timeline-footer">Slide 11 · GSoC Execution Plan (175 Hours)</div>
+  </div>
+</body>
+</html>

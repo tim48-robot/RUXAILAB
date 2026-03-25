@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logs — Trace View (Partial Trace State)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<div id="Top Bar" class="appbar">
+  <!-- Menu Icon -->
+  <div id="Menu Icon" class="appbar-menu">
+    <span class="mdi mdi-menu" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+
+  <!-- Logo -->
+  <div id="Logo" class="appbar-logo">
+    <img id="Logo Text" src="../src/assets/logo_full_white.png" height="25" alt="RUXAILAB Logo">
+  </div>
+
+  <!-- Spacer -->
+  <div id="Spacer" style="flex: 1"></div>
+
+  <!-- Language Selector -->
+  <div id="Language Selector" class="appbar-locale">
+    <span id="Language Icon" class="mdi mdi-translate" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+    <div id="Language Labels" class="text-wrap">
+      <span class="label">Language</span>
+      <span class="val">English</span>
+    </div>
+    <span id="Language Chevron" class="mdi mdi-menu-down" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+
+  <!-- Return to Console -->
+  <div id="Return to Console Button" class="appbar-text-btn">Return to Console</div>
+
+  <!-- Help Button -->
+  <div id="Help Button" class="appbar-icon-btn">
+    <span id="Help Icon" class="mdi mdi-help-circle-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+
+  <!-- Notifications -->
+  <div id="Notifications" class="appbar-icon-btn">
+    <span id="Bell Icon" class="mdi mdi-bell-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+
+  <!-- User Avatar -->
+  <div id="User Avatar" class="appbar-avatar">
+    <span>JT</span>
+  </div>
+  
+  <!-- Dropdown Arrow -->
+  <div id="Dropdown Arrow" class="appbar-icon-btn" style="margin-left:-8px">
+    <span class="mdi mdi-chevron-down" style="font-size:20px; color:#90A4AE" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>
+  </div>
+</div>
+
+<!-- App Layout -->
+<div id="App Layout" class="shell">
+  <!-- Sidebar Navigation -->
+  <aside id="Sidebar" class="drawer">
+    <!-- Nav Items -->
+    <div class="drawer-list">
+      <!-- Nav: Manager --><a class="ditem"><!-- Manager Icon --><span class="mdi mdi-home" data-html2design-name="Icon" data-name="Icon" title="Icon"></span><!-- Manager Label --><span>Manager</span></a>
+      <!-- Nav: Test --><a class="ditem"><!-- Test Icon --><span class="mdi mdi-file-document-edit" data-html2design-name="Icon" data-name="Icon" title="Icon"></span><!-- Test Label --><span>Test</span></a>
+      <!-- Nav: Preview --><a class="ditem"><!-- Preview Icon --><span class="mdi mdi-file-eye" data-html2design-name="Icon" data-name="Icon" title="Icon"></span><!-- Preview Label --><span>Preview</span></a>
+      <!-- Nav: Reports --><a class="ditem"><!-- Reports Icon --><span class="mdi mdi-book-multiple" data-html2design-name="Icon" data-name="Icon" title="Icon"></span><!-- Reports Label --><span>Reports</span></a>
+      <!-- Nav: Answers --><a class="ditem"><!-- Answers Icon --><span class="mdi mdi-order-bool-ascending-variant" data-html2design-name="Icon" data-name="Icon" title="Icon"></span><!-- Answers Label --><span>Answers</span></a>
+      <!-- Nav: Cooperators --><a class="ditem"><!-- Cooperators Icon --><span class="mdi mdi-account-group" data-html2design-name="Icon" data-name="Icon" title="Icon"></span><!-- Cooperators Label --><span>Cooperators</span></a>
+      <!-- Nav: Settings --><a class="ditem"><!-- Settings Icon --><span class="mdi mdi-cog" data-html2design-name="Icon" data-name="Icon" title="Icon"></span><!-- Settings Label --><span>Settings</span></a>
+      <!-- Divider --><div style="border-top:1px solid rgba(255,255,255,.08);margin:8px 0"></div>
+      <!-- Nav: Logs (Active) --><a class="ditem active"><!-- Logs Icon --><span class="mdi mdi-text-search" data-html2design-name="Icon" data-name="Icon" title="Icon"></span><!-- Logs Label --><span>Logs</span><!-- New Badge --><span style="margin-left:auto;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#fca326;color:#fff;padding:1px 5px;border-radius:3px">NEW</span></a>
+    </div>
+    <!-- Collapse Button --><div class="drawer-footer"><!-- Collapse Toggle --><div class="drawer-toggle"><!-- Chevron Left --><span class="mdi mdi-chevron-left" data-html2design-name="Icon" data-name="Icon" title="Icon"></span></div></div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Content Container -->
+    <div id="Content Container" class="dashboard-container">
+
+      <!-- Study Banner -->
+      <div class="dashboard-header">
+        <!-- Banner Inner -->
+        <div class="header-content">
+          <!-- Banner Icon Container --><div class="header-icon-container"><!-- Banner Icon --><span class="mdi mdi-chart-box-outline" style="color:#fff;font-size:28px" data-html2design-name="Icon" data-name="Icon" title="Icon"></span></div>
+          <!-- Banner Text -->
+          <div class="header-texts">
+            <!-- Study Title --><h1 class="dashboard-title">Mobile App Redesign Evaluation</h1>
+            <!-- Study Description --><p class="dashboard-subtitle">Usability test for the new checkout flow redesign</p>
+            <!-- Status Badges -->
+            <div class="header-chips">
+              <!-- Moderated Badge --><span class="study-chip"><!-- Moderated Icon --><span class="mdi mdi-account-check-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>Moderated Study</span>
+              <!-- Active Badge --><span class="study-chip"><!-- Active Dot --><span class="mdi mdi-circle-small" data-html2design-name="Icon" data-name="Icon" title="Icon"></span>Active</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div id="Tab Navigation" class="sub-tabs">
+        <!-- Tab: Overview --><button class="stab">Overview</button>
+        <!-- Tab: Log Explorer --><button class="stab">Log Explorer</button>
+        <!-- Tab: Trace View (Active) --><button class="stab active">Trace View</button>
+        <!-- Tab: Lifecycle --><button class="stab">Lifecycle</button>
+        <!-- Tab: Export --><button class="stab">Export</button>
+      </div>
+
+      <!-- Trace Content -->
+      <div>
+        <!-- ── PARTIAL TRACE WARNING BANNER ── -->
+        <div style="background:rgba(229,81,0,.08);border:1px solid rgba(229,81,0,.2);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start">
+          <!-- Warning Icon -->
+          <span class="mdi mdi-alert-circle-outline" style="color:var(--warn);font-size:20px;flex-shrink:0;margin-top:2px"></span>
+          <!-- Content -->
+          <div style="flex:1;font-size:13px">
+            <!-- Title -->
+            <div style="font-weight:600;color:#E65100">Partial trace — 2 events below trace completeness threshold</div>
+            <!-- Message -->
+            <div style="color:#90A4AE;font-size:12px;margin-top:4px">
+              This trace is 72% complete. Some AI outputs arrived out-of-order and may not be fully correlated. Use the session view or export for full context.
+            </div>
+            <!-- Action -->
+            <div style="margin-top:6px">
+              <button class="btn btn-out" style="font-size:11px;padding:5px 10px"><span class="mdi mdi-open-in-new"></span> View Full Session</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trace Summary Card -->
+        <div class="card" style="margin-bottom:14px">
+          <!-- Summary Row -->
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <!-- Trace ID Block -->
+            <div>
+              <!-- Trace ID Label --><div style="font-size:10px;color:#90A4AE;font-weight:600;text-transform:uppercase;letter-spacing:.5px">Trace ID</div>
+              <!-- Trace ID Value --><div style="font-size:18px;font-weight:700;color:#fca326">T-0089</div>
+            </div>
+            <!-- Divider --><div class="sep"></div>
+            <!-- Session Block --><div><!-- Session Label --><div style="font-size:10px;color:#90A4AE">Session</div><!-- Session Value --><div style="font-weight:600">S-012</div></div>
+            <!-- Divider --><div class="sep"></div>
+            <!-- Participant Block --><div><!-- Participant Label --><div style="font-size:10px;color:#90A4AE">Participant</div><!-- Participant Value --><div style="font-weight:600">P-006</div></div>
+            <!-- Divider --><div class="sep"></div>
+            <!-- Duration Block --><div><!-- Duration Label --><div style="font-size:10px;color:#90A4AE">Duration</div><!-- Duration Value --><div style="font-weight:600">8m 42s</div></div>
+            <!-- Spacer --><div style="flex:1"></div>
+            <!-- Completeness Badge --><span class="b" style="background:rgba(229,81,0,.12);color:var(--warn);padding:6px 10px;border-radius:6px;font-weight:600">⚠ 72% Complete</span>
+            <!-- Export Button --><button class="btn btn-out" style="font-size:11px"><!-- Download Icon --><span class="mdi mdi-download-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span> Export</button>
+          </div>
+        </div>
+
+        <!-- Swimlane Card -->
+        <div class="card" style="margin-bottom:14px">
+          <!-- Card Header -->
+          <div class="card-hdr">
+            <!-- Card Title --><div class="card-t">Event Swimlane (Incomplete)</div>
+            <!-- Layer Legend -->
+            <div style="display:flex;gap:5px">
+              <!-- Tech Badge --><span class="b b-tech"><!-- Wrench --><span class="mdi mdi-wrench-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span> Tech</span>
+              <!-- Method Badge --><span class="b b-meth"><!-- Clipboard --><span class="mdi mdi-clipboard-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span> Method</span>
+              <!-- AI Badge --><span class="b b-ai"><!-- Robot --><span class="mdi mdi-robot-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span> AI</span>
+            </div>
+          </div>
+          <!-- Timeline Axis -->
+          <div style="display:flex;justify-content:space-between;padding:0 112px 6px;font-size:10px;color:#90A4AE">
+            <!-- Time: 10:45 --><span>10:45</span>
+            <!-- Time: 10:46 --><span>10:46</span>
+            <!-- Time: 10:47 --><span>10:47</span>
+            <!-- Time: 10:48 --><span>10:48</span>
+            <!-- Time: 10:49 --><span>10:49</span>
+          </div>
+          <!-- Swimlane -->
+          <div class="sw-wrap">
+            <!-- Methodological Lane -->
+            <div class="sw-row">
+              <!-- Lane Label --><div class="sw-lbl" style="color:var(--meth)"><!-- Clipboard Icon --><span class="mdi mdi-clipboard-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span> Method</div>
+              <!-- Lane Track -->
+              <div class="sw-trk">
+                <!-- Event: Task Start --><div class="sn sn-m">Task Start</div>
+                <!-- Event: Observer Note --><div class="sn sn-m">Observer Note</div>
+                <!-- Gap indicator -->
+                <div style="margin-left:40px;color:#90A4AE;font-size:11px;opacity:.6">... (gap)</div>
+                <!-- Event: Task Done --><div class="sn sn-m" style="margin-left:auto">Task Done</div>
+              </div>
+            </div>
+            <!-- Technical Lane -->
+            <div class="sw-row">
+              <!-- Lane Label --><div class="sw-lbl" style="color:var(--tech)"><!-- Wrench Icon --><span class="mdi mdi-wrench-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span> Tech</div>
+              <!-- Lane Track -->
+              <div class="sw-trk">
+                <!-- Event: API Call --><div class="sn sn-t">API Call</div>
+                <!-- Event: DB Write --><div class="sn sn-t">DB Write</div>
+                <!-- Event: API Success --><div class="sn sn-t" style="opacity:.5">API 200?</div>
+              </div>
+            </div>
+            <!-- AI Lane -->
+            <div class="sw-row" style="border-bottom:none">
+              <!-- Lane Label --><div class="sw-lbl" style="color:var(--ai)"><!-- Robot Icon --><span class="mdi mdi-robot-outline" data-html2design-name="Icon" data-name="Icon" title="Icon"></span> AI</div>
+              <!-- Lane Track -->
+              <div class="sw-trk">
+                <!-- Event: Eye Track --><div class="sn sn-a" style="margin-left:40px">Eye Track</div>
+                <!-- Missing event dot -->
+                <div style="margin-left:auto;width:10px;height:10px;border:2px dashed var(--warn);border-radius:50%;position:relative">
+                  <span style="position:absolute;top:-12px;right:-20px;font-size:10px;color:var(--warn);font-weight:600">Missing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trace Gaps Analysis Card -->
+        <div class="card" style="margin-bottom:14px;background:rgba(229,81,0,.04);border-color:rgba(229,81,0,.2)">
+          <!-- Card Header -->
+          <div class="card-hdr">
+            <!-- Card Title --><div class="card-t">Trace Gaps & Missing Events</div>
+          </div>
+          <!-- Gaps Grid -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <!-- Gap 1: Out of Order -->
+            <div style="border-left:3px solid var(--warn);padding-left:12px">
+              <!-- Gap Title --><div style="font-weight:600;font-size:13px">Sentiment analysis out-of-order</div>
+              <!-- Gap Detail --><div style="font-size:12px;color:#90A4AE;margin-top:4px">
+                Expected at 10:46:22, arrived at 10:47:08 (+46s late) — after Task completion. Parent span unknown.
+              </div>
+              <!-- Impact --><div style="font-size:11px;color:var(--warn);margin-top:6px;font-weight:600">Impact: Causality uncertain</div>
+            </div>
+            <!-- Gap 2: Orphan AI -->
+            <div style="border-left:3px solid var(--warn);padding-left:12px">
+              <!-- Gap Title --><div style="font-weight:600;font-size:13px">Transcription without speaker ID</div>
+              <!-- Gap Detail --><div style="font-size:12px;color:#90A4AE;margin-top:4px">
+                10:47:35: Audio transcript received, but actor ID missing. Cannot determine if observer or participant.
+              </div>
+              <!-- Impact --><div style="font-size:11px;color:var(--warn);margin-top:6px;font-weight:600">Impact: Requires manual review</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advice for Researcher -->
+        <div class="card" style="background:rgba(21,101,192,.05);border-color:rgba(21,101,192,.15)">
+          <!-- Card Header -->
+          <div class="card-hdr">
+            <!-- Card Title --><div class="card-t">Recommendation for Researcher</div>
+          </div>
+          <!-- Message -->
+          <div style="font-size:13px;line-height:1.6;color:#1A1A1A">
+            <div style="margin-bottom:8px">
+              Since trace completeness is 72%, this trace is suitable for <strong>preliminary analysis only</strong>. Before making research conclusions:
+            </div>
+            <ul style="margin-left:20px;color:#546E7A;font-size:12px;line-height:1.7">
+              <li>Cross-check session video for context during the 10:46–10:47 gap</li>
+              <li>Manually assign actor to the transcription (observer vs participant)</li>
+              <li>Consider the sentiment spike may be pre-event stress rather than post-event reaction</li>
+            </ul>
+            <div style="margin-top:10px">
+              <button class="btn btn-out" style="font-size:11px"><!-- Info Icon --><span class="mdi mdi-help-circle-outline"></span> View Help Docs</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -133,7 +133,17 @@
       <!-- TAB: Log Explorer -->
       <!-- Log Explorer Content -->
       <div id="Log Explorer Tab Content" v-show="currentTab === 'Log Explorer'">
-        <!-- Filter Bar --><div class="fbar">
+        <!-- Quick Filters Bar (above layer filters) -->
+        <div id="Quick Filters Bar" class="fbar" style="background:rgba(0,33,63,.03);border:1px solid rgba(0,33,63,.08);margin-bottom:8px;flex-wrap:wrap">
+          <!-- Label --><span style="font-size:11px;font-weight:700;color:#90A4AE;text-transform:uppercase;letter-spacing:.5px;align-self:center">Quick filters:</span>
+          <!-- Filter: Warnings & Errors --><button class="chip" style="background:rgba(198,40,40,.08);color:var(--err);border-color:rgba(198,40,40,.2)"><span class="mdi mdi-alert-outline"></span> Warnings &amp; Errors</button>
+          <!-- Filter: Task Anomalies --><button class="chip" style="background:rgba(232,85,109,.08);color:#E8556D;border-color:rgba(232,85,109,.2)"><span class="mdi mdi-chart-box-outline"></span> Task Anomalies</button>
+          <!-- Filter: Unlinked AI Events --><button class="chip" style="background:rgba(21,101,192,.08);color:var(--info);border-color:rgba(21,101,192,.2)"><span class="mdi mdi-link-variant-off"></span> Unlinked AI</button>
+          <!-- Filter: Protocol Deviations --><button class="chip" style="background:rgba(255,152,0,.08);color:#F57C00;border-color:rgba(255,152,0,.2)"><span class="mdi mdi-alert-circle-outline"></span> Protocol Deviations</button>
+        </div>
+
+        <!-- Filter Bar (layer + severity + session + search) -->
+        <div class="fbar">
           <!-- Layers Label --><span style="font-size:11px;font-weight:600;color:#90A4AE">Layers:</span>
           <!-- Tech Filter --><button class="chip chip-tech"><span class="mdi mdi-wrench-outline"></span> Technical</button>
           <!-- Meth Filter --><button class="chip chip-meth"><span class="mdi mdi-clipboard-outline"></span> Methodological</button>
@@ -144,7 +154,6 @@
           <!-- Time Filter --><select class="fsel"><option>Last 1 hour</option><option>Last 15 min</option><option>Last 24h</option></select>
           <!-- Search Box --><input class="fsearch" placeholder="Search logs...">
         </div>
-
         <!-- Log Entries Card -->
         <!-- Card --><div class="card">
           <!-- Card Header --><div class="card-hdr">
@@ -158,91 +167,112 @@
               <!-- Refresh Button --><button class="btn btn-out"><span class="mdi mdi-refresh"></span></button>
             </div>
           </div>
-          <!-- Log Table --><table class="dtbl">
-            <!-- Table Header --><thead>
-              <tr>
-                <th style="width:80px">Time</th>
-                <th style="width:94px">Layer</th>
-                <th style="width:62px">Level</th>
-                <th style="width:100px">Source</th>
-                <th>Message</th>
-                <th style="width:64px">Trace</th>
-              </tr>
-            </thead>
-            <!-- Table Body --><tbody>
-              <!-- Row: Firestore Write -->
-              <tr>
-                <!-- Time --><td class="lt">10:23:01</td>
-                <!-- Layer --><td><!-- Tech Badge --><span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECH</span></td>
-                <!-- Level --><td><!-- Info Badge --><span class="b b-info">INFO</span></td>
-                <!-- Source --><td class="ls">firestore</td>
-                <!-- Message --><td>Write success: sessions/S-008/tasks/task_002</td>
-                <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
-              </tr>
-              <!-- Row: Task Assignment -->
-              <tr>
-                <!-- Time --><td class="lt">10:23:05</td>
-                <!-- Layer --><td><!-- Meth Badge --><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METH</span></td>
-                <!-- Level --><td><!-- Info Badge --><span class="b b-info">INFO</span></td>
-                <!-- Source --><td class="ls">facilitator</td>
-                <!-- Message --><td>Task 2 assigned to participant P-004</td>
-                <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
-              </tr>
-              <!-- Row: AI Fixation (expanded) -->
-              <tr style="background:#F8F9FF">
-                <!-- Time --><td class="lt">10:23:12</td>
-                <!-- Layer --><td><!-- AI Badge --><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span></td>
-                <!-- Level --><td><!-- Info Badge --><span class="b b-info">INFO</span></td>
-                <!-- Source --><td class="ls">eye-tracker</td>
-                <!-- Message --><td style="font-weight:500">▾ Fixation at (342, 518) — 1.2s</td>
-                <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
-              </tr>
-              <!-- Row: AI Expanded Detail -->
-              <tr>
-                <td colspan="6" style="padding:0">
-                  <!-- AI Decision Detail Card -->
-                  <div class="ai-detail-card" style="background:#F8F9FC;border:1px solid #E3E8F0;border-radius:8px;padding:12px 14px;margin:2px 4px;font-size:13px">
-                    <!-- Detail Header -->
-                    <div class="detail-header" style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-                      <!-- AI Decision Badge --><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI Decision Detail</span>
+          <!-- Log Table (scrollable) -->
+          <div
+            id="Log Table Scroll Container"
+            style="max-height:340px; overflow-y:auto; position:relative; scrollbar-width:thin; scrollbar-color:#CBD5E1 transparent;"
+          >
+            <table class="dtbl" style="width:100%">
+              <!-- Table Header (sticky) -->
+              <thead style="position:sticky;top:0;z-index:2;background:#fff">
+                <tr>
+                  <th style="width:80px">Time</th>
+                  <th style="width:94px">Layer</th>
+                  <th style="width:62px">Level</th>
+                  <th style="width:100px">Source</th>
+                  <th>Message</th>
+                  <th style="width:64px">Trace</th>
+                  <!-- Status column from explorer.html - shows trace link status -->
+                  <th style="width:72px">Status</th>
+                </tr>
+              </thead>
+              <!-- Table Body -->
+              <tbody>
+                <!-- Row: Firestore Write -->
+                <tr>
+                  <!-- Time --><td class="lt">10:23:01</td>
+                  <!-- Layer --><td><!-- Tech Badge --><span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECH</span></td>
+                  <!-- Level --><td><!-- Info Badge --><span class="b b-info">INFO</span></td>
+                  <!-- Source --><td class="ls">firestore</td>
+                  <!-- Message --><td>Write success: sessions/S-008/tasks/task_002</td>
+                  <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
+                  <!-- Status --><td><span class="b" style="background:rgba(46,125,50,.12);color:var(--ok);font-size:10px;padding:3px 6px">✓ Linked</span></td>
+                </tr>
+                <!-- Row: Task Assignment -->
+                <tr>
+                  <!-- Time --><td class="lt">10:23:05</td>
+                  <!-- Layer --><td><!-- Meth Badge --><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METH</span></td>
+                  <!-- Level --><td><!-- Info Badge --><span class="b b-info">INFO</span></td>
+                  <!-- Source --><td class="ls">facilitator</td>
+                  <!-- Message --><td>Task 2 assigned to participant P-004</td>
+                  <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
+                  <!-- Status --><td><span class="b" style="background:rgba(46,125,50,.12);color:var(--ok);font-size:10px;padding:3px 6px">✓ Linked</span></td>
+                </tr>
+                <!-- Row: AI Fixation (expanded) -->
+                <tr style="background:#F8F9FF">
+                  <!-- Time --><td class="lt">10:23:12</td>
+                  <!-- Layer --><td><!-- AI Badge --><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span></td>
+                  <!-- Level --><td><!-- Info Badge --><span class="b b-info">INFO</span></td>
+                  <!-- Source --><td class="ls">eye-tracker</td>
+                  <!-- Message --><td style="font-weight:500">▾ Fixation at (342, 518) — 1.2s</td>
+                  <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
+                  <!-- Status --><td><span class="b" style="background:rgba(46,125,50,.12);color:var(--ok);font-size:10px;padding:3px 6px">✓ Linked</span></td>
+                </tr>
+                <!-- Row: AI Expanded Detail -->
+                <tr>
+                  <td colspan="7" style="padding:0">
+                    <!-- AI Decision Detail Card -->
+                    <div class="ai-detail-card" style="background:#F8F9FC;border:1px solid #E3E8F0;border-radius:8px;padding:12px 14px;margin:2px 4px;font-size:13px">
+                      <!-- Detail Header -->
+                      <div class="detail-header" style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+                        <!-- AI Decision Badge --><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI Decision Detail</span>
+                      </div>
+                      <!-- Model Row --><div class="dr"><!-- Label --><span class="dl">Model:</span><!-- Value --><span>gaze-detection-v2.1</span></div>
+                      <!-- Confidence Row --><div class="dr"><!-- Label --><span class="dl">Confidence:</span><!-- Value --><span style="color:var(--ok);font-weight:600">0.91 ✓ High</span></div>
+                      <!-- AOI Row --><div class="dr"><!-- Label --><span class="dl">AOI Hit:</span><!-- Value --><span>"Submit Button" — 3rd fixation in task</span></div>
                     </div>
-                    <!-- Model Row --><div class="dr"><!-- Label --><span class="dl">Model:</span><!-- Value --><span>gaze-detection-v2.1</span></div>
-                    <!-- Confidence Row --><div class="dr"><!-- Label --><span class="dl">Confidence:</span><!-- Value --><span style="color:var(--ok);font-weight:600">0.91 ✓ High</span></div>
-                    <!-- AOI Row --><div class="dr"><!-- Label --><span class="dl">AOI Hit:</span><!-- Value --><span>"Submit Button" — 3rd fixation in task</span></div>
-                  </div>
-                </td>
-              </tr>
-              <!-- Row: Sentiment Warning -->
-              <tr>
-                <!-- Time --><td class="lt">10:23:22</td>
-                <!-- Layer --><td><!-- AI Badge --><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span></td>
-                <!-- Level --><td><!-- Warn Badge --><span class="b b-warn">WARN</span></td>
-                <!-- Source --><td class="ls">sentiment</td>
-                <!-- Message --><td>Expression: <b>frustrated</b> (confidence: 0.82)</td>
-                <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
-              </tr>
-              <!-- Row: Protocol Deviation -->
-              <tr>
-                <!-- Time --><td class="lt">10:23:30</td>
-                <!-- Layer --><td><!-- Meth Badge --><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METH</span></td>
-                <!-- Level --><td><!-- Warn Badge --><span class="b b-warn">WARN</span></td>
-                <!-- Source --><td class="ls">facilitator</td>
-                <!-- Message --><td>⚠ Protocol deviation: extra hint given</td>
-                <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
-              </tr>
-              <!-- Row: Frame Drop Error -->
-              <tr>
-                <!-- Time --><td class="lt">10:23:35</td>
-                <!-- Layer --><td><!-- Tech Badge --><span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECH</span></td>
-                <!-- Level --><td><!-- Error Badge --><span class="b b-err">ERR</span></td>
-                <!-- Source --><td class="ls">eye-tracker</td>
-                <!-- Message --><td>Frame drop: 3 frames lost (network jitter)</td>
-                <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
-              </tr>
-            </tbody>
-          </table>
+                  </td>
+                </tr>
+                <!-- Row: Sentiment Warning -->
+                <tr>
+                  <!-- Time --><td class="lt">10:23:22</td>
+                  <!-- Layer --><td><!-- AI Badge --><span class="b b-ai"><span class="mdi mdi-robot-outline"></span> AI</span></td>
+                  <!-- Level --><td><!-- Warn Badge --><span class="b b-warn">WARN</span></td>
+                  <!-- Source --><td class="ls">sentiment</td>
+                  <!-- Message --><td>Expression: <b>frustrated</b> (confidence: 0.82)</td>
+                  <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
+                  <!-- Status --><td><span class="b" style="background:rgba(46,125,50,.12);color:var(--ok);font-size:10px;padding:3px 6px">✓ Linked</span></td>
+                </tr>
+                <!-- Row: Protocol Deviation -->
+                <tr>
+                  <!-- Time --><td class="lt">10:23:30</td>
+                  <!-- Layer --><td><!-- Meth Badge --><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> METH</span></td>
+                  <!-- Level --><td><!-- Warn Badge --><span class="b b-warn">WARN</span></td>
+                  <!-- Source --><td class="ls">facilitator</td>
+                  <!-- Message --><td>⚠ Protocol deviation: extra hint given</td>
+                  <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
+                  <!-- Status --><td><span class="b" style="background:rgba(46,125,50,.12);color:var(--ok);font-size:10px;padding:3px 6px">✓ Linked</span></td>
+                </tr>
+                <!-- Row: Frame Drop Error -->
+                <tr>
+                  <!-- Time --><td class="lt">10:23:35</td>
+                  <!-- Layer --><td><!-- Tech Badge --><span class="b b-tech"><span class="mdi mdi-wrench-outline"></span> TECH</span></td>
+                  <!-- Level --><td><!-- Error Badge --><span class="b b-err">ERR</span></td>
+                  <!-- Source --><td class="ls">eye-tracker</td>
+                  <!-- Message --><td>Frame drop: 3 frames lost (network jitter)</td>
+                  <!-- Trace --><td><!-- Trace ID --><span class="ltr">T-0042</span></td>
+                  <!-- Status --><td><span class="b" style="background:rgba(229,81,0,.12);color:var(--warn);font-size:10px;padding:3px 6px">⚠ Partial</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Load More Row -->
+          <div style="display:flex;justify-content:center;padding:12px 0;border-top:1px solid #F5F5F5">
+            <!-- Load More Button --><button class="btn btn-out" style="font-size:12px;padding:6px 20px"><span class="mdi mdi-chevron-down"></span> Load more (840 remaining)</button>
+          </div>
         </div>
       </div>
+
 
       <!-- TAB: Trace View -->
       <!-- Trace View Content -->
@@ -254,19 +284,24 @@
             <!-- Trace ID Block -->
             <div class="trace-id-block">
               <!-- Trace ID Label --><div style="font-size:10px;color:#90A4AE;font-weight:600;text-transform:uppercase;letter-spacing:.5px">Trace ID</div>
-              <!-- Trace ID Value --><div style="font-size:18px;font-weight:700;color:#fca326">T-0042</div>
+              <!-- Trace ID Value --><div style="font-size:18px;font-weight:700;color:#fca326">{{ selectedTrace.id }}</div>
             </div>
             <!-- Separator --><div class="sep"></div>
             <!-- Session Block -->
-            <div class="trace-stat-block"><!-- Label --><div style="font-size:10px;color:#90A4AE">Session</div><!-- Value --><div style="font-weight:600">S-008</div></div>
+            <div class="trace-stat-block"><!-- Label --><div style="font-size:10px;color:#90A4AE">Session</div><!-- Value --><div style="font-weight:600">{{ selectedTrace.sessionId }}</div></div>
             <!-- Separator --><div class="sep"></div>
             <!-- Participant Block -->
-            <div class="trace-stat-block"><!-- Label --><div style="font-size:10px;color:#90A4AE">Participant</div><!-- Value --><div style="font-weight:600">P-004</div></div>
+            <div class="trace-stat-block"><!-- Label --><div style="font-size:10px;color:#90A4AE">Participant</div><!-- Value --><div style="font-weight:600">{{ selectedTrace.participantId }}</div></div>
             <!-- Separator --><div class="sep"></div>
             <!-- Duration Block -->
-            <div class="trace-stat-block"><!-- Label --><div style="font-size:10px;color:#90A4AE">Duration</div><!-- Value --><div style="font-weight:600">12m 34s</div></div>
+            <div class="trace-stat-block"><!-- Label --><div style="font-size:10px;color:#90A4AE">Duration</div><!-- Value --><div style="font-weight:600">{{ selectedTrace.duration }}</div></div>
             <!-- Spacer --><div style="flex:1"></div>
-            <!-- Deviation Badge --><span class="b b-warn"><span class="mdi mdi-alert-outline"></span> 1 Deviation</span>
+            <!-- Trace Selector --><select class="fsel" v-model="selectedTraceId" style="min-width:220px">
+              <option v-for="trace in traceOptions" :key="trace.id" :value="trace.id">{{ trace.id }} · {{ trace.sessionId }} · {{ trace.participantId }}</option>
+            </select>
+            <!-- Prev Button --><button class="btn btn-out" style="font-size:11px;padding:6px 10px" @click="selectPreviousTrace" :disabled="isFirstTrace"><span class="mdi mdi-chevron-left"></span></button>
+            <!-- Next Button --><button class="btn btn-out" style="font-size:11px;padding:6px 10px" @click="selectNextTrace" :disabled="isLastTrace"><span class="mdi mdi-chevron-right"></span></button>
+            <!-- Deviation Badge --><span class="b b-warn"><span class="mdi mdi-alert-outline"></span> {{ selectedTrace.deviations }} Deviation</span>
             <!-- Export Button --><button class="btn btn-out" style="font-size:11px"><span class="mdi mdi-download-outline"></span> Export</button>
           </div>
         </div>
@@ -318,17 +353,16 @@
         <!-- Selected Event Detail Card -->
         <!-- Card --><div class="card">
           <!-- Card Header --><div class="card-hdr">
-            <!-- Card Title --><div class="card-t">Selected: Observer Note (10:21:33)</div>
+            <!-- Card Title --><div class="card-t">Selected: {{ selectedTrace.selectedEvent.title }}</div>
             <!-- Meth Badge --><span class="b b-meth"><span class="mdi mdi-clipboard-outline"></span> Methodological</span>
           </div>
-          <!-- Source Row --><div class="dr"><!-- Label --><span class="dl">Source:</span><!-- Value --><span>Dr. Ana Martinez</span></div>
-          <!-- Content Row --><div class="dr"><!-- Label --><span class="dl">Content:</span><!-- Value --><span>"Participant paused, re-read instructions twice before proceeding"</span></div>
+          <!-- Source Row --><div class="dr"><!-- Label --><span class="dl">Source:</span><!-- Value --><span>{{ selectedTrace.selectedEvent.source }}</span></div>
+          <!-- Content Row --><div class="dr"><!-- Label --><span class="dl">Content:</span><!-- Value --><span>"{{ selectedTrace.selectedEvent.content }}"</span></div>
           <!-- Correlated Row -->
           <div class="dr">
             <!-- Label --><span class="dl">Correlated:</span>
             <!-- Correlated Items --><span class="correlated-items" style="display:flex;gap:4px">
-              <!-- Eye Fixation Tag --><span class="b b-ai" style="cursor:pointer"><span class="mdi mdi-robot-outline"></span> Eye fixation 1.2s</span>
-              <!-- Sentiment Tag --><span class="b b-ai" style="cursor:pointer"><span class="mdi mdi-robot-outline"></span> Frustrated 0.82</span>
+              <!-- Correlated Tags --><span class="b b-ai" style="cursor:pointer" v-for="correlated in selectedTrace.selectedEvent.correlated" :key="correlated"><span class="mdi mdi-robot-outline"></span> {{ correlated }}</span>
             </span>
           </div>
         </div>
@@ -590,10 +624,78 @@
 
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const currentTab = ref('Log Explorer')
 const tabs = ['Overview', 'Log Explorer', 'Trace View', 'Lifecycle', 'Export']
+
+const traceOptions = [
+  {
+    id: 'T-0042',
+    sessionId: 'S-008',
+    participantId: 'P-004',
+    duration: '12m 34s',
+    deviations: 1,
+    selectedEvent: {
+      title: 'Observer Note (10:21:33)',
+      source: 'Dr. Ana Martinez',
+      content: 'Participant paused, re-read instructions twice before proceeding',
+      correlated: ['Eye fixation 1.2s', 'Frustrated 0.82'],
+    },
+  },
+  {
+    id: 'T-0043',
+    sessionId: 'S-009',
+    participantId: 'P-005',
+    duration: '08m 11s',
+    deviations: 0,
+    selectedEvent: {
+      title: 'Task Start (10:12:05)',
+      source: 'System',
+      content: 'Participant started Task 1 without delay',
+      correlated: ['Eye fixation 0.7s', 'Neutral 0.77'],
+    },
+  },
+  {
+    id: 'T-0044',
+    sessionId: 'S-010',
+    participantId: 'P-006',
+    duration: '15m 02s',
+    deviations: 2,
+    selectedEvent: {
+      title: 'Protocol Deviation (10:44:10)',
+      source: 'Facilitator',
+      content: 'Additional hint was provided after repeated navigation error',
+      correlated: ['Frame drop', 'Frustrated 0.85'],
+    },
+  },
+]
+
+const selectedTraceId = ref(traceOptions[0].id)
+
+const selectedTraceIndex = computed(() =>
+  Math.max(
+    traceOptions.findIndex((trace) => trace.id === selectedTraceId.value),
+    0,
+  ),
+)
+
+const selectedTrace = computed(() => traceOptions[selectedTraceIndex.value])
+
+const isFirstTrace = computed(() => selectedTraceIndex.value === 0)
+const isLastTrace = computed(
+  () => selectedTraceIndex.value === traceOptions.length - 1,
+)
+
+const selectPreviousTrace = () => {
+  if (isFirstTrace.value) return
+  selectedTraceId.value = traceOptions[selectedTraceIndex.value - 1].id
+}
+
+const selectNextTrace = () => {
+  if (isLastTrace.value) return
+  selectedTraceId.value = traceOptions[selectedTraceIndex.value + 1].id
+}
 </script>
 
 <style>

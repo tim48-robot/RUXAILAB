@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slide 10 – Technical Architecture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #1a1a1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .slide { width: 1280px; height: 720px; position: relative; overflow: hidden; background: #0b1725; color: white; display: flex; flex-direction: column; padding: 52px 80px 44px; }
+    .dec-circle { position: absolute; border-radius: 50%; border: 2px solid rgba(252,163,38,0.08); z-index: 0; pointer-events: none; }
+    .dec-1 { width: 500px; height: 500px; top: -120px; left: -100px; }
+    .dec-2 { width: 800px; height: 800px; top: -280px; left: -220px; }
+    .header { position: relative; z-index: 2; margin-bottom: 22px; }
+    .eyebrow { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #E8556D; margin-bottom: 8px; }
+    .title { font-size: 36px; font-weight: 600; color: white; letter-spacing: -1px; }
+    .content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; }
+    .left-col { display: flex; flex-direction: column; gap: 16px; }
+    .data-model { padding: 14px 18px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); flex: 1; }
+    .dm-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 8px; letter-spacing: 0.2px; }
+    .tree { font-size: 11.5px; font-family: 'Inter', monospace; line-height: 1.7; }
+    .tree-root { color: #fca326; font-weight: 700; }
+    .tree-l1 { padding-left: 20px; color: #42A5F5; font-weight: 600; }
+    .tree-l2 { padding-left: 40px; color: #90A4AE; }
+    .tree-l3 { padding-left: 60px; color: #78909C; font-weight: 400; }
+    .tree-connector { color: rgba(255,255,255,0.2); }
+    .tree-type { color: #66BB6A; font-size: 10px; font-weight: 500; margin-left: 6px; opacity: 0.8; }
+    .decisions { padding: 14px 18px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+    .dec-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 8px; letter-spacing: 0.2px; }
+    .decision { display: flex; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .decision:last-child { border-bottom: none; padding-bottom: 0; }
+    .decision:first-of-type { padding-top: 0; }
+    .dec-num { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; background: rgba(252,163,38,0.12); color: #fca326; }
+    .dec-text { flex: 1; }
+    .dec-text-title { font-size: 12.5px; font-weight: 600; color: white; margin-bottom: 0; }
+    .dec-text-desc { font-size: 10.5px; color: #90A4AE; line-height: 1.35; }
+    .right-col { display: flex; flex-direction: column; }
+    .comparison { padding: 18px 20px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); flex: 1; display: flex; flex-direction: column; }
+    .comp-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 14px; letter-spacing: 0.2px; }
+    .comp-table { flex: 1; }
+    .comp-table table { width: 100%; border-collapse: collapse; }
+    .comp-table th { text-align: left; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.4); padding: 6px 8px 8px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .comp-table td { font-size: 11.5px; color: #CFD8DC; padding: 7px 8px; line-height: 1.4; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table .feature { color: white; font-weight: 600; font-size: 11.5px; white-space: nowrap; }
+    .badge-yes { font-size: 10px; font-weight: 600; color: #4CAF50; background: rgba(76,175,80,0.1); padding: 2px 6px; border-radius: 4px; }
+    .badge-no { font-size: 10px; font-weight: 600; color: #90A4AE; background: rgba(255,255,255,0.04); padding: 2px 6px; border-radius: 4px; }
+    .badge-limited { font-size: 10px; font-weight: 600; color: #fca326; background: rgba(252,163,38,0.1); padding: 2px 6px; border-radius: 4px; }
+    .footer { position: absolute; bottom: 24px; right: 32px; font-size: 12px; color: rgba(255,255,255,0.35); z-index: 2; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .anim-1 { animation: fadeIn 0.5s 0.1s ease both; }
+    .anim-2 { animation: fadeIn 0.5s 0.25s ease both; }
+    .anim-3 { animation: fadeIn 0.5s 0.4s ease both; }
+  </style>
+</head>
+<body>
+  <!-- Slide Container -->
+  <div id="Slide Container" class="slide">
+    <!-- Decorative Circle 1 -->
+    <div id="Decorative Circle 1" class="dec-circle dec-1"></div>
+    <!-- Decorative Circle 2 -->
+    <div id="Decorative Circle 2" class="dec-circle dec-2"></div>
+
+    <!-- Header Section -->
+    <div id="Header Section" class="header anim-1">
+      <!-- Header Eyebrow -->
+      <div id="Header Eyebrow" class="eyebrow">Under the Hood</div>
+      <!-- Header Title -->
+      <div id="Header Title" class="title">Technical Architecture</div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div id="Main Content Grid" class="content">
+
+      <!-- Left Column -->
+      <div id="Left Column" class="left-col anim-2">
+
+        <!-- Firestore Data Model Card -->
+        <div id="Firestore Data Model Card" class="data-model">
+          <!-- Data Model Title -->
+          <div id="Data Model Title" class="dm-title">
+            <!-- DB Icon --><span class="mdi mdi-database-outline" style="color:#fca326;margin-right:6px"></span>Firestore Data Model
+          </div>
+          <!-- Data Model Tree -->
+          <div id="Data Model Tree" class="tree">
+            <!-- Tree Root --><div id="Tree Root" class="tree-root"><span class="tree-connector">📁</span> tests / {testId}</div>
+            <!-- Tree L1: Logs --><div id="Tree L1: Logs" class="tree-l1"><span class="tree-connector">├─</span> logs / <span class="tree-type">collection</span></div>
+            <!-- Tree L2: Log ID --><div id="Tree L2: Log ID" class="tree-l2"><span class="tree-connector">├─</span> {logId} <span class="tree-type">auto-generated</span></div>
+            <!-- Tree L3: IDs --><div id="Tree L3: IDs" class="tree-l3"><span class="tree-connector">├─</span> sessionId, participantId, traceId</div>
+            <!-- Tree L3: Layer --><div id="Tree L3: Layer" class="tree-l3"><span class="tree-connector">├─</span> layer: "TECH" | "METH" | "AI"</div>
+            <!-- Tree L3: Level --><div id="Tree L3: Level" class="tree-l3"><span class="tree-connector">├─</span> level: INFO | WARN | ERR</div>
+            <!-- Tree L3: Meta --><div id="Tree L3: Meta" class="tree-l3"><span class="tree-connector">├─</span> source, message, timestamp</div>
+            <!-- Tree L3: Payload --><div id="Tree L3: Payload" class="tree-l3"><span class="tree-connector">└─</span> payload: { ...raw data }</div>
+            <!-- Tree L1: Sessions --><div id="Tree L1: Sessions" class="tree-l1"><span class="tree-connector">├─</span> sessions / <span class="tree-type">collection</span></div>
+            <!-- Tree L2: Session ID --><div id="Tree L2: Session ID" class="tree-l2"><span class="tree-connector">└─</span> {sessionId} → participantId, startedAt, phase</div>
+            <!-- Tree L1: Identity Map --><div id="Tree L1: Identity Map" class="tree-l1"><span class="tree-connector">└─</span> identityMap / <span class="tree-type">private sub-collection</span></div>
+            <!-- Tree L2: PII Entry --><div id="Tree L2: PII Entry" class="tree-l2"><span class="tree-connector">└─</span> P-004 → realName (access-controlled)</div>
+          </div>
+        </div>
+
+        <!-- Key Decisions Card -->
+        <div id="Key Decisions Card" class="decisions">
+          <!-- Decisions Title -->
+          <div id="Decisions Title" class="dec-title">
+            <!-- Lightbulb Icon --><span class="mdi mdi-lightbulb-outline" style="color:#fca326;margin-right:6px"></span>4 Key Technical Decisions
+          </div>
+          <!-- Decision 1 -->
+          <div id="Decision 1" class="decision">
+            <!-- Decision 1 Number --><div id="Decision 1 Number" class="dec-num">1</div>
+            <!-- Decision 1 Text -->
+            <div id="Decision 1 Text" class="dec-text">
+              <!-- Decision 1 Title --><div id="Decision 1 Title" class="dec-text-title">Logs nested under tests/{testId}</div>
+            </div>
+          </div>
+          <!-- Decision 2 -->
+          <div id="Decision 2" class="decision">
+            <!-- Decision 2 Number --><div id="Decision 2 Number" class="dec-num">2</div>
+            <!-- Decision 2 Text -->
+            <div id="Decision 2 Text" class="dec-text">
+              <!-- Decision 2 Title --><div id="Decision 2 Title" class="dec-text-title">Flat log documents, not nested events</div>
+            </div>
+          </div>
+          <!-- Decision 3 -->
+          <div id="Decision 3" class="decision">
+            <!-- Decision 3 Number --><div id="Decision 3 Number" class="dec-num">3</div>
+            <!-- Decision 3 Text -->
+            <div id="Decision 3 Text" class="dec-text">
+              <!-- Decision 3 Title --><div id="Decision 3 Title" class="dec-text-title">Identity resolution as separate sub-collection</div>
+            </div>
+          </div>
+          <!-- Decision 4 -->
+          <div id="Decision 4" class="decision">
+            <!-- Decision 4 Number --><div id="Decision 4 Number" class="dec-num">4</div>
+            <!-- Decision 4 Text -->
+            <div id="Decision 4 Text" class="dec-text">
+              <!-- Decision 4 Title --><div id="Decision 4 Title" class="dec-text-title">Buffer and flush, not per-event writes</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Moderated vs Unmoderated -->
+      <div id="Right Column: Mod vs Unmod" class="right-col anim-3">
+        <!-- Comparison Card -->
+        <div id="Comparison Card" class="comparison">
+          <!-- Comparison Title -->
+          <div id="Comparison Title" class="comp-title">
+            <!-- Compare Icon --><span class="mdi mdi-compare" style="color:#E8556D;margin-right:6px"></span>Moderated vs Unmoderated
+          </div>
+          <!-- Comparison Table -->
+          <div id="Comparison Table" class="comp-table">
+            <table>
+              <thead>
+                <!-- Header Row -->
+                <tr>
+                  <!-- Col: Feature --><th>Feature</th>
+                  <!-- Col: Moderated --><th>Moderated</th>
+                  <!-- Col: Unmoderated --><th>Unmoderated</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row: Active Sessions -->
+                <tr>
+                  <td class="feature">Overview (Active Sessions)</td>
+                  <td>"Join" button to live observe</td>
+                  <td>"X active" count only, no join</td>
+                </tr>
+                <!-- Row: METH Layer -->
+                <tr>
+                  <td class="feature">Log Explorer (METH Layer)</td>
+                  <td><span class="badge-yes">Rich</span> observer notes, hints, deviations</td>
+                  <td><span class="badge-limited">Sparse</span> system-generated only</td>
+                </tr>
+                <!-- Row: Observer Note -->
+                <tr>
+                  <td class="feature">Trace View (Observer Note)</td>
+                  <td><span class="badge-yes">Available</span></td>
+                  <td><span class="badge-no">N/A</span></td>
+                </tr>
+                <!-- Row: Swimlane Value -->
+                <tr>
+                  <td class="feature">Trace View (Swimlane Value)</td>
+                  <td>Full 3-lane (Tech + Meth + AI)</td>
+                  <td>Mostly Tech + AI, limited Meth</td>
+                </tr>
+                <!-- Row: Lifecycle Scope -->
+                <tr>
+                  <td class="feature">Lifecycle (Scope)</td>
+                  <td>One session at a time (1 room = 1 test)</td>
+                  <td>Participant-level table (async)</td>
+                </tr>
+                <!-- Row: Phase View -->
+                <tr>
+                  <td class="feature">Lifecycle (Phase View)</td>
+                  <td>Single progress bar</td>
+                  <td>Table: each participant's phase</td>
+                </tr>
+                <!-- Row: Export Scope -->
+                <tr>
+                  <td class="feature">Export (Session Scope)</td>
+                  <td>Per facilitator-participant pair</td>
+                  <td>Per individual participant</td>
+                </tr>
+                <!-- Row: Concurrent Sessions -->
+                <tr>
+                  <td class="feature">Concurrent Sessions</td>
+                  <td><span class="badge-no">1 room per test</span></td>
+                  <td><span class="badge-yes">Async, unlimited</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Slide Footer -->
+    <div id="Slide Footer" class="footer">Slide 10 · Technical architecture &amp; trade-offs</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stretch Goal 3 – Cross-Session Comparative View</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Compare Layout ── */
+    .compare-shell {
+      display: flex; flex-direction: column; flex: 1; overflow: hidden;
+      padding: 14px 20px 16px;
+    }
+    .compare-toolbar {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .compare-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      color: #AB47BC; background: rgba(171,71,188,0.1);
+      border: 1px solid rgba(171,71,188,0.25);
+      padding: 4px 10px; border-radius: 4px; white-space: nowrap;
+    }
+    .session-pill {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; padding: 5px 12px;
+      border-radius: 6px; border: 1px solid; white-space: nowrap;
+    }
+    .pill-a { background: rgba(66,165,245,0.1); border-color: rgba(66,165,245,0.35); color: #42A5F5; }
+    .pill-b { background: rgba(252,163,38,0.1); border-color: rgba(252,163,38,0.35); color: #fca326; }
+    .vs-dot { font-size: 11px; font-weight: 700; color: #546E7A; padding: 0 2px; }
+    .toolbar-spacer { flex: 1; }
+    .diff-count {
+      font-size: 11px; color: #90A4AE;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      padding: 4px 10px; border-radius: 6px;
+    }
+    .diff-count strong { color: #E8556D; }
+
+    /* ── Split Pane ── */
+    .compare-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; flex: 1; min-height: 0; overflow: hidden;
+    }
+    .session-pane {
+      display: flex; flex-direction: column; overflow: hidden;
+      border-radius: 12px; border: 1px solid;
+    }
+    .pane-a { border-color: rgba(66,165,245,0.3); background: rgba(66,165,245,0.03); }
+    .pane-b { border-color: rgba(252,163,38,0.3); background: rgba(252,163,38,0.03); }
+
+    .pane-header {
+      padding: 11px 14px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid;
+    }
+    .pane-a .pane-header { border-color: rgba(66,165,245,0.2); background: rgba(66,165,245,0.06); }
+    .pane-b .pane-header { border-color: rgba(252,163,38,0.2); background: rgba(252,163,38,0.06); }
+
+    .pane-session-id { font-size: 14px; font-weight: 700; }
+    .pane-a .pane-session-id { color: #42A5F5; }
+    .pane-b .pane-session-id { color: #fca326; }
+    .pane-meta { font-size: 11px; color: #78909C; margin-left: auto; }
+    .pane-participant {
+      font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 999px;
+      background: rgba(255,255,255,0.06); color: #90A4AE;
+    }
+
+    .pane-body { flex: 1; overflow-y: auto; }
+
+    /* ── Swimlane Timeline ── */
+    .swimlane-wrap { padding: 10px 12px; }
+    .swimlane-row {
+      display: flex; align-items: center; gap: 0;
+      margin-bottom: 4px; height: 28px;
+    }
+    .lane-label {
+      width: 58px; flex-shrink: 0;
+      font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+      text-align: right; padding-right: 8px;
+    }
+    .lane-label.tech { color: #42A5F5; }
+    .lane-label.meth { color: #66BB6A; }
+    .lane-label.ai   { color: #AB47BC; }
+
+    .lane-track {
+      flex: 1; height: 20px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 4px; position: relative;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .event-dot {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 6px; height: 6px; border-radius: 50%;
+    }
+    .event-dot.err { background: #EF5350; box-shadow: 0 0 4px rgba(239,83,80,0.5); }
+    .event-dot.warn { background: #fca326; box-shadow: 0 0 4px rgba(252,163,38,0.4); }
+    .event-dot.info { background: rgba(66,165,245,0.7); }
+    .event-dot.ai-dot { background: #CE93D8; }
+    .event-dot.meth-dot { background: #A5D6A7; }
+
+    .time-ruler {
+      margin-left: 58px;
+      display: flex; justify-content: space-between;
+      padding: 0 4px; margin-bottom: 8px;
+    }
+    .time-ruler span { font-size: 9px; color: rgba(255,255,255,0.25); }
+
+    /* ── Log Entries in pane ── */
+    .pane-log-entry {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 7px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 11px;
+    }
+    .pane-log-entry:hover { background: rgba(255,255,255,0.03); }
+    .pane-log-entry.diverge-a { background: rgba(66,165,245,0.06); border-left: 2px solid rgba(66,165,245,0.5); }
+    .pane-log-entry.diverge-b { background: rgba(252,163,38,0.06); border-left: 2px solid rgba(252,163,38,0.5); }
+    .pane-log-entry.match { opacity: 0.6; }
+
+    .entry-time { color: #78909C; width: 46px; flex-shrink: 0; font-size: 10px; padding-top: 1px; }
+    .entry-badge { flex-shrink: 0; }
+    .entry-msg { flex: 1; color: #CFD8DC; line-height: 1.4; }
+    .diff-tag {
+      font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
+      padding: 2px 5px; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+    }
+    .diff-only { background: rgba(66,165,245,0.15); color: #90CAF9; }
+    .diff-only-b { background: rgba(252,163,38,0.15); color: #FFD79C; }
+    .diff-later { background: rgba(255,255,255,0.06); color: #78909C; }
+
+    /* ── Diff Summary Footer ── */
+    .diff-summary {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 10px 20px;
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+    .diff-summary-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: .8px; }
+    .diff-chip {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 11px; padding: 4px 10px; border-radius: 6px;
+    }
+    .diff-chip.a { background: rgba(66,165,245,0.1); color: #42A5F5; border: 1px solid rgba(66,165,245,0.25); }
+    .diff-chip.b { background: rgba(252,163,38,0.1); color: #fca326; border: 1px solid rgba(252,163,38,0.25); }
+    .diff-chip.shared { background: rgba(255,255,255,0.04); color: #78909C; border: 1px solid rgba(255,255,255,0.08); }
+    .diff-summary-spacer { flex: 1; }
+    .export-compare-btn {
+      font-size: 11px; padding: 5px 12px;
+      background: rgba(171,71,188,0.1); color: #CE93D8;
+      border: 1px solid rgba(171,71,188,0.3); border-radius: 6px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div id="Top Bar" class="appbar">
+  <div id="Menu Icon" class="appbar-menu">
+    <span class="mdi mdi-menu" title="Icon"></span>
+  </div>
+  <div id="Logo" class="appbar-logo">
+    <img id="Logo Text" src="../src/assets/logo_full_white.png" height="25" alt="RUXAILAB Logo">
+  </div>
+  <div id="Spacer" style="flex:1"></div>
+  <div id="Return to Console Button" class="appbar-text-btn">Return to Console</div>
+  <div id="Help Button" class="appbar-icon-btn">
+    <span id="Help Icon" class="mdi mdi-help-circle-outline" title="Icon"></span>
+  </div>
+  <div id="Notifications" class="appbar-icon-btn">
+    <span id="Bell Icon" class="mdi mdi-bell-outline" title="Icon"></span>
+  </div>
+  <div id="User Avatar" class="appbar-avatar"><span>JT</span></div>
+  <div id="Dropdown Arrow" class="appbar-icon-btn" style="margin-left:-8px">
+    <span class="mdi mdi-chevron-down" style="font-size:20px;color:#90A4AE" title="Icon"></span>
+  </div>
+</div>
+
+<!-- App Layout -->
+<div id="App Layout" class="shell">
+
+  <!-- Sidebar Navigation -->
+  <aside id="Sidebar" class="drawer">
+    <div class="drawer-list">
+      <a class="ditem"><span class="mdi mdi-home" title="Icon"></span><span>Manager</span></a>
+      <a class="ditem"><span class="mdi mdi-file-document-edit" title="Icon"></span><span>Test</span></a>
+      <a class="ditem"><span class="mdi mdi-file-eye" title="Icon"></span><span>Preview</span></a>
+      <a class="ditem"><span class="mdi mdi-book-multiple" title="Icon"></span><span>Reports</span></a>
+      <a class="ditem"><span class="mdi mdi-order-bool-ascending-variant" title="Icon"></span><span>Answers</span></a>
+      <a class="ditem"><span class="mdi mdi-account-group" title="Icon"></span><span>Cooperators</span></a>
+      <a class="ditem"><span class="mdi mdi-cog" title="Icon"></span><span>Settings</span></a>
+      <div style="border-top:1px solid rgba(255,255,255,.08);margin:8px 0"></div>
+      <a class="ditem active">
+        <span class="mdi mdi-text-search" title="Icon"></span>
+        <span>Logs</span>
+        <span style="margin-left:auto;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#fca326;color:#fff;padding:1px 5px;border-radius:3px">NEW</span>
+      </a>
+    </div>
+    <div class="drawer-footer">
+      <div class="drawer-toggle">
+        <span class="mdi mdi-chevron-left" title="Icon"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Content Container -->
+    <div id="Content Container" class="dashboard-container" style="display:flex;flex-direction:column;padding-bottom:0;height:100%;overflow:hidden;">
+
+      <!-- Study Banner -->
+      <div class="dashboard-header">
+        <div class="header-content">
+          <div class="header-icon-container">
+            <span class="mdi mdi-chart-box-outline" style="color:#fff;font-size:28px" title="Icon"></span>
+          </div>
+          <div class="header-texts">
+            <h1 class="dashboard-title">Mobile App Redesign Evaluation</h1>
+            <p class="dashboard-subtitle">Usability test for the new checkout flow redesign</p>
+            <div class="header-chips">
+              <span class="study-chip">
+                <span class="mdi mdi-account-check-outline" title="Icon"></span>Moderated Study
+              </span>
+              <span class="study-chip">
+                <span class="mdi mdi-circle-small" title="Icon"></span>Active
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div id="Tab Navigation" class="sub-tabs">
+        <!-- Tab: Overview --><button class="stab">Overview</button>
+        <!-- Tab: Log Explorer --><button class="stab">Log Explorer</button>
+        <!-- Tab: Trace View (Active) --><button class="stab active">Trace View</button>
+        <!-- Tab: Lifecycle --><button class="stab">Lifecycle</button>
+        <!-- Tab: Export --><button class="stab">Export</button>
+      </div>
+
+      <!-- Compare Shell -->
+      <div id="Compare Shell" class="compare-shell">
+
+        <!-- Compare Toolbar -->
+        <div id="Compare Toolbar" class="compare-toolbar">
+          <!-- Stretch Goal Label -->
+          <span class="compare-label">
+            <span class="mdi mdi-star-shooting-outline" style="margin-right:4px"></span>Stretch Goal 3 · Cross-Session Compare
+          </span>
+          <!-- Session A Pill -->
+          <span class="session-pill pill-a">
+            <!-- Session A Icon --><span class="mdi mdi-account-outline"></span>Session S-007 · P-003
+          </span>
+          <!-- VS Separator -->
+          <span class="vs-dot">vs</span>
+          <!-- Session B Pill -->
+          <span class="session-pill pill-b">
+            <!-- Session B Icon --><span class="mdi mdi-account-outline"></span>Session S-008 · P-004
+          </span>
+          <!-- Toolbar Spacer -->
+          <div class="toolbar-spacer"></div>
+          <!-- Diff Count -->
+          <div class="diff-count">
+            <strong>11 divergent events</strong> · 6 shared · same task scope
+          </div>
+          <!-- Toggle: Show Only Diffs -->
+          <button class="btn btn-out" style="font-size:11px">
+            <span class="mdi mdi-eye-outline" title="Icon"></span> Diffs only
+          </button>
+        </div>
+
+        <!-- Split Pane (Session A | Session B) -->
+        <div id="Split Pane" class="compare-split">
+
+          <!-- Pane A: Session S-007 -->
+          <div id="Pane A: Session S-007" class="session-pane pane-a">
+            <!-- Pane A Header -->
+            <div id="Pane A Header" class="pane-header">
+              <!-- Pane A Session ID -->
+              <span class="mdi mdi-account-outline" style="color:#42A5F5;font-size:16px"></span>
+              <span class="pane-session-id">S-007</span>
+              <!-- Pane A Participant -->
+              <span class="pane-participant">P-003</span>
+              <!-- Pane A Meta -->
+              <span class="pane-meta">Mar 18 · 09:45 – 10:12</span>
+            </div>
+
+            <!-- Pane A Body -->
+            <div id="Pane A Body" class="pane-body">
+
+              <!-- Swimlane Timeline A -->
+              <div id="Swimlane Timeline A" class="swimlane-wrap">
+                <!-- Time Ruler A -->
+                <div class="time-ruler">
+                  <span>09:45</span><span>09:52</span><span>09:59</span><span>10:06</span><span>10:12</span>
+                </div>
+                <!-- Tech Lane A -->
+                <div class="swimlane-row">
+                  <span class="lane-label tech">TECH</span>
+                  <div class="lane-track">
+                    <div class="event-dot info" style="left:8%"></div>
+                    <div class="event-dot info" style="left:22%"></div>
+                    <div class="event-dot warn" style="left:45%"></div>
+                    <div class="event-dot info" style="left:68%"></div>
+                    <div class="event-dot info" style="left:88%"></div>
+                  </div>
+                </div>
+                <!-- Meth Lane A -->
+                <div class="swimlane-row">
+                  <span class="lane-label meth">METH</span>
+                  <div class="lane-track">
+                    <div class="event-dot meth-dot" style="left:5%"></div>
+                    <div class="event-dot meth-dot" style="left:38%"></div>
+                    <div class="event-dot warn" style="left:72%"></div>
+                  </div>
+                </div>
+                <!-- AI Lane A -->
+                <div class="swimlane-row">
+                  <span class="lane-label ai">AI</span>
+                  <div class="lane-track">
+                    <div class="event-dot ai-dot" style="left:15%"></div>
+                    <div class="event-dot ai-dot" style="left:30%"></div>
+                    <div class="event-dot warn" style="left:55%"></div>
+                    <div class="event-dot ai-dot" style="left:80%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pane A Log Entries -->
+              <!-- Entry: Task 1 assigned (shared) -->
+              <div class="pane-log-entry match">
+                <span class="entry-time">09:46</span>
+                <span class="b b-meth entry-badge"><span class="mdi mdi-clipboard-outline" title="Icon"></span> METH</span>
+                <span class="entry-msg">Task 1 assigned to P-003</span>
+                <span class="diff-tag diff-later">shared</span>
+              </div>
+              <!-- Entry: Task 1 completed (S-007 faster) -->
+              <div class="pane-log-entry diverge-a">
+                <span class="entry-time">09:51</span>
+                <span class="b b-meth entry-badge"><span class="mdi mdi-clipboard-outline" title="Icon"></span> METH</span>
+                <span class="entry-msg">Task 1 completed — 5m 12s</span>
+                <span class="diff-tag diff-only">S-007 only</span>
+              </div>
+              <!-- Entry: Gaze confidence OK -->
+              <div class="pane-log-entry match">
+                <span class="entry-time">09:52</span>
+                <span class="b b-ai entry-badge"><span class="mdi mdi-robot-outline" title="Icon"></span> AI</span>
+                <span class="entry-msg">Confidence 0.84 — gaze stable</span>
+                <span class="diff-tag diff-later">shared</span>
+              </div>
+              <!-- Entry: No hint given (S-007, no protocol deviation) -->
+              <div class="pane-log-entry diverge-a">
+                <span class="entry-time">10:02</span>
+                <span class="b b-meth entry-badge"><span class="mdi mdi-clipboard-outline" title="Icon"></span> METH</span>
+                <span class="entry-msg">Observer note: participant navigating independently</span>
+                <span class="diff-tag diff-only">S-007 only</span>
+              </div>
+              <!-- Entry: Sentiment calm -->
+              <div class="pane-log-entry diverge-a">
+                <span class="entry-time">10:05</span>
+                <span class="b b-ai entry-badge"><span class="mdi mdi-robot-outline" title="Icon"></span> AI</span>
+                <span class="entry-msg">Expression: calm (confidence 0.79)</span>
+                <span class="diff-tag diff-only">S-007 only</span>
+              </div>
+              <!-- Entry: Task 2 completed (shared moment) -->
+              <div class="pane-log-entry match">
+                <span class="entry-time">10:08</span>
+                <span class="b b-meth entry-badge"><span class="mdi mdi-clipboard-outline" title="Icon"></span> METH</span>
+                <span class="entry-msg">Task 2 completed</span>
+                <span class="diff-tag diff-later">shared</span>
+              </div>
+            </div>
+          </div>
+          <!-- /Pane A -->
+
+          <!-- Pane B: Session S-008 -->
+          <div id="Pane B: Session S-008" class="session-pane pane-b">
+            <!-- Pane B Header -->
+            <div id="Pane B Header" class="pane-header">
+              <!-- Pane B Session ID -->
+              <span class="mdi mdi-account-outline" style="color:#fca326;font-size:16px"></span>
+              <span class="pane-session-id">S-008</span>
+              <!-- Pane B Participant -->
+              <span class="pane-participant">P-004</span>
+              <!-- Pane B Meta -->
+              <span class="pane-meta">Mar 18 · 10:20 – 10:51</span>
+            </div>
+
+            <!-- Pane B Body -->
+            <div id="Pane B Body" class="pane-body">
+
+              <!-- Swimlane Timeline B -->
+              <div id="Swimlane Timeline B" class="swimlane-wrap">
+                <!-- Time Ruler B -->
+                <div class="time-ruler">
+                  <span>10:20</span><span>10:27</span><span>10:34</span><span>10:41</span><span>10:51</span>
+                </div>
+                <!-- Tech Lane B -->
+                <div class="swimlane-row">
+                  <span class="lane-label tech">TECH</span>
+                  <div class="lane-track">
+                    <div class="event-dot info" style="left:8%"></div>
+                    <div class="event-dot info" style="left:22%"></div>
+                    <div class="event-dot err" style="left:48%"></div>
+                    <div class="event-dot err" style="left:51%"></div>
+                    <div class="event-dot err" style="left:54%"></div>
+                    <div class="event-dot info" style="left:78%"></div>
+                  </div>
+                </div>
+                <!-- Meth Lane B -->
+                <div class="swimlane-row">
+                  <span class="lane-label meth">METH</span>
+                  <div class="lane-track">
+                    <div class="event-dot meth-dot" style="left:5%"></div>
+                    <div class="event-dot meth-dot" style="left:38%"></div>
+                    <div class="event-dot warn" style="left:62%"></div>
+                    <div class="event-dot warn" style="left:75%"></div>
+                  </div>
+                </div>
+                <!-- AI Lane B -->
+                <div class="swimlane-row">
+                  <span class="lane-label ai">AI</span>
+                  <div class="lane-track">
+                    <div class="event-dot ai-dot" style="left:15%"></div>
+                    <div class="event-dot ai-dot" style="left:30%"></div>
+                    <div class="event-dot warn" style="left:58%"></div>
+                    <div class="event-dot warn" style="left:70%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pane B Log Entries -->
+              <!-- Entry: Task 1 assigned (shared) -->
+              <div class="pane-log-entry match">
+                <span class="entry-time">10:23</span>
+                <span class="b b-meth entry-badge"><span class="mdi mdi-clipboard-outline" title="Icon"></span> METH</span>
+                <span class="entry-msg">Task 1 assigned to P-004</span>
+                <span class="diff-tag diff-later">shared</span>
+              </div>
+              <!-- Entry: Task 1 completed later (diverges) -->
+              <div class="pane-log-entry diverge-b">
+                <span class="entry-time">10:31</span>
+                <span class="b b-meth entry-badge"><span class="mdi mdi-clipboard-outline" title="Icon"></span> METH</span>
+                <span class="entry-msg">Task 1 completed — 8m 44s <span style="color:#E8556D;font-size:10px">(+3m 32s vs S-007)</span></span>
+                <span class="diff-tag diff-only-b">S-008 only</span>
+              </div>
+              <!-- Entry: Gaze confidence OK -->
+              <div class="pane-log-entry match">
+                <span class="entry-time">10:32</span>
+                <span class="b b-ai entry-badge"><span class="mdi mdi-robot-outline" title="Icon"></span> AI</span>
+                <span class="entry-msg">Confidence 0.77 — gaze stable</span>
+                <span class="diff-tag diff-later">shared</span>
+              </div>
+              <!-- Entry: Error burst (S-008 only) -->
+              <div class="pane-log-entry diverge-b">
+                <span class="entry-time">10:35</span>
+                <span class="b b-tech entry-badge"><span class="mdi mdi-wrench-outline" title="Icon"></span> TECH</span>
+                <span class="entry-msg">ERR burst: 3 frame drops in 2 seconds (eye-tracker)</span>
+                <span class="diff-tag diff-only-b">S-008 only</span>
+              </div>
+              <!-- Entry: Protocol deviation (S-008 only) -->
+              <div class="pane-log-entry diverge-b">
+                <span class="entry-time">10:38</span>
+                <span class="b b-meth entry-badge"><span class="mdi mdi-clipboard-outline" title="Icon"></span> METH</span>
+                <span class="entry-msg">⚠ Protocol deviation: extra hint given</span>
+                <span class="diff-tag diff-only-b">S-008 only</span>
+              </div>
+              <!-- Entry: Sentiment frustrated (S-008 only) -->
+              <div class="pane-log-entry diverge-b">
+                <span class="entry-time">10:40</span>
+                <span class="b b-ai entry-badge"><span class="mdi mdi-robot-outline" title="Icon"></span> AI</span>
+                <span class="entry-msg">Expression: <b>frustrated</b> (confidence: 0.82)</span>
+                <span class="diff-tag diff-only-b">S-008 only</span>
+              </div>
+              <!-- Entry: Task 2 completed (shared) -->
+              <div class="pane-log-entry match">
+                <span class="entry-time">10:45</span>
+                <span class="b b-meth entry-badge"><span class="mdi mdi-clipboard-outline" title="Icon"></span> METH</span>
+                <span class="entry-msg">Task 2 completed</span>
+                <span class="diff-tag diff-later">shared</span>
+              </div>
+            </div>
+          </div>
+          <!-- /Pane B -->
+
+        </div>
+        <!-- /Split Pane -->
+
+      </div>
+      <!-- /Compare Shell -->
+
+      <!-- Diff Summary Footer -->
+      <div id="Diff Summary Footer" class="diff-summary">
+        <!-- Summary Title -->
+        <span class="diff-summary-title">Session diff</span>
+        <!-- Chip: S-007 unique -->
+        <span class="diff-chip a">
+          <span class="mdi mdi-minus-circle-outline"></span>S-007: 3 unique events
+        </span>
+        <!-- Chip: S-008 unique -->
+        <span class="diff-chip b">
+          <span class="mdi mdi-plus-circle-outline"></span>S-008: 8 unique events
+        </span>
+        <!-- Chip: Shared -->
+        <span class="diff-chip shared">
+          <span class="mdi mdi-equal"></span>Shared: 6 events
+        </span>
+        <!-- Key finding -->
+        <span style="font-size:11px;color:#90A4AE;margin-left:6px">
+          S-008 took <span style="color:#fca326;font-weight:600">+3m 32s</span> longer on Task 1 with protocol deviation + error burst
+        </span>
+        <!-- Spacer -->
+        <div class="diff-summary-spacer"></div>
+        <!-- Export Compare Button -->
+        <button class="export-compare-btn">
+          <span class="mdi mdi-download-outline" style="margin-right:4px"></span>Export diff report
+        </button>
+      </div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>
