@@ -113,6 +113,12 @@ export const getAccessibilityNavigator = (test, userRole, route, type) => {
         requiresAdmin: true,
       },
       {
+        title: 'Logs',
+        icon: 'mdi-text-search',
+        path: `/accessibility/manual/logs/${testId}`,
+        requiresAdmin: true,
+      },
+      {
         title: 'Cooperator',
         icon: ICONS.ACCOUNT_GROUP,
         path: `/accessibility/manual/cooperative/${testId}`,
@@ -151,6 +157,12 @@ export const getAccessibilityNavigator = (test, userRole, route, type) => {
         title: 'Settings',
         icon: ICONS.COG,
         path: `/accessibility/automatic/settings/${testId}`,
+        requiresAdmin: true,
+      },
+      {
+        title: 'Logs',
+        icon: 'mdi-text-search',
+        path: `/accessibility/automatic/logs/${testId}`,
         requiresAdmin: true,
       },
     )

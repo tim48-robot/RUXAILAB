@@ -699,43 +699,12 @@ const selectNextTrace = () => {
 </script>
 
 <style>
-/* Global overrides to make Vuetify elements render in static flow for Figma export */
-.layout-wrapper, .v-application--wrap, .v-main {
-  min-height: 100vh !important;
-  height: auto !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.v-application--wrap {
-  flex-direction: row !important;
-  align-items: stretch !important;
-}
-
-.v-navigation-drawer, .v-navigation-drawer--fixed {
-  position: static !important;
-  height: auto !important;
-  min-height: 100vh !important;
-  transform: none !important;
-}
-
-.v-main {
-  padding: 0 !important;
-  flex: 1 !important;
-  width: 100% !important;
-}
-
-header.v-toolbar {
-  position: static !important;
-  transform: none !important;
-  width: 100% !important;
-  z-index: 100 !important;
-}
-
+/* Removed dangerous global overrides that broke v-navigation-drawer elsewhere */
 .mockup-scope {
   width: 100%;
 }
 </style>
+
 
 <style scoped>
 .mockup-scope {

@@ -2,6 +2,7 @@
 import SettingsView from '@/shared/views/SettingsView.vue'
 // Shared Cooperators View
 import CooperatorsView from '@/shared/views/CooperatorsView.vue'
+import LogsView from '@/shared/views/LogsView.vue'
 
 // Manual-Accessibility-Pages(x7)
 import AccessibilityManagerView from '@/ux/accessibility/view/manual/AccessibilityManagerView.vue'
@@ -68,6 +69,13 @@ const accessibilityRoutes = [
         meta: { authorize: [0, 1] },
         component: AccessibilityConfig,
       },
+      {
+        path: '/accessibility/manual/logs/:id',
+        name: 'AccessibilityManualLogsView',
+        props: true,
+        meta: { authorize: [0, 1] },
+        component: LogsView,
+      },
     ],
   },
   // Standalone cooperator access route (like heuristics)
@@ -127,6 +135,13 @@ const accessibilityRoutes = [
         props: true,
         meta: { authorize: [0, 1] },
         component: SettingsView,
+      },
+      {
+        path: '/accessibility/automatic/logs/:id',
+        name: 'AccessibilityAutomaticLogsView',
+        props: true,
+        meta: { authorize: [0, 1] },
+        component: LogsView,
       },
     ],
   },
