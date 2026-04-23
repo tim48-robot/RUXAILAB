@@ -38,7 +38,7 @@ export default {
       const coopsInfo = test.cooperators?.find(
         (coops) => coops.userDocId === user.id,
       )
-      if (coopsInfo) return coopsInfo.accessLevel
+      if (coopsInfo?.accepted === true) return coopsInfo.accessLevel
 
       // Check if the test is public
       return test.isPublic ? 1 : 2

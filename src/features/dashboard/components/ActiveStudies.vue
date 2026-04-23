@@ -317,7 +317,8 @@ const canManageStudy = (study) => {
   if (currentUser.accessLevel === 0) return true
   if (study.testAdmin?.userDocId === currentUser.id) return true
   const coop = study.cooperators?.find((c) => c.userDocId === currentUser.id)
-  return coop?.accessLevel === 0 || coop?.accessLevel === 1
+  if (coop?.accepted !== true) return false
+  return coop.accessLevel === 0 || coop.accessLevel === 1
 }
 
 const goToStudy = async (study) => {
