@@ -110,6 +110,10 @@ describe('StudyController', () => {
             expect(typeof studyController.acceptStudyCollaboration).toBe('function')
         })
 
+        it('should have rejectStudyCollaboration method', () => {
+            expect(typeof studyController.rejectStudyCollaboration).toBe('function')
+        })
+
         it('should have getStudy method', () => {
             expect(typeof studyController.getStudy).toBe('function')
         })
@@ -266,7 +270,7 @@ describe('StudyController', () => {
     })
 
     describe('acceptStudyCollaboration', () => {
-        it('should accept study collaboration and update both user and study', async () => {
+        it('should reject accepting an invitation that was already rejected/cancelled', async () => {
             const mockTestPayload = {
                 id: 'study-123',
                 answersDocId: 'answer-123',
@@ -276,7 +280,7 @@ describe('StudyController', () => {
                 subType: 'standard',
                 testTitle: 'Test Study',
                 cooperators: [
-                    { email: 'coop@test.com', accessLevel: 'edit', accepted: false, userDocId: null }
+                    { email: 'coop@test.com', accessLevel: 'edit', accepted: false, invited: false, userDocId: null }
                 ],
                 toFirestore: jest.fn().mockReturnValue({ id: 'study-123' })
             }
@@ -294,11 +298,38 @@ describe('StudyController', () => {
                 cooperator: mockCooperatorPayload
             }
 
-            spies.mockUpdate = () => spies.update.mockResolvedValue()
-            spies.mockUpdate()
-            
-            // Expect to throw due to UserAnswer mock or succeed
-            await expect(studyController.acceptStudyCollaboration(mockPayload)).rejects.toThrow()
+            await expect(studyController.acceptStudyCollaboration(mockPayload)).rejects.toThrow(
+                'COLLABORATION_INVITATION_NOT_ACCEPTABLE'
+            )
+        })
+    })
+
+    describe('rejectStudyCollaboration', () => {
+        it('should mark invitation as rejected and non-acceptable for reuse', async () => {
+            const mockTestPayload = {
+                id: 'study-123',
+                cooperators: [
+                    { email: 'coop@test.com', accessLevel: 'edit', accepted: false, invited: true, userDocId: null }
+                ],
+                toFirestore: jest.fn().mockReturnValue({ id: 'study-123' })
+            }
+
+            const mockCooperatorPayload = {
+                id: 'coop-user-123',
+                email: 'coop@test.com'
+            }
+
+            spies.update.mockResolvedValueOnce({ id: 'study-123' })
+
+            await studyController.rejectStudyCollaboration({
+                test: mockTestPayload,
+                cooperator: mockCooperatorPayload
+            })
+
+            expect(mockTestPayload.cooperators[0].accepted).toBe(false)
+            expect(mockTestPayload.cooperators[0].invited).toBe(false)
+            expect(mockTestPayload.cooperators[0].userDocId).toBeNull()
+            expect(spies.update).toHaveBeenCalledWith('tests', 'study-123', { id: 'study-123' })
         })
     })
 

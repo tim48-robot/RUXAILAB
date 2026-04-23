@@ -3,6 +3,7 @@ jest.mock('@/controllers/StudyController', () => {
   return jest.fn().mockImplementation(() => ({
     updateStudy: jest.fn(),
     acceptStudyCollaboration: jest.fn(),
+    rejectStudyCollaboration: jest.fn(),
   }))
 })
 
@@ -50,6 +51,21 @@ describe('Store Modules Error Handling Structure', () => {
       )
 
       const actionStr = TestModule.actions.acceptStudyCollaboration.toString()
+      expect(actionStr).toContain('try')
+      expect(actionStr).toContain('catch')
+      expect(actionStr).toContain('finally')
+
+      expect(actionStr).toContain('catch (err)')
+      expect(actionStr).toContain('setError')
+      expect(actionStr).toContain('setLoading')
+    })
+
+    it('has error handling in rejectStudyCollaboration action', () => {
+      expect(typeof TestModule.actions.rejectStudyCollaboration).toBe(
+        'function',
+      )
+
+      const actionStr = TestModule.actions.rejectStudyCollaboration.toString()
       expect(actionStr).toContain('try')
       expect(actionStr).toContain('catch')
       expect(actionStr).toContain('finally')
