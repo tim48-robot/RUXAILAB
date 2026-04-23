@@ -187,6 +187,21 @@ export default {
       }
     },
 
+    async rejectStudyCollaboration({ commit }, payload) {
+      commit('setLoading', true)
+      try {
+        await studyController.rejectStudyCollaboration(payload)
+      } catch (err) {
+        commit('setError', {
+          errorCode: 'studyError',
+          message: err,
+        })
+        throw err
+      } finally {
+        commit('setLoading', false)
+      }
+    },
+
     async getStudy({ commit }, payload) {
       commit('setLoading', true)
       try {

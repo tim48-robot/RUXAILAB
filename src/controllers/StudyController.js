@@ -82,6 +82,28 @@ export default class StudyController extends Controller {
 
   //ToDo: It seems an action from User Testing
   async acceptStudyCollaboration(payload) {
+    if (!payload?.test || !payload?.cooperator) {
+      throw new Error('INVALID_COLLABORATION_PAYLOAD')
+    }
+
+    const testToUpdate = payload.test
+    const userToUpdate = payload.cooperator
+
+    const index = testToUpdate.cooperators?.findIndex(
+      (c) => c.email === userToUpdate.email,
+    )
+
+    if (index == null || index < 0) {
+      throw new Error('COOPERATOR_NOT_FOUND')
+    }
+
+    const cooperator = testToUpdate.cooperators[index]
+
+    // A rejected/cancelled invitation cannot be accepted from the same invite.
+    if (cooperator.invited !== true && cooperator.accepted !== true) {
+      throw new Error('COLLABORATION_INVITATION_NOT_ACCEPTABLE')
+    }
+
     const userAnswer = new UserAnswer({
       answersDocId: payload.test.answersDocId,
       accessLevel: payload.cooperator.accessLevel,
@@ -96,18 +118,41 @@ export default class StudyController extends Controller {
     })
 
     // Update answers inside collaborator
-    const userToUpdate = payload.cooperator
+    userToUpdate.myAnswers = userToUpdate.myAnswers || {}
     userToUpdate.myAnswers[`${userAnswer.testDocId}`] = userAnswer.toFirestore()
     await userController.update(userToUpdate.id, userToUpdate.toFirestore())
 
-    const testToUpdate = payload.test
-    const index = testToUpdate.cooperators.findIndex(
-      (c) => c.email === userToUpdate.email,
-    )
     testToUpdate.cooperators[index].accepted = true
     testToUpdate.cooperators[index].userDocId = userToUpdate.id
 
     // Update invitation on test to accepted
+    return await super.update(
+      COLLECTION,
+      testToUpdate.id,
+      testToUpdate.toFirestore(),
+    )
+  }
+
+  async rejectStudyCollaboration(payload) {
+    if (!payload?.test || !payload?.cooperator) {
+      throw new Error('INVALID_COLLABORATION_PAYLOAD')
+    }
+
+    const testToUpdate = payload.test
+    const userToUpdate = payload.cooperator
+
+    const index = testToUpdate.cooperators?.findIndex(
+      (c) => c.email === userToUpdate.email,
+    )
+
+    if (index == null || index < 0) {
+      throw new Error('COOPERATOR_NOT_FOUND')
+    }
+
+    testToUpdate.cooperators[index].accepted = false
+    testToUpdate.cooperators[index].invited = false
+    testToUpdate.cooperators[index].userDocId = null
+
     return await super.update(
       COLLECTION,
       testToUpdate.id,
