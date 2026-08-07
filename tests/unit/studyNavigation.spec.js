@@ -404,4 +404,30 @@ describe('study navigation', () => {
       }),
     ).toBe('/userTest/unmoderated/manager/study-1')
   })
+
+  it('allows accepted participants and Admin staff represented by the security role map to answer', () => {
+    const study = {
+      ...studyWith('USER'),
+      subType: USER_STUDY_SUBTYPES.UNMODERATED,
+      studyRoleMap: {
+        participant: STUDY_ROLE.USER,
+        admin: STUDY_ROLE.ADMIN,
+      },
+    }
+
+    expect(
+      getTestViewAccessRedirect({
+        study,
+        user: { id: 'participant', accessLevel: 1 },
+        token: 'participant',
+      }),
+    ).toBeNull()
+    expect(
+      getTestViewAccessRedirect({
+        study,
+        user: { id: 'admin', accessLevel: 1 },
+        token: 'admin',
+      }),
+    ).toBeNull()
+  })
 })

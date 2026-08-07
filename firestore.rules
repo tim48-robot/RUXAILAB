@@ -120,6 +120,13 @@ service cloud.firestore {
       );
       allow delete: if isAdmin(resource.data);
 
+      match /participants/{participantId} {
+        allow read: if canViewDashboard(
+          get(/databases/$(database)/documents/tests/$(studyId)).data
+        );
+        allow write: if false;
+      }
+
       match /auditTrail/{eventId} {
         allow read: if signedIn() &&
           get(/databases/$(database)/documents/tests/$(studyId))

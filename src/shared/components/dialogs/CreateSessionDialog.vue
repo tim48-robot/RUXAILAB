@@ -154,7 +154,7 @@
 
                   <v-row class="ma-0 mt-3">
                     <v-text-field
-                      v-model="participantEmailInput"
+                      :model-value="participantEmailInput"
                       variant="outlined"
                       density="comfortable"
                       :placeholder="
@@ -163,6 +163,7 @@
                       prepend-inner-icon="mdi-email-outline"
                       color="primary"
                       clearable
+                      @update:model-value="participantEmailInput = $event ?? ''"
                       @keydown.enter.prevent="addParticipantEmail"
                     />
 

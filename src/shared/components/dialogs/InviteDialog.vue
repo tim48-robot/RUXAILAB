@@ -12,13 +12,14 @@
       <v-card-text class="pt-4">
         <v-row class="ma-0">
           <v-text-field
-            v-model="emailInput"
+            :model-value="emailInput"
             :label="selectLabel || t('cooperators.invite.emailPlaceholder')"
             variant="outlined"
             density="comfortable"
             placeholder="Type an email address"
             prepend-inner-icon="mdi-email-outline"
             clearable
+            @update:model-value="emailInput = $event ?? ''"
             @keydown.enter.prevent="addEmailToSelection"
           />
           <v-btn
@@ -210,7 +211,7 @@ const props = defineProps({
     default: () => [],
   },
   preDefinedRole: {
-    type: Array,
+    type: Number,
     default: null,
   },
 })

@@ -4,16 +4,36 @@ import {
   assertSucceeds,
   initializeTestEnvironment,
 } from '@firebase/rules-unit-testing'
-import { deleteDoc, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import {
-  deleteObject,
-  getBytes,
-  ref,
-  uploadBytes,
-} from 'firebase/storage'
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore'
+import { deleteObject, getBytes, ref, uploadBytes } from 'firebase/storage'
 
 const projectId = 'demo-ruxailab-rbac'
 let testEnv
+
+const emulatorEndpoint = (configuredHost, fallbackPort) => {
+  const [host = '127.0.0.1', port = fallbackPort] = String(
+    configuredHost || `127.0.0.1:${fallbackPort}`,
+  ).split(':')
+
+  return { host, port: Number(port) }
+}
+
+const firestoreEmulator = emulatorEndpoint(
+  process.env.FIRESTORE_EMULATOR_HOST,
+  8081,
+)
+const storageEmulator = emulatorEndpoint(
+  process.env.FIREBASE_STORAGE_EMULATOR_HOST,
+  9199,
+)
 
 const study = (overrides = {}) => ({
   testType: 'USER',
@@ -39,8 +59,14 @@ const context = (uid) => testEnv.authenticatedContext(uid)
 beforeAll(async () => {
   testEnv = await initializeTestEnvironment({
     projectId,
-    firestore: { rules: fs.readFileSync('firestore.rules', 'utf8') },
-    storage: { rules: fs.readFileSync('storage.rules', 'utf8') },
+    firestore: {
+      ...firestoreEmulator,
+      rules: fs.readFileSync('firestore.rules', 'utf8'),
+    },
+    storage: {
+      ...storageEmulator,
+      rules: fs.readFileSync('storage.rules', 'utf8'),
+    },
   })
 })
 
@@ -61,6 +87,13 @@ beforeEach(async () => {
       setDoc(doc(db, 'users/observator'), { accessLevel: 1 }),
       setDoc(doc(db, 'users/stranger'), { accessLevel: 1 }),
       setDoc(doc(db, 'tests/study-1'), study()),
+      setDoc(doc(db, 'tests/study-1/participants/participant-1'), {
+        userDocId: 'user',
+        email: 'participant@example.com',
+        accessLevel: 5,
+        accepted: true,
+        status: 'accepted',
+      }),
       setDoc(doc(db, 'answers/answers-1'), {
         studyId: 'study-1',
         createdBy: 'owner',
@@ -92,7 +125,9 @@ describe('Firestore study RBAC', () => {
       getDoc(doc(context('stranger').firestore(), 'tests/study-1')),
     )
     await assertFails(
-      getDoc(doc(testEnv.unauthenticatedContext().firestore(), 'tests/study-1')),
+      getDoc(
+        doc(testEnv.unauthenticatedContext().firestore(), 'tests/study-1'),
+      ),
     )
   })
 
@@ -156,6 +191,27 @@ describe('Firestore study RBAC', () => {
     )
   })
 
+  it('allows dashboard viewers to list participant records without exposing them to participants', async () => {
+    await assertSucceeds(
+      getDocs(
+        collection(context('owner').firestore(), 'tests/study-1/participants'),
+      ),
+    )
+    await assertSucceeds(
+      getDocs(
+        collection(
+          context('manager').firestore(),
+          'tests/study-1/participants',
+        ),
+      ),
+    )
+    await assertFails(
+      getDocs(
+        collection(context('user').firestore(), 'tests/study-1/participants'),
+      ),
+    )
+  })
+
   it('prevents ordinary users from changing their platform access level', async () => {
     await assertFails(
       updateDoc(doc(context('stranger').firestore(), 'users/stranger'), {
@@ -168,7 +224,9 @@ describe('Firestore study RBAC', () => {
     await assertSucceeds(
       getDoc(doc(context('observator').firestore(), 'answers/answers-1')),
     )
-    await assertFails(getDoc(doc(context('user').firestore(), 'answers/answers-1')))
+    await assertFails(
+      getDoc(doc(context('user').firestore(), 'answers/answers-1')),
+    )
 
     await assertSucceeds(
       updateDoc(doc(context('user').firestore(), 'answers/answers-1'), {
@@ -244,7 +302,9 @@ describe('Firestore study RBAC', () => {
     )
 
     await assertFails(
-      deleteDoc(doc(context('stranger').firestore(), 'answers/unlinked-answer')),
+      deleteDoc(
+        doc(context('stranger').firestore(), 'answers/unlinked-answer'),
+      ),
     )
     await assertSucceeds(
       deleteDoc(doc(context('owner').firestore(), 'answers/unlinked-answer')),
@@ -448,6 +508,8 @@ describe('Storage study RBAC', () => {
       context('user').storage(),
       'tests/study-1/user/recording.webm',
     )
-    await assertFails(uploadBytes(unsupportedUserRecording, new Uint8Array([1])))
+    await assertFails(
+      uploadBytes(unsupportedUserRecording, new Uint8Array([1])),
+    )
   })
 })

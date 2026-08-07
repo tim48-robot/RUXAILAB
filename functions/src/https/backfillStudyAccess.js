@@ -1,19 +1,27 @@
 import { admin, functions } from '../f.firebase.js'
 
-const error = (code, message) =>
-  new functions.https.HttpsError(code, message)
+const error = (code, message) => new functions.https.HttpsError(code, message)
 
-const buildStudyRoleMap = (cooperators = []) =>
-  cooperators.reduce((roles, cooperator) => {
+const isAcceptedMembership = (membership) =>
+  membership?.status === 'accepted' ||
+  (!membership?.status && membership?.accepted === true)
+
+const addAcceptedRoles = (roles, memberships = []) =>
+  memberships.reduce((result, membership) => {
     if (
-      cooperator?.accepted === true &&
-      cooperator?.userDocId &&
-      Number.isInteger(cooperator?.accessLevel)
+      isAcceptedMembership(membership) &&
+      membership?.userDocId &&
+      Number.isInteger(membership?.accessLevel)
     ) {
-      roles[cooperator.userDocId] = cooperator.accessLevel
+      result[membership.userDocId] = membership.accessLevel
     }
-    return roles
-  }, {})
+    return result
+  }, roles)
+
+const buildStudyRoleMap = (cooperators = [], participants = []) => {
+  const roles = addAcceptedRoles({}, cooperators)
+  return addAcceptedRoles(roles, participants)
+}
 
 export const backfillStudyAccessMetadata = functions.onCall({
   handler: async (request) => {
@@ -41,9 +49,16 @@ export const backfillStudyAccessMetadata = functions.onCall({
 
     for (const testSnap of testsSnap.docs) {
       const study = testSnap.data()
+      const participantsSnap = await testSnap.ref
+        .collection('participants')
+        .get()
+      const participants = participantsSnap.docs.map((doc) => doc.data())
+
       batch.set(
         testSnap.ref,
-        { studyRoleMap: buildStudyRoleMap(study.cooperators) },
+        {
+          studyRoleMap: buildStudyRoleMap(study.cooperators, participants),
+        },
         { merge: true },
       )
       operations += 1

@@ -503,10 +503,14 @@ onMounted(async () => {
     return
   }
 
-  await store.dispatch('getStudy', {
-    id: studyId,
-  })
+  try {
+    await store.dispatch('getStudy', {
+      id: studyId,
+    })
 
-  await store.dispatch('getStudyParticipants', { studyId })
+    await store.dispatch('getStudyParticipants', { studyId })
+  } catch {
+    showError('errors.globalError')
+  }
 })
 </script>
